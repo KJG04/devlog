@@ -1,12 +1,11 @@
-import { Container, useTheme } from '@nextui-org/react';
-import { useEffect, useRef } from 'react';
+import { useTheme } from '@nextui-org/react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
-const Utterances: React.FC = () => {
-  const { isDark } = useTheme();
+export const useRenderComments = () => {
   const ref = useRef<HTMLElement>(null);
 
-  const debounced = useDebouncedCallback((isDark) => {
+  const render = useCallback((isDark: boolean) => {
     const elem = ref.current;
 
     if (!elem || typeof window === 'undefined') {
@@ -22,25 +21,22 @@ const Utterances: React.FC = () => {
     scriptElem.setAttribute('label', 'blog-comment');
     scriptElem.crossOrigin = 'anonymous';
     elem.replaceChildren(scriptElem);
-  }, 500);
+  }, []);
 
-  useEffect(() => {
-    debounced(isDark);
-  }, [debounced, isDark]);
-
-  return (
-    <Container
-      fluid
-      css={{
-        padding: 0,
-        '.utterances': {
-          maxWidth: '100%',
-        },
-      }}
-    >
-      <section ref={ref}></section>
-    </Container>
-  );
+  return { ref, render };
 };
 
-export default Utterances;
+export const useDebounceComments = (
+  callback: (isDark: boolean) => void,
+  wait: number
+) => {
+  const { isDark } = useTheme();
+
+  const debounced = useDebouncedCallback(callback, wait);
+
+  useEffect(() => {
+    if (isDark !== undefined) {
+      debounced(isDark);
+    }
+  }, [debounced, isDark]);
+};

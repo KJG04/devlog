@@ -1,6 +1,6 @@
 import { Image } from '@nextui-org/react';
 import { FC } from 'react';
-import { FrontMatter } from 'types';
+import { FrontMatter } from 'src/types';
 import Zoom from 'react-medium-image-zoom';
 
 interface PropsType {

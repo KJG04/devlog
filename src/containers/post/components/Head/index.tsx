@@ -1,6 +1,6 @@
 import NextHead from "next/head";
 import { FC } from "react";
-import { FrontMatter } from "types";
+import { FrontMatter } from "src/types";
 
 interface PropsType {
   frontMatter: FrontMatter;

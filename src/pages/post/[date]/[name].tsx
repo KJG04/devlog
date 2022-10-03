@@ -1,25 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAllPaths, getPostWithPath } from '@utils';
-import { Post as PostType } from 'types';
-import { NextPage } from 'next';
-import Head from '@containers/post/components/Head';
-import Content from '@containers/post/components/Content';
-import { NavigationBar } from '@components';
-
-interface PropsType {
-  post: PostType;
-}
-
-const Post: NextPage<PropsType> = (props) => {
-  const { body, frontMatter } = props.post;
-  return (
-    <>
-      <Head frontMatter={frontMatter} />
-      <NavigationBar />
-      <Content body={body} frontMatter={frontMatter} />
-    </>
-  );
-};
+import { getAllPaths, getNextPost, getPostByPath } from '#utils';
+import Post from '#containers/post';
+import { StaticPostProps } from '#types';
 
 export default Post;
 
@@ -30,7 +12,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<StaticPostProps> = async (
+  context
+) => {
   const { params } = context;
   if (!params) {
     return { notFound: true };
@@ -49,8 +33,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const path = `${year}/${month}/${name}`;
 
   try {
-    const post = await getPostWithPath(path);
-    return { notFound: false, props: { post } };
+    const post = await getPostByPath(path);
+
+    const props: StaticPostProps = {
+      post,
+      nextPost: post.frontMatter.series
+        ? await getNextPost(post.frontMatter)
+        : null,
+    };
+
+    return { notFound: false, props };
   } catch (error) {
     return { notFound: true };
   }

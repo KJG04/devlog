@@ -1,7 +1,7 @@
 // create logo component
 
 import React from 'react';
-import { Text, useTheme } from '@nextui-org/react';
+import { Navbar, Text, useTheme } from '@nextui-org/react';
 
 const NavigationBarLogo: React.FC = () => {
   const { isDark } = useTheme();
@@ -44,7 +44,9 @@ const NavigationBarLogo: React.FC = () => {
           />
         </svg>
       )}
-      <Text css={{ fontWeight: '$bold' }}>김진근의 Devlog</Text>
+      <Navbar.Content hideIn="xs">
+        <Text css={{ fontWeight: '$bold' }}>김진근의 Devlog</Text>
+      </Navbar.Content>
     </div>
   );
 };

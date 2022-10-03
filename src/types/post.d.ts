@@ -9,9 +9,10 @@ export interface FrontMatter {
   date: string;
   description: string;
   thumbnail?: string;
+  series?: string;
 }
 
-export interface Post {
+export interface PostWithHTMLBody {
   frontMatter: FrontMatter;
   body: MDXRemoteSerializeResult;
 }
@@ -22,3 +23,14 @@ export type Path =
       params: ParsedUrlQuery;
       locale?: string | undefined;
     };
+
+export interface Post {
+  frontMatter: FrontMatter;
+  body: string;
+  pathParam: { date: string; name: string };
+}
+
+export interface StaticPostProps {
+  post: PostWithHTMLBody;
+  nextPost: Post | null;
+}

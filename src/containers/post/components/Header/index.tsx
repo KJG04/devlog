@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Badge, Spacer, Text } from '@nextui-org/react';
 import moment from 'moment';
 import { FC } from 'react';
-import { FrontMatter } from 'types';
+import { FrontMatter } from 'src/types';
 import 'moment/locale/ko';
 import { useMemo } from 'react';
 
@@ -11,7 +11,7 @@ interface PropsType {
 }
 
 const Header: FC<PropsType> = (props) => {
-  const { title, category, date, tags } = props.frontMatter;
+  const { title, date, tags } = props.frontMatter;
   const dateText = useMemo(() => moment(date).format('LLL'), [date]);
 
   return (
@@ -27,9 +27,9 @@ const Header: FC<PropsType> = (props) => {
         </BadgeContainer>
         {date && <Text css={{ color: '$gray800' }}>{dateText}</Text>}
       </InfoContainer>
-      <Spacer y={1}/>
+      <Spacer y={1} />
       <Divider />
-      <Spacer y={1}/>
+      <Spacer y={1} />
     </div>
   );
 };

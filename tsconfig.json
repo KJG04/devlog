@@ -16,16 +16,17 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "types": ["src/types/index.ts"],
-      "types/*": ["src/types/*"],
-      "@pages/*": ["src/pages/*"],
-      "@containers/*": ["src/containers/*"],
-      "@utils": ["src/utils/index.ts"],
-      "@utils/*": ["src/utils/*"],
-      "@styles/*": ["src/styles/*"],
-      "@components/*": ["src/components/*"],
-      "@components": ["src/components/index.ts"]
-    }
+      "#types": ["src/types/index.d.ts"],
+      "#types/*": ["src/types/*"],
+      "#pages/*": ["src/pages/*"],
+      "#containers/*": ["src/containers/*"],
+      "#utils": ["src/utils/index.ts"],
+      "#utils/*": ["src/utils/*"],
+      "#styles/*": ["src/styles/*"],
+      "#components/*": ["src/components/*"],
+      "#components": ["src/components/index.ts"]
+    },
+    "typeRoots": ["src/types", "./node_modules/@types"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
