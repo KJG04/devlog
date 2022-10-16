@@ -1,36 +1,69 @@
-import { useTheme } from '@nextui-org/react';
 import { FC } from 'react';
 
 const Favicon: FC = () => {
-  const { isDark } = useTheme();
-
   return (
     <>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href={`/${isDark ? 'dark' : 'light'}-favicon/apple-touch-icon.png`}
+        href="/dark-favicon/apple-touch-icon.png"
+        media="(prefers-color-scheme: dark)"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href={`/${isDark ? 'dark' : 'light'}-favicon/favicon-32x32.png`}
+        href="/dark-favicon/favicon-32x32.png"
+        media="(prefers-color-scheme: dark)"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href={`/${isDark ? 'dark' : 'light'}-favicon/favicon-16x16.png`}
+        href="/dark-favicon/favicon-16x16.png"
+        media="(prefers-color-scheme: dark)"
       />
       <link
         rel="icon"
         type="image/x-icon"
-        href={`/${isDark ? 'dark' : 'light'}-favicon/favicon.ico`}
+        href="/dark-favicon/favicon.ico"
+        media="(prefers-color-scheme: dark)"
       />
       <link
         rel="/manifest"
-        href={`/${isDark ? 'dark' : 'light'}-favicon/site.webmanifest`}
+        href="/dark-favicon/site.webmanifest"
+        media="(prefers-color-scheme: dark)"
+      />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/light-favicon/apple-touch-icon.png"
+        media="(prefers-color-scheme: light)"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/light-favicon/favicon-32x32.png"
+        media="(prefers-color-scheme: light)"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/light-favicon/favicon-16x16.png"
+        media="(prefers-color-scheme: light)"
+      />
+      <link
+        rel="icon"
+        type="image/x-icon"
+        href="/light-favicon/favicon.ico"
+        media="(prefers-color-scheme: light)"
+      />
+      <link
+        rel="/manifest"
+        href="/light-favicon/site.webmanifest"
+        media="(prefers-color-scheme: light)"
       />
     </>
   );

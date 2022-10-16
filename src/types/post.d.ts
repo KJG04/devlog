@@ -33,4 +33,5 @@ export interface Post {
 export interface StaticPostProps {
   post: PostWithHTMLBody;
   nextPost: Post | null;
+  allPost: Post[];
 }

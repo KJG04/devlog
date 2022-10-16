@@ -26,6 +26,7 @@ const NextPost: FC<PropsType> = (props) => {
         css={{
           display: 'flex',
           gap: '$1',
+          background: post.frontMatter.thumbnail ? 'transparent' : '$accents1',
         }}
       >
         {post.frontMatter.thumbnail && (

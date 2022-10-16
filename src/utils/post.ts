@@ -120,7 +120,6 @@ export const getNextPost = async (
   currPost: FrontMatter
 ): Promise<Post | null> => {
   const currSeries = currPost.series;
-  console.log(currSeries);
 
   if (!currSeries) {
     return null;
