@@ -49,6 +49,7 @@ const NavigationBar: FC = () => {
           size="xl"
           iconOn={<SunIcon />}
           iconOff={<MoonIcon />}
+          aria-label="theme toggle"
         />
       </Navbar.Content>
     </Navbar>

@@ -41,7 +41,10 @@ const Home: NextPage<PropsType> = (props) => {
               <Spacer y={1} />
               <Text h4>김진근</Text>
               <ButtonContainer>
-                <Link href="mailto:freedom7113@gmail.com">
+                <Link
+                  href="mailto:freedom7113@gmail.com"
+                  aria-label="contact email"
+                >
                   <svg
                     width={30}
                     xmlns="http://www.w3.org/2000/svg"
