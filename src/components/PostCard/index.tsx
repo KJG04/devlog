@@ -1,7 +1,9 @@
-import { Badge, Card, Text } from '@nextui-org/react';
+import styled from '@emotion/styled';
+import { Card, Spacer, Text } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { FrontMatter } from 'src/types';
+import { Tag } from '#components';
 
 interface PropsType {
   frontMatter: FrontMatter;
@@ -20,7 +22,7 @@ const PostCard: FC<PropsType> = (props) => {
   };
 
   return (
-    <Card isPressable onPress={onPress}>
+    <Card isPressable onPress={onPress} variant="flat">
       {frontMatter.thumbnail && (
         <Card.Body css={{ p: 0, flex: 'none' }}>
           <Card.Image
@@ -29,15 +31,18 @@ const PostCard: FC<PropsType> = (props) => {
             alt={frontMatter.title}
             css={{
               aspectRatio: '16 / 9',
+              borderRadius: '$lg',
             }}
           />
         </Card.Body>
       )}
       <Card.Footer
         css={{
-          backgroundColor: '$gray100',
+          backgroundColor: frontMatter.thumbnail ? 'transparent' : '$gray100',
           flex: 1,
           alignItems: 'normal',
+          paddingLeft: frontMatter.thumbnail ? 0 : undefined,
+          paddingRight: frontMatter.thumbnail ? 0 : undefined,
         }}
       >
         <div>
@@ -45,13 +50,12 @@ const PostCard: FC<PropsType> = (props) => {
           <Text css={{ color: '$gray700', lineHeight: '$lg' }}>
             {frontMatter.description}
           </Text>
-          <div>
+          <Spacer y={0.5} />
+          <TagContainer>
             {frontMatter.tags.map((item) => (
-              <Badge variant="flat" css={{ border: 0 }} key={item}>
-                {item}
-              </Badge>
+              <Tag key={item}>{item}</Tag>
             ))}
-          </div>
+          </TagContainer>
         </div>
       </Card.Footer>
     </Card>
@@ -59,3 +63,8 @@ const PostCard: FC<PropsType> = (props) => {
 };
 
 export default PostCard;
+
+const TagContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;

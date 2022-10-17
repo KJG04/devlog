@@ -21,9 +21,14 @@ const CopyButton: FC<PropsType> = (props) => {
         height: 40,
         backgroundColor: '$gray500',
         position: 'relative',
+        '.nextui-button-text': {
+          position: 'relative',
+          zIndex: 1,
+        },
       }}
       auto
       onPress={onCopyPress}
+      value="복사"
     >
       <svg
         width={17.5}

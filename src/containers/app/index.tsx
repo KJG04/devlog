@@ -5,6 +5,8 @@ import Head from 'next/head';
 import Favicon from '#containers/app/components/Favicon';
 import ThemeController from '#containers/app/components/ThemeController';
 import ThemeProvider from '#containers/app/components/ThemeProvider';
+import NextNProgress from 'nextjs-progressbar';
+import { NavigationBar, Footer } from '#components';
 
 const darkTheme = createTheme({
   type: 'dark',
@@ -24,7 +26,7 @@ const lightTheme = createTheme({
   },
 });
 
-function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <NextThemesProvider
       defaultTheme="system"
@@ -40,12 +42,22 @@ function App({ Component, pageProps }: AppProps) {
           <Head>
             <Favicon />
           </Head>
+          <NextNProgress
+            color="var(--nextui-colors-primaryLightContrast)"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={3}
+            showOnShallow={true}
+            options={{ showSpinner: false }}
+          />
+          <NavigationBar />
           <Component {...pageProps} />
+          <Footer />
           <ThemeController />
         </ThemeProvider>
       </NextUIProvider>
     </NextThemesProvider>
   );
-}
+};
 
 export default App;

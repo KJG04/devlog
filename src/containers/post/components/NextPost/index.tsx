@@ -1,9 +1,10 @@
 import { FC } from 'react';
-import { Badge, Card, Image, Spacer, Text } from '@nextui-org/react';
+import { Card, Image, Spacer, Text } from '@nextui-org/react';
 import { memo } from 'react';
 import { Post } from '#types';
 import styled from '@emotion/styled';
 import { useNextPost } from './hooks';
+import { Tag } from '#components';
 
 interface PropsType {
   post: Post;
@@ -46,9 +47,7 @@ const NextPost: FC<PropsType> = (props) => {
           </Text>
           <TagContainer>
             {post.frontMatter.tags.map((item) => (
-              <Badge key={item} variant="flat" css={{ border: 0 }}>
-                {item}
-              </Badge>
+              <Tag key={item}>{item}</Tag>
             ))}
           </TagContainer>
         </Card.Body>

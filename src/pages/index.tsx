@@ -1,21 +1,16 @@
-import { Link } from "@nextui-org/react";
-import type { GetStaticProps, NextPage } from "next";
-
-const Home: NextPage = () => {
-  return (
-    <>
-      <Link href="/post/2022-09/first" color="error">
-        첫번째 게시물
-      </Link>
-      <Link href="/post/2022-09/second" color="primary">
-        두번째 게시물
-      </Link>
-    </>
-  );
-};
+import Home from '#containers/home';
+import { getAllPosts } from '#utils';
+import { GetStaticProps } from 'next';
 
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  return { props: {} };
+  return {
+    props: {
+      allPost: (await getAllPosts()).map((value) => {
+        const date = value.frontMatter.date.toString();
+        return { ...value, frontMatter: { ...value.frontMatter, date } };
+      }),
+    },
+  };
 };

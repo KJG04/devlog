@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import { Badge, Spacer, Text } from '@nextui-org/react';
-import moment from 'moment';
+import { Spacer, Text } from '@nextui-org/react';
 import { FC } from 'react';
 import { FrontMatter } from 'src/types';
-import 'moment/locale/ko';
 import { useMemo } from 'react';
+import { Tag } from '#components';
+import 'dayjs/locale/ko';
+import dayjs from 'dayjs';
 
 interface PropsType {
   frontMatter: FrontMatter;
@@ -12,7 +13,10 @@ interface PropsType {
 
 const Header: FC<PropsType> = (props) => {
   const { title, date, tags } = props.frontMatter;
-  const dateText = useMemo(() => moment(date).format('LLL'), [date]);
+  const dateText = useMemo(
+    () => dayjs(date).format('YYYY년 M월 D일 HH:mm:ss'),
+    [date]
+  );
 
   return (
     <div>
@@ -20,9 +24,7 @@ const Header: FC<PropsType> = (props) => {
       <InfoContainer>
         <BadgeContainer>
           {tags.map((tag) => (
-            <Badge css={{ border: 0 }} variant="flat" key={tag}>
-              {tag}
-            </Badge>
+            <Tag key={tag}>{tag}</Tag>
           ))}
         </BadgeContainer>
         {date && <Text css={{ color: '$gray800' }}>{dateText}</Text>}

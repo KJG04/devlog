@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import { StaticPostProps } from 'src/types';
 import { Container, Spacer } from '@nextui-org/react';
-import NavigationBar from '#components/NavigationBar';
 import Head from '#containers/post/components/Head';
 import Utterances from '#containers/post/components/Utterances';
 import Thumbnail from '#containers/post/components/Thumbnail';
@@ -18,7 +17,6 @@ const Post: NextPage<StaticPostProps> = (props) => {
   return (
     <>
       <Head frontMatter={frontMatter} />
-      <NavigationBar />
       <Container sm>
         {frontMatter.thumbnail && (
           <>

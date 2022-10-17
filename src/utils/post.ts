@@ -1,7 +1,6 @@
 import fs from 'fs';
 import frontMatter from 'front-matter';
 import { FrontMatter, Path, Post, PostWithHTMLBody } from '#types';
-import moment from 'moment';
 import remarkMath from 'remark-math';
 import toc from 'remark-toc';
 import slug from 'remark-slug';
@@ -12,6 +11,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import rehypeKatex from 'rehype-katex';
 import { h } from 'hastscript';
 import { glob } from 'glob';
+import dayjs from 'dayjs';
 
 const DIR_REPLACE_STRING = '/src/posts';
 const POST_PATH = `${process.cwd()}${DIR_REPLACE_STRING}`;
@@ -38,7 +38,7 @@ export const getPostByPath = async (
   const file = fs.readFileSync(fullPath, { encoding: 'utf8' });
 
   const { attributes, body } = frontMatter<FrontMatter>(file);
-  attributes.date = moment(attributes.date)
+  attributes.date = dayjs(attributes.date)
     .add(-9, 'hours')
     .format('YYYY-MM-DD HH:mm:ss');
 
@@ -91,8 +91,8 @@ export const getAllPosts = async (): Promise<Post[]> => {
       };
     })
     .sort((a, b) => {
-      const dateA = moment(a.frontMatter.date);
-      const dateB = moment(b.frontMatter.date);
+      const dateA = dayjs(a.frontMatter.date);
+      const dateB = dayjs(b.frontMatter.date);
 
       return dateA.isBefore(dateB) ? -1 : 1;
     });
@@ -108,7 +108,7 @@ export const getSeriesPosts = async (series: string): Promise<Post[]> => {
         ...item,
         frontMatter: {
           ...item.frontMatter,
-          date: moment(item.frontMatter.date)
+          date: dayjs(item.frontMatter.date)
             .add(-9, 'hours')
             .format('YYYY-MM-DD HH:mm:ss'),
         },

@@ -5,7 +5,7 @@ import { HTMLProps } from 'react';
 
 const Zoom = dynamic(() => import('react-medium-image-zoom'), { ssr: false });
 
-function Img(props: HTMLProps<HTMLImageElement>) {
+const Img = (props: HTMLProps<HTMLImageElement>) => {
   const { src, ...rest } = props;
 
   if (!src) {
@@ -36,6 +36,6 @@ function Img(props: HTMLProps<HTMLImageElement>) {
       />
     </Zoom>
   );
-}
+};
 
 export default Img;
