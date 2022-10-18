@@ -50,7 +50,7 @@ const Home: NextPage<PropsType> = (props) => {
             <ProfileContainer>
               <ProfileImageContainer>
                 <Image
-                  src="/technology_man.svg"
+                  src="/profile-image.png"
                   alt="profile"
                   height={200}
                   width={200}
