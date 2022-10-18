@@ -66,8 +66,9 @@ const Markdown: FC<PropsType> = (props) => {
             },
           },
           blockquote: {
-            borderLeft: '10px solid $gray300',
+            borderLeft: '10px solid $gray500',
             borderRadius: 0,
+            color: '$gray800',
           },
         }}
       >

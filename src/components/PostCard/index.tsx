@@ -47,7 +47,7 @@ const PostCard: FC<PropsType> = (props) => {
       >
         <ContentContainer>
           <Text h4>{frontMatter.title}</Text>
-          <Text css={{ color: '$gray700', lineHeight: '$lg' }}>
+          <Text css={{ color: '$gray800', lineHeight: '$lg' }}>
             {frontMatter.description}
           </Text>
           <Spacer y={0.5} />
