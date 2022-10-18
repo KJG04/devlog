@@ -16,13 +16,13 @@ thumbnail: /img/thumbnail-2022-10-17.jpg
 
 > The original medium.com-inspired image zooming library for React.
 
-React를 위한 medium 같은 이미지 Zooming 라이브러리이다.
+[react-medium-image-zoom](https://github.com/rpearce/react-medium-image-zoom)은 React를 위한 medium 같은 이미지 Zooming 라이브러리입니다.
 
 <br />
 
-개인적으로 medium을 사용하며 이미지를 클릭 시 확대가 되는 방식이 마음에 들었었다.
+개인적으로 medium을 사용하며 이미지를 클릭 시 확대가 되는 방식이 마음에 들었었습니다.
 
-개발 블로그의 경우 사진 자료가 많이 사용되는데 이때 클릭 시 확대되면 편리할 거 같아 [react-medium-image-zoom](https://github.com/rpearce/react-medium-image-zoom)을 사용하기로 마음먹었다.
+개발 블로그의 경우 사진 자료가 많이 사용되는데 이때 클릭 시 확대되면 편리할 거 같아 [react-medium-image-zoom](https://github.com/rpearce/react-medium-image-zoom)을 사용하기로 마음먹었습니다.
 
 ### 설치
 
@@ -36,11 +36,11 @@ npm install --save react-medium-image-zoom
 
 ## 적용
 
-지금 Next.js로 개발중인 블로그는 `remark`, `rehype` 그리고 `next-mdx-remote`을 사용해 게시물을 생성하고 있다.
+현재 Next.js로 개발중인 블로그는 `remark`, `rehype` 그리고 `next-mdx-remote`을 사용해 게시물을 생성하고 있습니다.
 
-`next-mdx-remote`에서 `components` 옵션을 통해 컴포넌트를 사용자 마음대로 바꿀 수 있기 때문에 그걸 사용하기로 했다.
+`next-mdx-remote`에서 `components` 옵션을 통해 컴포넌트를 사용자 마음대로 바꿀 수 있기 때문에 이 옵션을 사용해서 이미지 확대 기능을 추가하면 될 것입니다.
 
-우선 `Img` 컴포넌트를 생성한다
+우선 `Img` 컴포넌트를 생성합니다.
 
 ```tsx
 // src/components/Img.tsx
@@ -69,7 +69,7 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
 export default Img;
 ```
 
-그리고 생성한 `Img` 컴포넌트를 `MDXRemote`의 components에 넣어준다.
+그리고 생성한 `Img` 컴포넌트를 `MDXRemote`의 components에 넣어줍니다.
 
 ```tsx
 // src/components/Markdown.tsx
@@ -92,11 +92,11 @@ const Markdown: FC<PropsType> = (props) => {
 export default Markdown;
 ```
 
-이미지가 들어있는 mdx 파일을 `Markdown` 컴포넌트를 통해 렌더링하면 이미지가 렌더링 되는 것을 확인할 수 있다.
+이미지가 들어있는 mdx 파일을 `Markdown` 컴포넌트를 통해 렌더링하면 이미지가 렌더링 되는 것을 확인할 수 있습니다.
 
 <br />
 
-이제 `react-medium-image-zoom`을 적용해보자.
+이제 `react-medium-image-zoom`을 적용해봅시다.
 
 ```tsx
 // src/components/Img.tsx
@@ -128,20 +128,20 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
 export default Img;
 ```
 
-적용 방법은 굉장히 쉽다. 위 코드처럼 이미지를 `Zoom` 컴포넌트로 감싸면 된다.
+적용 방법은 굉장히 쉽습니다. 위 코드처럼 이미지를 `Zoom` 컴포넌트로 감싸면 됩니다.
 그리고 결과물을 확인해보면,
 
 ![img](/img/screenshot-2022-10-18-AM-9.09.31.png)
 
 Error: Hydration failed because the initial UI does not match what was rendered on the server.
 
-위와 같은 오류가 발생한다...
+위와 같은 오류가 발생합니다...
 
 ## 문제 해결
 
-나는 이 오류로 구글링을 꽤 오랫동안 했다. 하지만 해결 방법은 간단했다.
+저는 이 오류로 구글링을 꽤 오랫동안 했습니다. 하지만 해결 방법은 꽤 간단했습니다.
 
-Next.js의 기능 중 하나인 [Dynamic Import](https://nextjs.org/docs/advanced-features/dynamic-import)를 사용하면 된다.
+Next.js의 기능 중 하나인 [Dynamic Import](https://nextjs.org/docs/advanced-features/dynamic-import)를 사용하면 됩니다.
 
 ```tsx
 // src/components/Img.tsx
@@ -175,12 +175,12 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
 export default Img;
 ```
 
-`Img` 컴포넌트를 위와 같은 코드로 수정 후 결과물을 확인하면 오류가 발생하지 않는 것을 확인할 수 있다.
+`Img` 컴포넌트를 위와 같은 코드로 수정 후 결과물을 확인하면 오류가 발생하지 않는 것을 확인할 수 있습니다.
 
 ### 이유는?
 
-나름대로 추측을 해보자면, Zoom 컴포넌트가 자식 img 컴포넌트를 클릭시 확대 되도록하는 기능을 추가하기 위해 dom을 수정하는 과정에서 서버와 클라이언트간 초기 UI가 맞지 않아 생기는 오류인것 같다.
+나름대로 추측을 해보자면, Zoom 컴포넌트가 자식 img 컴포넌트를 클릭시 확대 되도록하는 기능을 추가하기 위해 dom을 수정하는 과정에서 서버와 클라이언트간 초기 UI가 맞지 않아 생기는 오류인것 같습니다.
 
-따라서 dynamic import로 서버 렌더링에 포함하지 않으면 해결되는 것이다.
+따라서 dynamic import로 서버 렌더링에 포함하지 않으면 해결되는 것입니다.
 
-정확한 이유는 코드를 확인해보아야 알 수 있을 것 같다.
+정확한 이유는 코드를 확인해보아야 알 수 있을 것 같습니다.
