@@ -1,5 +1,4 @@
-import GithubLogo from '#components/GithubLogo';
-import RecentlyPost from '#components/RecentlyPost';
+import { GithubLogo, RecentlyPost } from '#components';
 import { Post } from '#types';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
