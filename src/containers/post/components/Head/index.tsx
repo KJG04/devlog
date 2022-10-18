@@ -19,6 +19,16 @@ const Head: FC<PropsType> = (props) => {
       <meta name="og:title" content={frontMatter.title} />
       <meta name="og:description" content={frontMatter.description} />
       <meta name="og:type" content="blog" />
+      <meta property="og:url" content="https://devlog-kjg04.vercel.app/" />
+      <meta name="twitter:title" content={frontMatter.title} />
+      <meta name="twitter:description" content={frontMatter.description} />
+      {frontMatter.thumbnail && (
+        <>
+          <meta name="twitter:url" content={frontMatter.thumbnail} />
+          <meta property="og:image" content={frontMatter.thumbnail} />
+        </>
+      )}
+      <meta name="twitter:card" content="blog" />
     </NextHead>
   );
 };
