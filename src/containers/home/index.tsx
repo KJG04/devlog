@@ -23,6 +23,25 @@ const Home: NextPage<PropsType> = (props) => {
           name="description"
           content="개발하며 이것저것을 기록하는 블로그"
         />
+        <meta
+          name="keywords"
+          content="프론트엔드, 개발, 개발자, frontend, react, reactjs, nextjs, devlog, velog, github, 김진근, 개발 블로그, 블로그"
+        />
+        <meta name="author" content="김진근" />
+        <meta name="og:site_name" content="김진근의 Devlog" />
+        <meta name="og:title" content="김진근의 devlog" />
+        <meta
+          name="og:description"
+          content="개발하며 이것저것을 기록하는 블로그"
+        />
+        <meta name="og:type" content="blog" />
+        <meta property="og:url" content="https://devlog-kjg04.vercel.app/" />
+        <meta name="twitter:title" content="김진근의 devlog" />
+        <meta
+          name="twitter:description"
+          content="개발하며 이것저것을 기록하는 블로그"
+        />
+        <meta name="twitter:card" content="blog" />
       </Head>
       <Spacer y={3} />
       <Container sm>
