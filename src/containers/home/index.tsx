@@ -91,6 +91,11 @@ const Home: NextPage<PropsType> = (props) => {
               디자인을 독학하였고, 진행한 프로젝트에서 디자인과 UI/UX 개발을
               주도적으로 하였습니다. 이런 경험과 기본 지식이 디자이너와의 협업
               과정이나 제품의 퀄리티에 좋은 영향을 미친다고 생각합니다.
+              <br />
+              <br />
+              주로 typescript와 reactjs, nextjs를 사용해 프론트엔드를
+              개발합니다. react native 경험도 있어, iOS / android 앱 개발이
+              가능합니다.
             </div>
           </Grid>
         </Grid.Container>
