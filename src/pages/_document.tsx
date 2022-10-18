@@ -35,6 +35,10 @@ class MyDocument extends Document {
             href={`https://unpkg.com/prismjs@0.0.1/themes/prism-tomorrow.css`}
             rel="stylesheet"
           />
+          <meta
+            name="google-site-verification"
+            content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
+          />
         </Head>
         <body>
           <Main />
