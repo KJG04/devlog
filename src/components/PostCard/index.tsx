@@ -45,7 +45,7 @@ const PostCard: FC<PropsType> = (props) => {
           paddingRight: frontMatter.thumbnail ? 0 : undefined,
         }}
       >
-        <div>
+        <ContentContainer>
           <Text h4>{frontMatter.title}</Text>
           <Text css={{ color: '$gray700', lineHeight: '$lg' }}>
             {frontMatter.description}
@@ -56,7 +56,7 @@ const PostCard: FC<PropsType> = (props) => {
               <Tag key={item}>{item}</Tag>
             ))}
           </TagContainer>
-        </div>
+        </ContentContainer>
       </Card.Footer>
     </Card>
   );
@@ -67,4 +67,9 @@ export default PostCard;
 const TagContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
+`;
+
+const ContentContainer = styled.div`
+  max-width: 100%;
 `;

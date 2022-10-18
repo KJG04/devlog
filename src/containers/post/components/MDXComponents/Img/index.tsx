@@ -9,7 +9,7 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
   const { src, ...rest } = props;
 
   if (!src) {
-    return <p>Currently, image is not available. {src}</p>;
+    return <p>{src} 이미지는 사용할 수 없습니다.</p>;
   }
 
   if (src.startsWith('http')) {

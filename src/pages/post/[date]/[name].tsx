@@ -1,5 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAllPaths, getAllPosts, getNextPost, getPostByPath } from '#utils';
+import {
+  getAllPaths,
+  getNextPost,
+  getPostByPath,
+  getRecentPosts,
+} from '#utils';
 import Post from '#containers/post';
 import { StaticPostProps } from '#types';
 
@@ -40,7 +45,7 @@ export const getStaticProps: GetStaticProps<StaticPostProps> = async (
       nextPost: post.frontMatter.series
         ? await getNextPost(post.frontMatter)
         : null,
-      allPost: (await getAllPosts()).map((value) => {
+      recentlyPost: (await getRecentPosts()).map((value) => {
         const date = value.frontMatter.date.toString();
 
         return {

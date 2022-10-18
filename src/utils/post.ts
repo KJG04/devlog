@@ -19,16 +19,21 @@ const POST_PATH = `${process.cwd()}${DIR_REPLACE_STRING}`;
 export const getAllPaths = async (): Promise<Path[]> => {
   const paths = glob.sync(`${POST_PATH}/**/*.md*`);
 
-  return paths.map((path) => {
-    const regex = new RegExp(`${POST_PATH}|.mdx`, 'g');
-    const slug = path
-      .replaceAll(regex, '')
-      .split('/')
-      .filter((item) => item.length > 0);
-    const params = { date: `${slug[0]}-${slug[1]}`, name: slug[2] };
+  return paths
+    .filter(async (path) => {
+      const post = await getPostByPath(path);
+      return post.frontMatter.published;
+    })
+    .map((path) => {
+      const regex = new RegExp(`${POST_PATH}|.mdx`, 'g');
+      const slug = path
+        .replaceAll(regex, '')
+        .split('/')
+        .filter((item) => item.length > 0);
+      const params = { date: `${slug[0]}-${slug[1]}`, name: slug[2] };
 
-    return { params };
-  });
+      return { params };
+    });
 };
 
 export const getPostByPath = async (
@@ -90,16 +95,16 @@ export const getAllPosts = async (): Promise<Post[]> => {
         pathParam,
       };
     })
-    .sort((a, b) => {
-      const dateA = dayjs(a.frontMatter.date);
-      const dateB = dayjs(b.frontMatter.date);
-
-      return dateA.isBefore(dateB) ? -1 : 1;
-    });
+    .filter((value) => value.frontMatter.published);
 };
 
 export const getSeriesPosts = async (series: string): Promise<Post[]> => {
-  const posts = await getAllPosts();
+  const posts = (await getAllPosts()).sort((a, b) => {
+    const dateA = dayjs(a.frontMatter.date);
+    const dateB = dayjs(b.frontMatter.date);
+
+    return dateA.isBefore(dateB) ? -1 : 1;
+  });
 
   return posts
     .filter((post) => post.frontMatter.series === series)
@@ -139,4 +144,13 @@ export const getNextPost = async (
   }
 
   return null;
+};
+
+export const getRecentPosts = async () => {
+  return (await getAllPosts()).sort((a, b) => {
+    const dateA = dayjs(a.frontMatter.date);
+    const dateB = dayjs(b.frontMatter.date);
+
+    return dateA.isBefore(dateB) ? 1 : -1;
+  });
 };

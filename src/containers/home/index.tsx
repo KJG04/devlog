@@ -1,5 +1,5 @@
-import GithubLogo from '#components/NavigationBar/GithubLogo';
-import RecentlyPost from '#containers/post/components/RecentlyPost';
+import GithubLogo from '#components/GithubLogo';
+import RecentlyPost from '#components/RecentlyPost';
 import { Post } from '#types';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -9,11 +9,11 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 interface PropsType {
-  allPost: Post[];
+  recentlyPost: Post[];
 }
 
 const Home: NextPage<PropsType> = (props) => {
-  const { allPost } = props;
+  const { recentlyPost } = props;
   const theme = useTheme();
 
   return (
@@ -79,7 +79,7 @@ const Home: NextPage<PropsType> = (props) => {
         <Spacer y={3} />
         <Divider />
         <Spacer y={3} />
-        <RecentlyPost allPost={allPost} />
+        <RecentlyPost recentlyPost={recentlyPost} />
         <Spacer y={3} />
       </Container>
     </>

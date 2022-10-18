@@ -3,7 +3,6 @@ import { ParsedUrlQuery } from 'querystring';
 
 export interface FrontMatter {
   title: string;
-  category: string;
   tags: string[];
   published: boolean;
   date: string;
@@ -33,5 +32,5 @@ export interface Post {
 export interface StaticPostProps {
   post: PostWithHTMLBody;
   nextPost: Post | null;
-  allPost: Post[];
+  recentlyPost: Post[];
 }

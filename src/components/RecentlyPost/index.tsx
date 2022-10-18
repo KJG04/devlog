@@ -5,18 +5,18 @@ import { Spacer, Text } from '@nextui-org/react';
 import { FC } from 'react';
 
 interface PropsType {
-  allPost: Post[];
+  recentlyPost: Post[];
 }
 
 const RecentlyPost: FC<PropsType> = (props) => {
-  const { allPost } = props;
+  const { recentlyPost } = props;
 
   return (
     <>
       <Text h2>최근 게시물</Text>
       <Spacer y={1} />
       <GridContainer>
-        {allPost.map((value) => {
+        {recentlyPost.map((value) => {
           return (
             <PostCard
               key={value.frontMatter.date}

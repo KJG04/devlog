@@ -1,4 +1,4 @@
-import GithubLogo from '#components/NavigationBar/GithubLogo';
+import GithubLogo from '#components/GithubLogo';
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Link, Spacer } from '@nextui-org/react';
