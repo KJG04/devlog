@@ -7,6 +7,7 @@ import ThemeController from '#containers/app/components/ThemeController';
 import ThemeProvider from '#containers/app/components/ThemeProvider';
 import NextNProgress from 'nextjs-progressbar';
 import { NavigationBar, Footer } from '#components';
+import Script from 'next/script';
 
 const darkTheme = createTheme({
   type: 'dark',
@@ -39,6 +40,23 @@ const App = ({ Component, pageProps }: AppProps) => {
     >
       <NextUIProvider>
         <ThemeProvider>
+          <Script
+            async
+            strategy="afterInteractive"
+            src="https://www.googletagmanager.com/gtag/js?id=G-EPEK9F6ERK"
+          />
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-EPEK9F6ERK');`,
+            }}
+          />
           <Head>
             <Favicon />
           </Head>
