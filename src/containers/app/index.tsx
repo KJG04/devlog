@@ -43,7 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <Script
             async
             strategy="afterInteractive"
-            src="https://www.googletagmanager.com/gtag/js?id=G-EPEK9F6ERK"
+            src="https://www.googletagmanager.com/gtag/js?id=G-Y0GBC8LJBX"
           />
           <Script
             id="google-analytics"
@@ -54,7 +54,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', 'G-EPEK9F6ERK');`,
+                gtag('config', 'G-Y0GBC8LJBX');`,
             }}
           />
           <Head>
