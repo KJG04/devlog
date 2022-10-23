@@ -7,6 +7,7 @@ export interface FrontMatter {
   published: boolean;
   date: string;
   description: string;
+  keyword: string;
   thumbnail?: string;
   series?: string;
 }
