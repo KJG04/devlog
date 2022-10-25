@@ -41,11 +41,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       <NextUIProvider>
         <ThemeProvider>
           <Script
-            async
+            defer
             strategy="afterInteractive"
             src="https://www.googletagmanager.com/gtag/js?id=G-Y0GBC8LJBX"
           />
           <Script
+            defer
             id="google-analytics"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
