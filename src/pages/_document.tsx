@@ -31,11 +31,11 @@ class MyDocument extends Document {
             rel="stylesheet"
             crossOrigin="anonymous"
           />
-          {/* <link
+          <link
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css"
             rel="stylesheet"
             crossOrigin="anonymous"
-          /> */}
+          />
           <meta
             name="google-site-verification"
             content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
