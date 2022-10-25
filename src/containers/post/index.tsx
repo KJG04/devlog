@@ -9,10 +9,12 @@ import Markdown from '#containers/post/components/Markdown';
 import NextPost from '#containers/post/components/NextPost';
 import RecentlyPost from '#components/RecentlyPost';
 import styled from '@emotion/styled';
+import { useMediumZoom } from './hooks';
 
 const Post: NextPage<StaticPostProps> = (props) => {
   const { post, nextPost, recentlyPost } = props;
   const { body, frontMatter } = post;
+  useMediumZoom();
 
   return (
     <>
