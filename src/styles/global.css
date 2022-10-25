@@ -14,4 +14,9 @@ p {
 
 .medium-zoom-overlay {
   backdrop-filter: saturate(180%) blur(var(--nextui--navbarBlur));
+  z-index: var(--nextui-zIndices-3);
+}
+
+.medium-zoom-image--opened {
+  z-index: var(--nextui-zIndices-3);
 }
