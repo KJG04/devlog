@@ -7,14 +7,14 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
   const preRef = useRef<HTMLPreElement>(null);
 
   return (
-    <span style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', top: 0, left: 0 }}>
       <ButtonContainer>
         <CopyButton preRef={preRef} />
       </ButtonContainer>
       <pre {...rest} ref={preRef}>
         {children}
       </pre>
-    </span>
+    </div>
   );
 };
 
