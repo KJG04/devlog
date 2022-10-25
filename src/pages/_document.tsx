@@ -33,7 +33,9 @@ class MyDocument extends Document {
           />
           <link
             href={`https://unpkg.com/prismjs@0.0.1/themes/prism-tomorrow.css`}
-            rel="stylesheet"
+            rel="preload"
+            crossOrigin="anonymous"
+            as="style"
           />
           <meta
             name="google-site-verification"
@@ -41,8 +43,9 @@ class MyDocument extends Document {
           />
           <link
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css"
-            rel="stylesheet"
+            rel="preload"
             crossOrigin="anonymous"
+            as="style"
           />
         </Head>
         <body>
