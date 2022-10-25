@@ -27,25 +27,18 @@ class MyDocument extends Document {
         <Head>
           {CssBaseline.flush()}
           <link
-            rel="preload"
             href="https://unpkg.com/prismjs@0.0.1/themes/prism-tomorrow.css"
-            as="script"
+            rel="stylesheet"
+            crossOrigin="anonymous"
           />
           <link
-            href={`https://unpkg.com/prismjs@0.0.1/themes/prism-tomorrow.css`}
-            rel="preload"
+            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css"
+            rel="stylesheet"
             crossOrigin="anonymous"
-            as="style"
           />
           <meta
             name="google-site-verification"
             content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
-          />
-          <link
-            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css"
-            rel="preload"
-            crossOrigin="anonymous"
-            as="style"
           />
         </Head>
         <body>
