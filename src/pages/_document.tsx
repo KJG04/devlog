@@ -21,26 +21,31 @@ class MyDocument extends Document {
     };
   }
 
+  prismjsRef = React.createRef<HTMLLinkElement>();
+  pretendardRef = React.createRef<HTMLLinkElement>();
+
   render() {
     return (
       <Html lang="ko-KR">
         <Head>
           {CssBaseline.flush()}
-          <link
-            href="https://unpkg.com/prismjs@0.0.1/themes/prism-tomorrow.css"
-            rel="stylesheet"
-            crossOrigin="anonymous"
-          />
-          <link
-            href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard-dynamic-subset.css"
-            rel="stylesheet"
-            crossOrigin="anonymous"
-          />
           <meta
             name="google-site-verification"
             content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
           />
         </Head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/prismjs@0.0.1/themes/prism-tomorrow.css"
+          crossOrigin="anonymous"
+          media="print"
+        />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/prismjs@0.0.1/themes/prism-tomorrow.css"
+          crossOrigin="anonymous"
+          media="print"
+        />
         <body>
           <Main />
           <NextScript />
