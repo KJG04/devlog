@@ -11,7 +11,7 @@ const Head: FC<PropsType> = (props) => {
 
   return (
     <NextHead>
-      <title>{frontMatter.title}</title>
+      <title>{frontMatter.title} | 김진근의 devlog</title>
       <meta name="description" content={frontMatter.description} />
       <meta name="keywords" content={frontMatter.keyword} />
       <meta name="author" content="김진근" />
