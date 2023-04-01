@@ -35,14 +35,14 @@ export const useCopyButton = (
   preRef: RefObject<HTMLPreElement>,
   copy: (text: string) => void
 ) => {
-  const onCopyPress = () => {
+  const onCopyPress = useCallback(() => {
     if (!preRef.current) {
       return;
     }
 
     const text = preRef.current.innerText;
     copy(text);
-  };
+  }, [copy, preRef]);
 
   return onCopyPress;
 };

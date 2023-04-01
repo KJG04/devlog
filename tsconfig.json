@@ -24,7 +24,9 @@
       "#utils/*": ["src/utils/*"],
       "#styles/*": ["src/styles/*"],
       "#components/*": ["src/components/*"],
-      "#components": ["src/components/index.ts"]
+      "#components": ["src/components/index.ts"],
+      "#hooks/*": ["src/hooks/*"],
+      "#hooks": ["src/hooks/index.ts"]
     },
     "typeRoots": ["src/types", "./node_modules/@types"]
   },
