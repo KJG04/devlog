@@ -70,6 +70,13 @@ const PostCard: FC<PropsType> = (props) => {
     []
   );
 
+  const titleCSS = useCSS(
+    () => ({
+      wordBreak: 'break-all',
+    }),
+    []
+  );
+
   const renderedTags = useMemo(
     () => tags.map((item) => <Tag key={item}>{item}</Tag>),
     [tags]
@@ -90,7 +97,9 @@ const PostCard: FC<PropsType> = (props) => {
       <Card.Footer css={footerCSS}>
         <ContentContainer>
           <Text css={dateCSS}>{formatDateByYear(date)}</Text>
-          <Text h4>{title}</Text>
+          <Text h4 css={titleCSS}>
+            {title}
+          </Text>
           <Text css={descriptionCSS}>{description}</Text>
           <Spacer y={0.5} />
           <TagContainer>{renderedTags}</TagContainer>
