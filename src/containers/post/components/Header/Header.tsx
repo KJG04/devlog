@@ -30,7 +30,9 @@ const Header: FC<PropsType> = (props) => {
     <div>
       <Text h1>{title}</Text>
       <InfoContainer>
-        <BadgeContainer>{renderedTags}</BadgeContainer>
+        <div>
+          <BadgeContainer>{renderedTags}</BadgeContainer>
+        </div>
         {date && <Text css={dateCSS}>{dateText}</Text>}
       </InfoContainer>
       <Spacer y={1} />
