@@ -50,6 +50,13 @@ const PostCard: FC<PropsType> = (props) => {
     () => ({
       color: '$gray800',
       lineHeight: '$lg',
+      textOverflow: 'ellipsis',
+      display: '-webkit-box',
+      '-webkit-line-clamp': 2,
+      '-webkit-box-orient': 'vertical',
+      overflow: 'hidden',
+      'text-overflow': 'ellipsis',
+      wordBreak: 'break-all',
     }),
     []
   );

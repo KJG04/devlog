@@ -12,6 +12,7 @@ import rehypeKatex from 'rehype-katex';
 import { h } from 'hastscript';
 import { glob } from 'glob';
 import dayjs from 'dayjs';
+import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
 const DIR_REPLACE_STRING = '/src/posts';
 const POST_PATH = `${process.cwd()}${DIR_REPLACE_STRING}`;
@@ -43,15 +44,13 @@ export const getPostByPath = async (
   const file = fs.readFileSync(fullPath, { encoding: 'utf8' });
 
   const { attributes, body } = frontMatter<FrontMatter>(file);
-  attributes.date = dayjs(attributes.date)
-    .add(-9, 'hours')
-    .format('YYYY-MM-DD HH:mm:ss');
+  attributes.date = dayjs(attributes.date).format('YYYY-MM-DD HH:mm:ss');
 
   return {
     frontMatter: attributes,
     body: await serialize(body, {
       mdxOptions: {
-        remarkPlugins: [remarkMath, toc, slug, remarkGfm],
+        remarkPlugins: [remarkMath, toc, slug, remarkGfm, remarkMdxCodeMeta],
         rehypePlugins: [
           rehypeKatex,
           prism,

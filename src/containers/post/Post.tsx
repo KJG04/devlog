@@ -11,6 +11,8 @@ import RecentlyPost from '#components/RecentlyPost';
 import styled from '@emotion/styled';
 import { useMediumZoom } from './hooks';
 import { memo } from 'react';
+import { MDXProvider } from '@mdx-js/react';
+import { Blockquote } from './components/MDXComponents';
 
 const Post: NextPage<StaticPostProps> = (props) => {
   const { post, nextPost, recentlyPost } = props;
@@ -18,7 +20,7 @@ const Post: NextPage<StaticPostProps> = (props) => {
   useMediumZoom();
 
   return (
-    <>
+    <MDXProvider components={{ Blockquote }}>
       <Head frontMatter={frontMatter} />
       <Container sm>
         {frontMatter.thumbnail && (
@@ -44,7 +46,7 @@ const Post: NextPage<StaticPostProps> = (props) => {
         <RecentlyPost recentlyPost={recentlyPost} />
         <Spacer y={3} />
       </Container>
-    </>
+    </MDXProvider>
   );
 };
 

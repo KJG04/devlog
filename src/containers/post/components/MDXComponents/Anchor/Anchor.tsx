@@ -8,7 +8,7 @@ const Anchor = (props: HTMLProps<HTMLAnchorElement>) => {
   const linkCSS = useCSS(() => ({ display: 'inline' }), []);
 
   return (
-    <Link css={linkCSS} href={href}>
+    <Link css={linkCSS} href={href} target="_blank" rel="noopener noreferrer">
       {children}
     </Link>
   );

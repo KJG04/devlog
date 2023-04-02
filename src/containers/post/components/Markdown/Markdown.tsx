@@ -48,8 +48,11 @@ const Markdown: FC<PropsType> = (props) => {
         borderRadius: '1rem',
         margin: '$xl 0',
       },
+      hr: {
+        margin: '$lg 0',
+      },
       'h1, h2, h3, h4, h5, h6': {
-        marginTop: '$lg',
+        marginTop: '$xl',
         marginBottom: '$xs',
         fontWeight: '$bold',
         position: 'relative',
@@ -68,7 +71,7 @@ const Markdown: FC<PropsType> = (props) => {
         },
       },
       blockquote: {
-        borderLeft: '10px solid $gray500',
+        borderLeft: '5px solid $gray500',
         borderRadius: 0,
         color: '$gray800',
       },

@@ -57,7 +57,7 @@ const Home: NextPage<PropsType> = (props) => {
             <ProfileContainer>
               <ProfileImageContainer>
                 <Image
-                  src="/img/profile-image.webp"
+                  src="/img/profile-image.png"
                   alt="profile"
                   height={200}
                   width={200}
@@ -91,19 +91,17 @@ const Home: NextPage<PropsType> = (props) => {
             <div>
               안녕하세요 👋
               <br />
-              디자인과 UI/UX에 관심이 많은 주니어 개발자 김진근입니다.
+              주니어 개발자 김진근입니다.
               <br />
               주로 Typescript와 React, Nextjs를 사용해 웹 프론트엔드를
               개발합니다. React Native로 iOS와 Android 앱 개발을 할 수 있습니다.
               <br />
               <br />
-              UI/UX, 특히 UX에 관심이 많습니다. 더 나은 UX를 만들기 위해
-              고민하고 디자인합니다. 참여한 대부분 프로젝트에서 프론트엔드
-              개발과 제품 디자인을 맡았습니다.
-              <br />
-              <br />
               &apos;어제의 나보다 성장한 오늘의 나&apos;가 되기위해 노력합니다.
               뛰어난 사람이 되기 위해 끊임없이 공부합니다.
+              <br />
+              <br />
+              현재 매쓰팡의 프론트엔드 개발을 맡고 있습니다.
             </div>
           </Grid>
         </Grid.Container>
