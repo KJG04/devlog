@@ -9,6 +9,7 @@ import NextNProgress from 'nextjs-progressbar';
 import { NavigationBar, Footer } from '#components';
 import Script from 'next/script';
 import { memo, useMemo } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 const darkTheme = createTheme({
   type: 'dark',
@@ -52,43 +53,46 @@ const App = ({ Component, pageProps }: AppProps) => {
   const progressOptions = useMemo(() => ({ showSpinner: false }), []);
 
   return (
-    <NextThemesProvider
-      defaultTheme="system"
-      attribute="class"
-      enableSystem={true}
-      value={themeValue}
-    >
-      <NextUIProvider>
-        <ThemeProvider>
-          <Script
-            defer
-            strategy="afterInteractive"
-            src="https://www.googletagmanager.com/gtag/js?id=G-Y0GBC8LJBX"
-          />
-          <Script
-            defer
-            id="google-analytics"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={googleAnalyticsScript}
-          />
-          <Head>
-            <Favicon />
-          </Head>
-          <NextNProgress
-            color="var(--nextui-colors-primaryLightContrast)"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={3}
-            showOnShallow={true}
-            options={progressOptions}
-          />
-          <NavigationBar />
-          <Component {...pageProps} />
-          <Footer />
-          <ThemeController />
-        </ThemeProvider>
-      </NextUIProvider>
-    </NextThemesProvider>
+    <>
+      <NextThemesProvider
+        defaultTheme="system"
+        attribute="class"
+        enableSystem={true}
+        value={themeValue}
+      >
+        <NextUIProvider>
+          <ThemeProvider>
+            <Script
+              defer
+              strategy="afterInteractive"
+              src="https://www.googletagmanager.com/gtag/js?id=G-Y0GBC8LJBX"
+            />
+            <Script
+              defer
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={googleAnalyticsScript}
+            />
+            <Head>
+              <Favicon />
+            </Head>
+            <NextNProgress
+              color="var(--nextui-colors-primaryLightContrast)"
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={3}
+              showOnShallow={true}
+              options={progressOptions}
+            />
+            <NavigationBar />
+            <Component {...pageProps} />
+            <Footer />
+            <ThemeController />
+          </ThemeProvider>
+        </NextUIProvider>
+      </NextThemesProvider>
+      <Analytics />
+    </>
   );
 };
 
