@@ -5,7 +5,7 @@ import { FC, memo, useCallback, useMemo } from 'react';
 import { FrontMatter } from 'src/types';
 import { Tag } from '#components';
 import { useCSS } from 'src/hooks';
-import { formatDateByYear } from '#utils';
+import { formatDateByYear } from '#utils/date';
 
 interface PropsType {
   frontMatter: FrontMatter;
