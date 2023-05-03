@@ -8,15 +8,11 @@ import SunIcon from '#components/NavigationBar/SunIcon/SunIcon';
 import GithubLogo from '#components/GithubLogo';
 import { useCSS } from '#hooks/styles';
 
-const backgroundColorMap = new Map<boolean, string>()
-  .set(true, 'rgba(241, 243, 245, 0.6)')
-  .set(false, 'rgba(22, 24, 26, 0.6)');
-
 const NavigationBar: FC = () => {
   const { checked, onChangeTheme } = useThemeSwitch();
   const navbarCSS = useCSS(
     () => ({
-      background: backgroundColorMap.get(checked),
+      background: 'var(--navbar-background)',
       backdropFilter: 'saturate(180%) blur(var(--nextui--navbarBlur))',
       borderBottom:
         'var(--nextui--navbarBorderWeight) solid var(--nextui--navbarBorderColor)',
@@ -30,7 +26,7 @@ const NavigationBar: FC = () => {
         marginRight: 'calc(2 * var(--nextui-space-sm))',
       },
     }),
-    [checked]
+    []
   );
 
   return (

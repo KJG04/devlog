@@ -23,3 +23,12 @@ p {
 .medium-zoom-image--opened {
   z-index: var(--nextui-zIndices-3);
 }
+
+html.light-theme:root {
+  /* 라이트 모드에 적용할 스타일 정의 */
+  --navbar-background: rgba(241, 243, 245, 0.6);
+}
+html.dark-theme:root {
+  /* 다크 모드에 적용할 스타일 정의 */
+  --navbar-background: rgba(22, 24, 26, 0.6);
+}
