@@ -1,6 +1,6 @@
 import { Badge } from '@nextui-org/react';
 import { FC, memo, PropsWithChildren } from 'react';
-import { useCSS } from 'src/hooks';
+import { useCSS } from '#hooks/styles';
 
 const Tag: FC<PropsWithChildren> = (props) => {
   const { children } = props;

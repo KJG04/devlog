@@ -5,8 +5,8 @@ import { useThemeSwitch } from './hooks';
 import NavigationBarLogo from '#components/NavigationBar/NavigationBarLogo';
 import MoonIcon from '#components/NavigationBar/MoonIcon';
 import SunIcon from '#components/NavigationBar/SunIcon/SunIcon';
-import { GithubLogo } from '#components';
-import { useCSS } from '#hooks';
+import GithubLogo from '#components/GithubLogo';
+import { useCSS } from '#hooks/styles';
 
 const NavigationBar: FC = () => {
   const { checked, onChangeTheme } = useThemeSwitch();

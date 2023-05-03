@@ -1,4 +1,4 @@
-import { useStyle } from '#hooks';
+import { useStyle } from '#hooks/styles';
 import { Image } from '@nextui-org/react';
 import { FC, memo } from 'react';
 import { FrontMatter } from 'src/types';

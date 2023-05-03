@@ -3,7 +3,7 @@ import { Spacer, Text } from '@nextui-org/react';
 import { FC, memo } from 'react';
 import { FrontMatter } from 'src/types';
 import { useMemo } from 'react';
-import { Tag } from '#components';
+import Tag from '#components/Tag';
 import 'dayjs/locale/ko';
 import dayjs from 'dayjs';
 import { useCSS } from '#hooks/styles';

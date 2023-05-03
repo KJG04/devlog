@@ -4,7 +4,7 @@ import {
   getNextPost,
   getPostByPath,
   getRecentPosts,
-} from '#utils';
+} from '#utils/post';
 import Post from '#containers/post';
 import { StaticPostProps } from '#types';
 

@@ -1,5 +1,5 @@
 import Home from '#containers/home';
-import { getRecentPosts } from '#utils';
+import { getRecentPosts } from '#utils/post';
 import { GetStaticProps } from 'next';
 
 export default Home;

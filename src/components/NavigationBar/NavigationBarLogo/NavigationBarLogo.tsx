@@ -2,7 +2,7 @@
 
 import React, { memo } from 'react';
 import { Navbar, Text, useTheme } from '@nextui-org/react';
-import { useCSS } from '#hooks';
+import { useCSS } from '#hooks/styles';
 import styled from '@emotion/styled';
 
 const DarkLogo = memo(() => (

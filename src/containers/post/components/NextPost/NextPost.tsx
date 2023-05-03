@@ -4,8 +4,8 @@ import { memo } from 'react';
 import { Post } from '#types';
 import styled from '@emotion/styled';
 import { useNextPost } from './hooks';
-import { Tag } from '#components';
-import { useCSS } from '#hooks';
+import Tag from '#components/Tag';
+import { useCSS } from '#hooks/styles';
 
 interface PropsType {
   post: Post;

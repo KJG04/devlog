@@ -1,4 +1,4 @@
-import { useCSS } from '#hooks';
+import { useCSS } from '#hooks/styles';
 import { Container } from '@nextui-org/react';
 import { memo } from 'react';
 import { useDebounceComments, useRenderComments } from './hooks';

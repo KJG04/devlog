@@ -3,8 +3,8 @@ import { Card, Spacer, Text } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import { FC, memo, useCallback, useMemo } from 'react';
 import { FrontMatter } from 'src/types';
-import { Tag } from '#components';
-import { useCSS } from 'src/hooks';
+import Tag from '#components/Tag';
+import { useCSS } from '#hooks/styles';
 import { formatDateByYear } from '#utils/date';
 
 interface PropsType {

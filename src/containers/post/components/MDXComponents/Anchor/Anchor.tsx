@@ -1,4 +1,4 @@
-import { useCSS } from '#hooks';
+import { useCSS } from '#hooks/styles';
 import { Link } from '@nextui-org/react';
 import { HTMLProps, memo } from 'react';
 
