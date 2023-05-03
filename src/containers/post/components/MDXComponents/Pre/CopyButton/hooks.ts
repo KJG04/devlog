@@ -86,6 +86,11 @@ export const useCopyButton = (
 
   useEffect(() => {
     reset();
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
   }, [reset]);
 
   return { onCopyPress, buttonBackgroundColor, buttonColor };
