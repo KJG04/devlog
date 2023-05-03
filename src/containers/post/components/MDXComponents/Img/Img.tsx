@@ -29,6 +29,6 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
 export default memo(Img) as typeof Img;
 
 const StyledImage = styled(Image)`
-  width: auth;
+  width: auto;
   height: auto;
 `;
