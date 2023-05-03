@@ -8,7 +8,7 @@ const Footer: FC = () => {
   const theme = useTheme();
 
   return (
-    <>
+    <div>
       <ButtonContainer>
         <Link href="mailto:freedom7113@gmail.com" aria-label="contact email">
           <svg
@@ -29,7 +29,7 @@ const Footer: FC = () => {
       <Spacer y={0.5} />
       <FooterContent>김진근 • © {new Date().getFullYear()}</FooterContent>
       <Spacer y={0.5} />
-    </>
+    </div>
   );
 };
 

@@ -8,10 +8,11 @@ interface PropsType {
 
 const Head: FC<PropsType> = (props) => {
   const { frontMatter } = props;
+  const title = `${frontMatter.title} | 김진근의 devlog`;
 
   return (
     <NextHead>
-      <title>{frontMatter.title} | 김진근의 devlog</title>
+      <title>{title}</title>
       <meta name="description" content={frontMatter.description} />
       <meta name="keywords" content={frontMatter.keyword} />
       <meta name="author" content="김진근" />

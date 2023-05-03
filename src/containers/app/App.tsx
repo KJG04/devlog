@@ -11,6 +11,7 @@ import Footer from '#components/Footer';
 import Script from 'next/script';
 import { memo, useMemo } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import styled from '@emotion/styled';
 
 const darkTheme = createTheme({
   type: 'dark',
@@ -85,9 +86,11 @@ const App = ({ Component, pageProps }: AppProps) => {
               showOnShallow={true}
               options={progressOptions}
             />
-            <NavigationBar />
-            <Component {...pageProps} />
-            <Footer />
+            <Container>
+              <NavigationBar />
+              <Component {...pageProps} />
+              <Footer />
+            </Container>
             <ThemeController />
           </ThemeProvider>
         </NextUIProvider>
@@ -98,3 +101,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 export default memo(App);
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
