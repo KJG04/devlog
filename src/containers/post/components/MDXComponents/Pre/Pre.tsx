@@ -1,6 +1,6 @@
 import { HTMLProps, memo, useRef } from 'react';
 import styled from '@emotion/styled';
-import CopyButton from '#containers/post/components/MDXComponents/Pre/CopyButton/CopyButton';
+import CopyButton from '#containers/post/components/MDXComponents/Pre/CopyButton';
 
 const Pre = (props: HTMLProps<HTMLPreElement>) => {
   const { children, ...rest } = props;

@@ -43,6 +43,7 @@
     "use-debounce": "^8.0.4"
   },
   "devDependencies": {
+    "@svgr/webpack": "^7.0.0",
     "@types/glob": "^8.0.0",
     "@types/node": "18.7.18",
     "@types/prismjs": "^1.26.0",

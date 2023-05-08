@@ -12,7 +12,7 @@ import styled from '@emotion/styled';
 import { useMediumZoom } from './hooks';
 import { memo } from 'react';
 import { MDXProvider } from '@mdx-js/react';
-import { Blockquote } from './components/MDXComponents';
+import { Blockquote } from '#containers/post/components/MDXComponents';
 
 const Post: NextPage<StaticPostProps> = (props) => {
   const { post, nextPost, recentlyPost } = props;

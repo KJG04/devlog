@@ -1,13 +1,25 @@
-import Image from 'next/image';
 import { memo } from 'react';
-import { useIconPath } from './hook';
+import GithubLogoIcon from 'public/icon/github-logo.svg';
+import styled from '@emotion/styled';
 
 const GithubLogo = () => {
-  const icon = useIconPath();
-
   return (
-    <Image src={icon} alt="github-logo" layout="fixed" width={30} height={30} />
+    <Logo
+      width={30}
+      height={30}
+      viewBox="0 0 30 30"
+      preserveAspectRatio="none"
+    />
   );
 };
 
 export default memo(GithubLogo);
+
+const Logo = styled(GithubLogoIcon)`
+  path {
+    fill: ${({ theme }) => theme.colors.gray900.value};
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+  }
+`;
