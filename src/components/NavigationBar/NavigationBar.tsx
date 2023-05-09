@@ -30,13 +30,7 @@ const NavigationBar: FC = () => {
   );
 
   return (
-    <Navbar
-      shouldHideOnScroll
-      variant="sticky"
-      css={navbarCSS}
-      maxWidth="sm"
-      isCompact
-    >
+    <Navbar variant="sticky" css={navbarCSS} maxWidth="sm" isCompact>
       <Navbar.Brand>
         <Link href="/" passHref>
           <a>

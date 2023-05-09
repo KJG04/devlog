@@ -2,7 +2,12 @@ import { Container } from '@nextui-org/react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { FC, memo, useMemo } from 'react';
 import { MDXComponents } from 'src/types';
-import { Pre, Anchor, Img } from '#containers/post/components/MDXComponents';
+import {
+  Pre,
+  Anchor,
+  Img,
+  Span,
+} from '#containers/post/components/MDXComponents';
 import { useCSS } from '#hooks/styles';
 
 interface PropsType {
@@ -16,6 +21,7 @@ const Markdown: FC<PropsType> = (props) => {
       pre: Pre,
       a: Anchor,
       img: Img,
+      span: Span,
     }),
     []
   );
@@ -40,9 +46,6 @@ const Markdown: FC<PropsType> = (props) => {
       },
       'pre code:hover': {
         opacity: 1,
-      },
-      pre: {
-        margin: '$lg 0 !important',
       },
       img: {
         borderRadius: '1rem',

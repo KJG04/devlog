@@ -12,7 +12,7 @@ import rehypeKatex from 'rehype-katex';
 import { h } from 'hastscript';
 import { glob } from 'glob';
 import dayjs from 'dayjs';
-import remarkMdxCodeMeta from 'remark-mdx-code-meta';
+import rehypeMetaAsAttributes from '#utils/rehypeMetaAsAttributes';
 
 const DIR_REPLACE_STRING = '/src/posts';
 const POST_PATH = `${process.cwd()}${DIR_REPLACE_STRING}`;
@@ -50,10 +50,11 @@ export const getPostByPath = async (
     frontMatter: attributes,
     body: await serialize(body, {
       mdxOptions: {
-        remarkPlugins: [remarkMath, toc, slug, remarkGfm, remarkMdxCodeMeta],
+        remarkPlugins: [remarkMath, toc, slug, remarkGfm],
         rehypePlugins: [
           rehypeKatex,
-          prism,
+          rehypeMetaAsAttributes,
+          [prism, { showLineNumbers: true }],
           [
             rehypeAutolinkHeadings,
             {

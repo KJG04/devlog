@@ -22,11 +22,14 @@ const CopyButton: FC<PropsType> = (props) => {
       width: 40,
       height: 40,
       backgroundColor: buttonBackgroundColor,
+      borderRadius: 0,
+      display: 'inline-block',
       position: 'relative',
       '.nextui-button-text': {
         position: 'relative',
         zIndex: 1,
       },
+      zIndex: 2,
     }),
     [buttonBackgroundColor]
   );

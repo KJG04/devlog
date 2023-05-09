@@ -35,10 +35,8 @@ export const useCopyButton = (
   copy: (text: string) => void
 ) => {
   const theme = useTheme();
-  const [buttonBackgroundColor, setButtonBackgroundColor] = useState(
-    theme.colors.gray800.value
-  );
-  const [buttonColor, setButtonColor] = useState(theme.colors.gray500.value);
+  const [buttonBackgroundColor, setButtonBackgroundColor] = useState('#1e1e1e');
+  const [buttonColor, setButtonColor] = useState('#787f85');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const onSuccess = useCallback(() => {
@@ -52,9 +50,9 @@ export const useCopyButton = (
   }, [theme.colors.error.value, theme.colors.white.value]);
 
   const reset = useCallback(() => {
-    setButtonBackgroundColor(theme.colors.gray500.value);
-    setButtonColor(theme.colors.gray800.value);
-  }, [theme.colors.gray500.value, theme.colors.gray800.value]);
+    setButtonBackgroundColor('#1e1e1e');
+    setButtonColor('#787f85');
+  }, []);
 
   const resetWait3Seconds = useCallback(() => {
     if (timeoutRef.current) {

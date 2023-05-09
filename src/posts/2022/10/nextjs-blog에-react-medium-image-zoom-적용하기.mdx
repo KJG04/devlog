@@ -26,11 +26,11 @@ thumbnail: /img/thumbnail-2022-10-17.webp
 
 ### 설치
 
-```ts
+```sh path="shell"
 yarn add react-medium-image-zoom
 ```
 
-```ts
+```sh path="shell"
 npm install --save react-medium-image-zoom
 ```
 
@@ -42,9 +42,7 @@ npm install --save react-medium-image-zoom
 
 우선 `Img` 컴포넌트를 생성합니다.
 
-```tsx
-// src/components/Img.tsx
-
+```tsx showLineNumbers="true" path="src/components/Img.tsx"
 import { HTMLProps } from 'react';
 
 const Img = (props: HTMLProps<HTMLImageElement>) => {
@@ -71,9 +69,7 @@ export default Img;
 
 그리고 생성한 `Img` 컴포넌트를 `MDXRemote`의 components에 넣어줍니다.
 
-```tsx
-// src/components/Markdown.tsx
-
+```tsx showLineNumbers="true" path="src/components/Markdown.tsx"
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { FC } from 'react';
 import { Img } from 'src/components/Img';
@@ -98,9 +94,7 @@ export default Markdown;
 
 이제 `react-medium-image-zoom`을 적용해봅시다.
 
-```tsx
-// src/components/Img.tsx
-
+```tsx showLineNumbers="true" path="src/components/Img.tsx"
 import { HTMLProps } from 'react';
 import Zoom from 'react-medium-image-zoom';
 
@@ -143,9 +137,7 @@ Error: Hydration failed because the initial UI does not match what was rendered 
 
 Next.js의 기능 중 하나인 [Dynamic Import](https://nextjs.org/docs/advanced-features/dynamic-import)를 사용하면 됩니다.
 
-```tsx
-// src/components/Img.tsx
-
+```tsx showLineNumbers="true" path="src/components/Img.tsx"
 import { HTMLProps } from 'react';
 import dynamic from 'next/dynamic';
 
