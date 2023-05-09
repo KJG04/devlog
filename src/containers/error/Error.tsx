@@ -1,6 +1,7 @@
 import { useCSS } from '#hooks/styles';
 import styled from '@emotion/styled';
 import { Button, Spacer, Text } from '@nextui-org/react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { memo, useCallback } from 'react';
 
@@ -21,24 +22,31 @@ const Error = () => {
   );
 
   return (
-    <Container>
-      <Text h1 css={codeStyle}>
-        500
-      </Text>
-      <Text b css={descriptionStyle}>
-        페이지를 가져오는 도중 오류가 발생했습니다.
-      </Text>
-      <Spacer y={1} />
-      <ButtonContainer>
-        <Button size="sm" onClick={onClickBack}>
-          뒤로가기
-        </Button>
-        <Spacer x={1} />
-        <Button bordered color="default" size="sm" onClick={onClickHome}>
-          홈으로
-        </Button>
-      </ButtonContainer>
-    </Container>
+    <>
+      <Head>
+        <title>
+          페이지를 가져오는 도중 오류가 발생했습니다. | 김진근의 Devlog
+        </title>
+      </Head>
+      <Container>
+        <Text h1 css={codeStyle}>
+          500
+        </Text>
+        <Text b css={descriptionStyle}>
+          페이지를 가져오는 도중 오류가 발생했습니다.
+        </Text>
+        <Spacer y={1} />
+        <ButtonContainer>
+          <Button size="sm" onClick={onClickBack}>
+            뒤로가기
+          </Button>
+          <Spacer x={1} />
+          <Button bordered color="default" size="sm" onClick={onClickHome}>
+            홈으로
+          </Button>
+        </ButtonContainer>
+      </Container>
+    </>
   );
 };
 
