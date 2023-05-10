@@ -35,7 +35,9 @@ export const useCopyButton = (
   copy: (text: string) => void
 ) => {
   const theme = useTheme();
-  const [buttonBackgroundColor, setButtonBackgroundColor] = useState('#1e1e1e');
+  const [buttonBackgroundColor, setButtonBackgroundColor] = useState(
+    'var(--code-background)'
+  );
   const [buttonColor, setButtonColor] = useState('#787f85');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -50,7 +52,7 @@ export const useCopyButton = (
   }, [theme.colors.error.value, theme.colors.white.value]);
 
   const reset = useCallback(() => {
-    setButtonBackgroundColor('#1e1e1e');
+    setButtonBackgroundColor('var(--code-background)');
     setButtonColor('#787f85');
   }, []);
 

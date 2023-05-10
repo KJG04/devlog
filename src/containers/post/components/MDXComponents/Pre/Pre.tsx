@@ -53,7 +53,7 @@ const PreContainer = styled.div`
   position: relative;
   top: 0px;
   left: 0px;
-  background-color: #1e1e1e;
+  background-color: var(--code-background);
   border-radius: ${({ theme }) => theme.radii.md.value};
   contain: paint;
   margin: ${({ theme }) => theme.space.md.value} 0;
@@ -65,7 +65,7 @@ const PreContainer = styled.div`
 
 const Header = styled.div`
   position: sticky;
-  background-color: #1e1e1e;
+  background-color: var(--code-background);
   top: 69px;
   z-index: 3;
   color: #787f85;
@@ -74,7 +74,7 @@ const Header = styled.div`
 
   &::before {
     content: '';
-    background-color: #1e1e1e;
+    background-color: var(--code-background);
     position: absolute;
     left: 0px;
     bottom: 100%;

@@ -32,3 +32,11 @@ html.dark-theme:root {
   /* 다크 모드에 적용할 스타일 정의 */
   --navbar-background: rgba(22, 24, 26, 0.6);
 }
+
+.dark-theme:root {
+  --code-background: #1e1e1e;
+}
+
+.light-theme:root {
+  --code-background: white;
+}
