@@ -1,7 +1,6 @@
 import PostCard from '#components/PostCard/PostCard';
 import { Post } from '#types';
-import styled from '@emotion/styled';
-import { Spacer, Text } from '@nextui-org/react';
+import { Spacer } from '@nextui-org/react';
 import { FC, memo, useMemo } from 'react';
 
 interface PropsType {
@@ -20,25 +19,18 @@ const RecentlyPost: FC<PropsType> = (props) => {
           pathParam={post.pathParam}
         />
       )),
-    [recentlyPost]
+    [recentlyPost],
   );
 
   return (
     <>
-      <Text h2>최근 게시물</Text>
+      <h2>최근 게시물</h2>
       <Spacer y={1} />
-      <GridContainer>{renderedRecentlyPost}</GridContainer>
+      <div className="grid grid-cols-2 gap-[1rem] lg:grid-cols-1">
+        {renderedRecentlyPost}
+      </div>
     </>
   );
 };
 
 export default memo(RecentlyPost);
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  @media screen and (max-width: 900px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-`;

@@ -18,7 +18,7 @@ const NotFound = () => {
   const codeStyle = useCSS(() => ({ fontSize: '$9xl', margin: '$0' }), []);
   const descriptionStyle = useCSS(
     () => ({ fontSize: '$2xl', color: '$gray700' }),
-    []
+    [],
   );
 
   return (

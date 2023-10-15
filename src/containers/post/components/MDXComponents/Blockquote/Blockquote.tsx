@@ -25,7 +25,7 @@ const Blockquote = (props: PropsType) => {
         padding: `${size ?? '$md'} $lg`,
       },
     }),
-    []
+    [],
   );
 
   return (

@@ -1,4 +1,3 @@
-import { useStyle } from '#hooks/styles';
 import { Image } from '@nextui-org/react';
 import { FC, memo } from 'react';
 import { FrontMatter } from 'src/types';
@@ -10,15 +9,6 @@ interface PropsType {
 const Thumbnail: FC<PropsType> = (props) => {
   const { frontMatter } = props;
 
-  const imageStyle = useStyle(
-    () => ({
-      borderRadius: '1rem',
-      width: '100%',
-      display: 'block',
-    }),
-    []
-  );
-
   if (!frontMatter.thumbnail) {
     return <></>;
   }
@@ -26,11 +16,10 @@ const Thumbnail: FC<PropsType> = (props) => {
   return (
     <Image
       data-zoomable
-      style={imageStyle}
-      autoResize
-      objectFit="cover"
-      showSkeleton
+      className="rounded-[1rem] w-[100%] block"
       src={frontMatter.thumbnail}
+      width={100}
+      height={100}
       alt="blog-thumbnail"
     />
   );

@@ -23,7 +23,7 @@ const Markdown: FC<PropsType> = (props) => {
       img: Img,
       span: Span,
     }),
-    []
+    [],
   );
 
   const containerCSS = useCSS(
@@ -79,7 +79,7 @@ const Markdown: FC<PropsType> = (props) => {
         color: '$gray800',
       },
     }),
-    []
+    [],
   );
 
   return (

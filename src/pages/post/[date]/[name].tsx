@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<StaticPostProps> = async (
-  context
+  context,
 ) => {
   const { params } = context;
   if (!params) {

@@ -1,4 +1,4 @@
-import { Navbar, Switch } from '@nextui-org/react';
+import { Navbar, NavbarBrand, NavbarContent, Switch } from '@nextui-org/react';
 import { FC, memo } from 'react';
 import Link from 'next/link';
 import { useThemeSwitch } from './hooks';
@@ -6,51 +6,30 @@ import NavigationBarLogo from '#components/NavigationBar/NavigationBarLogo';
 import MoonIcon from '#components/NavigationBar/MoonIcon';
 import SunIcon from '#components/NavigationBar/SunIcon/SunIcon';
 import GithubLogo from '#components/GithubLogo';
-import { useCSS } from '#hooks/styles';
 
 const NavigationBar: FC = () => {
   const { checked, onChangeTheme } = useThemeSwitch();
-  const navbarCSS = useCSS(
-    () => ({
-      background: 'var(--navbar-background)',
-      backdropFilter: 'saturate(180%) blur(var(--nextui--navbarBlur))',
-      borderBottom:
-        'var(--nextui--navbarBorderWeight) solid var(--nextui--navbarBorderColor)',
-      boxShadow: 'unset',
-      '.nextui-navbar-container': {
-        background: 'transparent',
-        backdropFilter: 'none',
-        marginTop: '$md',
-        paddingBottom: '$md',
-        marginLeft: 'calc(2 * var(--nextui-space-sm))',
-        marginRight: 'calc(2 * var(--nextui-space-sm))',
-      },
-    }),
-    []
-  );
 
   return (
-    <Navbar variant="sticky" css={navbarCSS} maxWidth="sm" isCompact>
-      <Navbar.Brand>
+    <Navbar position="sticky" maxWidth="sm" slot="">
+      <NavbarBrand>
         <Link href="/" passHref>
-          <a>
-            <NavigationBarLogo />
-          </a>
+          <NavigationBarLogo />
         </Link>
-      </Navbar.Brand>
-      <Navbar.Content>
-        <Navbar.Link href="https://github.com/KJG04" target="_blank">
+      </NavbarBrand>
+      <NavbarContent>
+        <Link href="https://github.com/KJG04" target="_blank">
           <GithubLogo />
-        </Navbar.Link>
+        </Link>
         <Switch
-          onChange={onChangeTheme}
-          checked={checked}
-          size="xl"
-          iconOn={<SunIcon />}
-          iconOff={<MoonIcon />}
+          onValueChange={onChangeTheme}
+          isSelected={checked}
+          size="lg"
+          startContent={<SunIcon />}
+          endContent={<MoonIcon />}
           aria-label="theme toggle"
         />
-      </Navbar.Content>
+      </NavbarContent>
     </Navbar>
   );
 };

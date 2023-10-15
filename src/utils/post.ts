@@ -38,7 +38,7 @@ export const getAllPaths = async (): Promise<Path[]> => {
 };
 
 export const getPostByPath = async (
-  path: string
+  path: string,
 ): Promise<PostWithHTMLBody> => {
   const fullPath = `${POST_PATH}/${path}.mdx`;
   const file = fs.readFileSync(fullPath, { encoding: 'utf8' });
@@ -122,7 +122,7 @@ export const getSeriesPosts = async (series: string): Promise<Post[]> => {
 };
 
 export const getNextPost = async (
-  currPost: FrontMatter
+  currPost: FrontMatter,
 ): Promise<Post | null> => {
   const currSeries = currPost.series;
 

@@ -16,12 +16,12 @@ const Header: FC<PropsType> = (props) => {
   const { title, date, tags } = props.frontMatter;
   const dateText = useMemo(
     () => dayjs(date).format('YYYY년 M월 D일 HH:mm:ss'),
-    [date]
+    [date],
   );
 
   const renderedTags = useMemo(
     () => tags.map((tag) => <Tag key={tag}>{tag}</Tag>),
-    [tags]
+    [tags],
   );
 
   const dateCSS = useCSS(() => ({ color: '$gray800' }), []);

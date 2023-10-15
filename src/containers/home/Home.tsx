@@ -1,10 +1,7 @@
 import GithubLogo from '#components/GithubLogo';
 import RecentlyPost from '#components/RecentlyPost';
-import { useCSS } from '#hooks/styles';
 import { Post } from '#types';
-import { useTheme } from '@emotion/react';
-import styled from '@emotion/styled';
-import { Container, Grid, Link, Spacer, Text } from '@nextui-org/react';
+import { Link, Spacer } from '@nextui-org/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -16,12 +13,6 @@ interface PropsType {
 
 const Home: NextPage<PropsType> = (props) => {
   const { recentlyPost } = props;
-  const theme = useTheme();
-  const gridCSS = useCSS(
-    () => ({ width: '100%', justifyContent: 'center' }),
-    []
-  );
-  const descritpionCSS = useCSS(() => ({ flexDirection: 'column' }), []);
 
   return (
     <>
@@ -52,21 +43,21 @@ const Home: NextPage<PropsType> = (props) => {
         <meta name="twitter:card" content="blog" />
       </Head>
       <Spacer y={3} />
-      <Container sm>
-        <Grid.Container css={gridCSS}>
-          <Grid md={4}>
-            <ProfileContainer>
-              <ProfileImageContainer>
+      <div className="w-unit-sm">
+        <div>
+          <div>
+            <div className="flex flex-col align-middle">
+              <div className="border-r-[50%] overflow-hidden bg-gray-100">
                 <Image
                   src="/img/profile-image.webp"
                   alt="profile"
                   height={200}
                   width={200}
                 />
-              </ProfileImageContainer>
+              </div>
               <Spacer y={1} />
-              <Text h4>김진근</Text>
-              <ButtonContainer>
+              <h4>김진근</h4>
+              <div className="flex gap-x-[1rem] justify-center">
                 <Link
                   href="mailto:freedom7113@gmail.com"
                   aria-label="contact email"
@@ -77,7 +68,7 @@ const Home: NextPage<PropsType> = (props) => {
                     viewBox="0 0 512 512"
                   >
                     <path
-                      fill={theme.colors.gray900.value}
+                      className="fill-gray-900"
                       d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
                     />
                   </svg>
@@ -85,10 +76,10 @@ const Home: NextPage<PropsType> = (props) => {
                 <Link href="https://github.com/KJG04" target="_blank">
                   <GithubLogo />
                 </Link>
-              </ButtonContainer>
-            </ProfileContainer>
-          </Grid>
-          <Grid md={8} css={descritpionCSS}>
+              </div>
+            </div>
+          </div>
+          <div>
             <div>
               안녕하세요 👋
               <br />
@@ -104,38 +95,16 @@ const Home: NextPage<PropsType> = (props) => {
               <br />
               현재 매쓰팡의 프론트엔드 개발을 맡고 있습니다.
             </div>
-          </Grid>
-        </Grid.Container>
+          </div>
+        </div>
         <Spacer y={3} />
-        <Divider />
+        <hr className="bg-gray-600" />
         <Spacer y={3} />
         <RecentlyPost recentlyPost={recentlyPost} />
         <Spacer y={3} />
-      </Container>
+      </div>
     </>
   );
 };
 
 export default memo(Home);
-
-const ProfileImageContainer = styled.div`
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.gray100.value};
-`;
-
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Divider = styled.hr`
-  background-color: var(--nextui-colors-gray600);
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  column-gap: 1rem;
-  justify-content: center;
-`;

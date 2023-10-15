@@ -28,7 +28,7 @@ export const useRenderComments = () => {
 
 export const useDebounceComments = (
   callback: (isDark: boolean) => void,
-  wait: number
+  wait: number,
 ) => {
   const { isDark } = useTheme();
 

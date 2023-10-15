@@ -14,7 +14,7 @@ const Utterances: React.FC = () => {
         maxWidth: '100%',
       },
     }),
-    []
+    [],
   );
 
   return (

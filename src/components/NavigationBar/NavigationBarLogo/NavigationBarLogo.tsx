@@ -1,9 +1,6 @@
-// create logo component
-
 import React, { memo } from 'react';
-import { Navbar, Text, useTheme } from '@nextui-org/react';
-import { useCSS } from '#hooks/styles';
-import styled from '@emotion/styled';
+import { NavbarContent } from '@nextui-org/react';
+import { useTheme } from 'next-themes';
 
 const DarkLogo = memo(() => (
   <svg
@@ -48,25 +45,18 @@ const LightLogo = memo(() => (
 LightLogo.displayName = 'LightLogo';
 
 const NavigationBarLogo: React.FC = () => {
-  const { isDark } = useTheme();
-
-  const titleCSS = useCSS(() => ({ fontWeight: '$bold' }), []);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
-    <NavigationContainer>
+    <div className="flex gap-x-0.5 align-middle">
       {isDark && <DarkLogo />}
       {!isDark && <LightLogo />}
-      <Navbar.Content hideIn="xs">
-        <Text css={titleCSS}>김진근의 Devlog</Text>
-      </Navbar.Content>
-    </NavigationContainer>
+      <NavbarContent className="block sm:hidden">
+        <div className="font-bold">김진근의 Devlog</div>
+      </NavbarContent>
+    </div>
   );
 };
 
 export default memo(NavigationBarLogo);
-
-const NavigationContainer = styled.div`
-  display: flex;
-  column-gap: 0.5rem;
-  align-items: center;
-`;

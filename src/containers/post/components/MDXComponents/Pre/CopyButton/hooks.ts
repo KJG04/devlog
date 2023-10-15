@@ -1,4 +1,3 @@
-import { useTheme } from '@emotion/react';
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 export const useCopy = () => {
@@ -32,29 +31,19 @@ export const useCopy = () => {
 
 export const useCopyButton = (
   preRef: RefObject<HTMLPreElement>,
-  copy: (text: string) => void
+  copy: (text: string) => void,
 ) => {
-  const theme = useTheme();
   const [buttonBackgroundColor, setButtonBackgroundColor] = useState(
-    'var(--code-background)'
+    'var(--code-background)',
   );
   const [buttonColor, setButtonColor] = useState('#787f85');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const onSuccess = useCallback(() => {
-    setButtonBackgroundColor(theme.colors.green600.value);
-    setButtonColor(theme.colors.white.value);
-  }, [theme.colors.green600.value, theme.colors.white.value]);
+  const onSuccess = useCallback(() => {}, []);
 
-  const onError = useCallback(() => {
-    setButtonBackgroundColor(theme.colors.error.value);
-    setButtonColor(theme.colors.white.value);
-  }, [theme.colors.error.value, theme.colors.white.value]);
+  const onError = useCallback(() => {}, []);
 
-  const reset = useCallback(() => {
-    setButtonBackgroundColor('var(--code-background)');
-    setButtonColor('#787f85');
-  }, []);
+  const reset = useCallback(() => {}, []);
 
   const resetWait3Seconds = useCallback(() => {
     if (timeoutRef.current) {

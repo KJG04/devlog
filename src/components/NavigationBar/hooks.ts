@@ -1,17 +1,16 @@
-import { SwitchEvent, useTheme } from '@nextui-org/react';
-import { useTheme as useNextTheme } from 'next-themes';
+import { useTheme } from 'next-themes';
 import { useCallback } from 'react';
+import { SwitchProps } from '@nextui-org/react';
 
 export const useThemeSwitch = () => {
-  const { isDark } = useTheme();
-  const { setTheme } = useNextTheme();
+  const { setTheme, theme } = useTheme();
 
-  const onChangeTheme = useCallback(
-    (e: SwitchEvent) => {
-      setTheme(e.target.checked ? 'light' : 'dark');
+  const onChangeTheme = useCallback<NonNullable<SwitchProps['onValueChange']>>(
+    (e) => {
+      setTheme(e ? 'light' : 'dark');
     },
-    [setTheme]
+    [setTheme],
   );
 
-  return { checked: !isDark, onChangeTheme };
+  return { checked: theme === 'light', onChangeTheme };
 };
