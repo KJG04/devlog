@@ -20,13 +20,13 @@ const POST_PATH = `${process.cwd()}${DIR_REPLACE_STRING}`;
 export const getAllPaths = async (): Promise<Path[]> => {
   const paths = glob.sync(`${POST_PATH}/**/*.md*`);
 
+  const regex = new RegExp(`${POST_PATH}|\.mdx`, 'g');
   return paths
     .filter(async (path) => {
-      const post = await getPostByPath(path);
+      const post = await getPostByPath(path.replaceAll(regex, ''));
       return post.frontMatter.published;
     })
     .map((path) => {
-      const regex = new RegExp(`${POST_PATH}|.mdx`, 'g');
       const slug = path
         .replaceAll(regex, '')
         .split('/')

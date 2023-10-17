@@ -1,8 +1,12 @@
-import styled from '@emotion/styled';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { HTMLProps, ImgHTMLAttributes, memo } from 'react';
 
-const Img = (props: HTMLProps<HTMLImageElement>) => {
+const Img = (
+  props: Omit<
+    HTMLProps<HTMLImageElement>,
+    'ref' | 'as' | 'onError' | 'width' | 'height'
+  >,
+) => {
   const { src, crossOrigin, placeholder, ...rest } = props;
 
   if (!src) {
@@ -10,7 +14,7 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
   }
 
   return (
-    <StyledImage
+    <Image
       data-zoomable
       {...rest}
       crossOrigin={
@@ -19,16 +23,11 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
       placeholder={placeholder as 'blur' | 'empty' | undefined}
       src={src}
       alt={src}
-      width="0"
-      height="0"
       sizes="100vw"
+      width={1000}
+      height={1000}
     />
   );
 };
 
 export default memo(Img) as typeof Img;
-
-const StyledImage = styled(Image)`
-  width: auto;
-  height: auto;
-`;

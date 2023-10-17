@@ -1,4 +1,4 @@
-import { useTheme } from '@nextui-org/react';
+import { useTheme } from 'next-themes';
 import { useCallback, useEffect, useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -30,9 +30,9 @@ export const useDebounceComments = (
   callback: (isDark: boolean) => void,
   wait: number,
 ) => {
-  const { isDark } = useTheme();
-
   const debounced = useDebouncedCallback(callback, wait);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     if (isDark !== undefined) {

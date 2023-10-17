@@ -1,15 +1,12 @@
-import { useCSS } from '#hooks/styles';
 import { Link } from '@nextui-org/react';
 import { HTMLProps, memo } from 'react';
 
 const Anchor = (props: HTMLProps<HTMLAnchorElement>) => {
   const { href, children } = props;
 
-  const linkCSS = useCSS(() => ({ display: 'inline' }), []);
-
   return (
     <Link
-      css={linkCSS}
+      className="inline"
       href={href}
       target={href?.startsWith('#') ? undefined : '_blank'}
       rel={href?.startsWith('#') ? undefined : 'noopener noreferrer'}
