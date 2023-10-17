@@ -24,9 +24,9 @@ const RecentlyPost: FC<PropsType> = (props) => {
 
   return (
     <>
-      <h2>최근 게시물</h2>
-      <Spacer y={1} />
-      <div className="grid grid-cols-2 gap-[1rem] lg:grid-cols-1">
+      <h2 className="text-4xl font-semibold">최근 게시물</h2>
+      <Spacer y={6} />
+      <div className="grid grid-cols-1 gap-[1rem] sm:grid-cols-2">
         {renderedRecentlyPost}
       </div>
     </>

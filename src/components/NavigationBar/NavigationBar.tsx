@@ -6,29 +6,45 @@ import NavigationBarLogo from '#components/NavigationBar/NavigationBarLogo';
 import MoonIcon from '#components/NavigationBar/MoonIcon';
 import SunIcon from '#components/NavigationBar/SunIcon/SunIcon';
 import GithubLogo from '#components/GithubLogo';
+import MountOnly from '#components/MountOnly/MountOnly';
+
+const sunIcon = <SunIcon />;
+const moonIcon = <MoonIcon />;
+
+const switchFallback = (
+  <Switch
+    size="lg"
+    aria-label="theme toggle"
+    startContent={sunIcon}
+    endContent={moonIcon}
+    key="fallback"
+  />
+);
 
 const NavigationBar: FC = () => {
   const { checked, onChangeTheme } = useThemeSwitch();
 
   return (
-    <Navbar position="sticky" maxWidth="sm" slot="">
+    <Navbar position="sticky" maxWidth="lg" className="bg-navbar">
       <NavbarBrand>
         <Link href="/" passHref>
           <NavigationBarLogo />
         </Link>
       </NavbarBrand>
-      <NavbarContent>
+      <NavbarContent justify="end">
         <Link href="https://github.com/KJG04" target="_blank">
           <GithubLogo />
         </Link>
-        <Switch
-          onValueChange={onChangeTheme}
-          isSelected={checked}
-          size="lg"
-          startContent={<SunIcon />}
-          endContent={<MoonIcon />}
-          aria-label="theme toggle"
-        />
+        <MountOnly fallback={switchFallback}>
+          <Switch
+            onValueChange={onChangeTheme}
+            isSelected={checked}
+            size="lg"
+            startContent={sunIcon}
+            endContent={moonIcon}
+            aria-label="theme toggle"
+          />
+        </MountOnly>
       </NavbarContent>
     </Navbar>
   );

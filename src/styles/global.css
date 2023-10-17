@@ -3,37 +3,40 @@
 @tailwind utilities;
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-body,
-html {
-  background-color: var(--nextui-colors-gray50);
-  color: var(--nextui-colors-gray900);
-  word-wrap: break-word;
-  word-break: keep-all;
-  width: 100%;
-  scroll-behavior: smooth;
-}
+@layer base {
+  body,
+  html {
+    font-family:
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      Roboto,
+      'Helvetica Neue',
+      'Segoe UI',
+      'Apple SD Gothic Neo',
+      'Noto Sans KR',
+      'Malgun Gothic',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
+      sans-serif;
 
-p {
-  letter-spacing: var(--nextui-letterSpacings-normal);
-  line-height: var(--nextui-lineHeights-2xl);
-}
+    @apply bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 w-full scroll-smooth break-keep break-words leading-relaxed;
+  }
 
-.medium-zoom-overlay {
-  backdrop-filter: saturate(180%) blur(var(--nextui--navbarBlur));
-  z-index: var(--nextui-zIndices-3);
-}
+  p {
+    @apply leading-loose tracking-normal;
+  }
 
-.medium-zoom-image--opened {
-  z-index: var(--nextui-zIndices-3);
-}
+  .medium-zoom-overlay {
+    backdrop-filter: saturate(180%) blur(16px);
+    @apply z-30;
+  }
 
-html.light-theme:root {
-  /* 라이트 모드에 적용할 스타일 정의 */
-  --navbar-background: rgba(241, 243, 245, 0.6);
-}
-html.dark-theme:root {
-  /* 다크 모드에 적용할 스타일 정의 */
-  --navbar-background: rgba(22, 24, 26, 0.6);
+  .medium-zoom-image--opened {
+    @apply z-30;
+  }
 }
 
 .dark-theme:root {

@@ -42,21 +42,23 @@ const Home: NextPage<PropsType> = (props) => {
         />
         <meta name="twitter:card" content="blog" />
       </Head>
-      <Spacer y={3} />
-      <div className="w-unit-sm">
-        <div>
-          <div>
-            <div className="flex flex-col align-middle">
-              <div className="border-r-[50%] overflow-hidden bg-gray-100">
+      <Spacer y={16} />
+      <div className="px-6 max-w-screen-lg m-auto">
+        <div className="flex flex-col md:flex-row">
+          <div className="mr-0 md:mr-12">
+            <div className="flex flex-col items-center">
+              <div>
                 <Image
                   src="/img/profile-image.webp"
                   alt="profile"
                   height={200}
                   width={200}
+                  className="w-[200px] h-[200px] rounded-full"
                 />
               </div>
-              <Spacer y={1} />
-              <h4>김진근</h4>
+              <Spacer y={5} />
+              <h4 className="text-lg font-semibold">김진근</h4>
+              <Spacer y={3} />
               <div className="flex gap-x-[1rem] justify-center">
                 <Link
                   href="mailto:freedom7113@gmail.com"
@@ -64,11 +66,12 @@ const Home: NextPage<PropsType> = (props) => {
                 >
                   <svg
                     width={30}
+                    height={30}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
                   >
                     <path
-                      className="fill-gray-900"
+                      className="fill-zinc-900 dark:fill-zinc-100"
                       d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
                     />
                   </svg>
@@ -79,8 +82,8 @@ const Home: NextPage<PropsType> = (props) => {
               </div>
             </div>
           </div>
-          <div>
-            <div>
+          <div className="flex-1">
+            <div className="leading-relaxed">
               안녕하세요 👋
               <br />
               주니어 개발자 김진근입니다.
@@ -97,11 +100,11 @@ const Home: NextPage<PropsType> = (props) => {
             </div>
           </div>
         </div>
-        <Spacer y={3} />
-        <hr className="bg-gray-600" />
-        <Spacer y={3} />
+        <Spacer y={16} />
+        <hr className="border-zinc-400 dark:border-zinc-700" />
+        <Spacer y={16} />
         <RecentlyPost recentlyPost={recentlyPost} />
-        <Spacer y={3} />
+        <Spacer y={16} />
       </div>
     </>
   );

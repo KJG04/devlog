@@ -25,7 +25,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="ko-KR">
+      <Html lang="ko-KR" className="bg-html">
         <Head>
           <meta
             name="google-site-verification"

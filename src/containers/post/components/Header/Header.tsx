@@ -1,12 +1,10 @@
-import styled from '@emotion/styled';
-import { Spacer, Text } from '@nextui-org/react';
+import { Spacer } from '@nextui-org/react';
 import { FC, memo } from 'react';
 import { FrontMatter } from 'src/types';
 import { useMemo } from 'react';
 import Tag from '#components/Tag';
 import 'dayjs/locale/ko';
 import dayjs from 'dayjs';
-import { useCSS } from '#hooks/styles';
 
 interface PropsType {
   frontMatter: FrontMatter;
@@ -24,40 +22,20 @@ const Header: FC<PropsType> = (props) => {
     [tags],
   );
 
-  const dateCSS = useCSS(() => ({ color: '$gray800' }), []);
-
   return (
     <div>
-      <Text h1>{title}</Text>
-      <InfoContainer>
+      <h1>{title}</h1>
+      <div className="flex justify-between flex-wrap gap-y-2">
         <div>
-          <BadgeContainer>{renderedTags}</BadgeContainer>
+          <div className="flex gap-2 flex-wrap">{renderedTags}</div>
         </div>
-        {date && <Text css={dateCSS}>{dateText}</Text>}
-      </InfoContainer>
+        {date && <div className="text-zinc-800">{dateText}</div>}
+      </div>
       <Spacer y={1} />
-      <Divider />
+      <hr className="border-zinc-600" />
       <Spacer y={1} />
     </div>
   );
 };
 
 export default memo(Header);
-
-const BadgeContainer = styled.div`
-  display: flex;
-  column-gap: 0.5rem;
-  flex-wrap: wrap;
-  row-gap: 0.5rem;
-`;
-
-const InfoContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  row-gap: 0.5rem;
-`;
-
-const Divider = styled.hr`
-  background-color: var(--nextui-colors-gray600);
-`;

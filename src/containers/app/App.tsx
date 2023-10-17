@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import { NextUIProvider } from '@nextui-org/react';
-import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { ThemeProvider } from 'next-themes';
 import Head from 'next/head';
 import Favicon from '#containers/app/components/Favicon';
 import ThemeController from '#containers/app/components/ThemeController';
@@ -28,7 +28,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <NextThemesProvider
+      <ThemeProvider
         defaultTheme="system"
         attribute="class"
         enableSystem={true}
@@ -62,9 +62,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Footer />
           </div>
           <ThemeController />
+          <Analytics />
         </NextUIProvider>
-      </NextThemesProvider>
-      <Analytics />
+      </ThemeProvider>
     </>
   );
 };

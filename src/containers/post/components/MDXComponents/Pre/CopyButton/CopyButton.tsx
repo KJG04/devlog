@@ -16,7 +16,7 @@ const CopyButton: FC<PropsType> = (props) => {
 
   return (
     <Button
-      className="p-0 w-40 h-40 bg-gray-100 border-r-0 inline-block relative z-20"
+      className="p-0 w-40 h-40 bg-zinc-100 border-r-0 inline-block relative z-20"
       onPress={onCopyPress}
       value="복사"
     >

@@ -12,20 +12,23 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {
-    extend: {
-      dark: {
-        fonts: {
-          sans: 'Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+  plugins: [
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            html: '#F4F4F5',
+            navbar: 'hsl(240 100% 97.8% / 0.6)',
+          },
+        },
+        dark: {
+          colors: {
+            html: '#18181B',
+            navbar: 'hsl(240 5.9% 10% / 0.6)',
+          },
         },
       },
-      light: {
-        fonts: {
-          sans: 'Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
-        },
-      },
-    },
-  },
-  plugins: [nextui()],
+    }),
+  ],
   darkMode: 'class',
 };
