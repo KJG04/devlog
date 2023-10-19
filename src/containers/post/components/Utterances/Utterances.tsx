@@ -6,8 +6,8 @@ const Utterances: React.FC = () => {
   useDebounceComments(render, 500);
 
   return (
-    <div className="[&>.utterances]:max-w-full p-0">
-      <section ref={ref}></section>
+    <div className="p-0">
+      <section ref={ref} className="[&>.utterances]:max-w-full"></section>
     </div>
   );
 };

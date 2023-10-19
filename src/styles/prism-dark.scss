@@ -1,4 +1,4 @@
-.dark-theme {
+.dark {
   pre[class*='language-'],
   code[class*='language-'] {
     color: #d4d4d4;
@@ -38,7 +38,6 @@
 
   pre[class*='language-'] {
     padding: 1em;
-    margin: 0.5em 0;
     overflow: auto;
     background: #1e1e1e;
   }

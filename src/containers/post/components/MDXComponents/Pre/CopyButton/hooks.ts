@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useRef, useState } from 'react';
 
 export const useCopy = () => {
   const copy = useCallback(async (text: string) => {
@@ -33,29 +33,10 @@ export const useCopyButton = (
   preRef: RefObject<HTMLPreElement>,
   copy: (text: string) => void,
 ) => {
-  const [buttonBackgroundColor, setButtonBackgroundColor] = useState(
-    'var(--code-background)',
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'success' | 'error'>(
+    'idle',
   );
-  const [buttonColor, setButtonColor] = useState('#787f85');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const onSuccess = useCallback(() => {}, []);
-
-  const onError = useCallback(() => {}, []);
-
-  const reset = useCallback(() => {}, []);
-
-  const resetWait3Seconds = useCallback(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
-    timeoutRef.current = setTimeout(() => {
-      reset();
-      timeoutRef.current = null;
-    }, 3000);
-  }, [reset]);
 
   const onCopyPress = useCallback(async () => {
     if (!preRef.current) {
@@ -63,24 +44,20 @@ export const useCopyButton = (
     }
 
     const text = preRef.current.innerText;
+
     try {
       await copy(text);
-      onSuccess();
-      resetWait3Seconds();
+      setCopyStatus('success');
     } catch (error) {
-      onError();
-      resetWait3Seconds();
+      setCopyStatus('error');
     }
-  }, [copy, onError, onSuccess, preRef, resetWait3Seconds]);
 
-  useEffect(() => {
-    reset();
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+    timeoutRef.current && clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setCopyStatus('idle');
       timeoutRef.current = null;
-    }
-  }, [reset]);
+    }, 1000);
+  }, [copy, preRef]);
 
-  return { onCopyPress, buttonBackgroundColor, buttonColor };
+  return { onCopyPress, copyStatus };
 };

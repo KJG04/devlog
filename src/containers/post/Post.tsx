@@ -13,27 +13,31 @@ import { memo } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { Blockquote } from '#containers/post/components/MDXComponents';
 
+const components = {
+  Blockquote,
+};
+
 const Post: NextPage<StaticPostProps> = (props) => {
   const { post, nextPost, recentlyPost } = props;
   const { body, frontMatter } = post;
   useMediumZoom();
 
   return (
-    <MDXProvider components={{ Blockquote }}>
+    <MDXProvider components={components}>
       <Head frontMatter={frontMatter} />
-      <div>
+      <div className="max-w-screen-lg mx-auto px-6">
         {frontMatter.thumbnail && (
           <>
-            <Spacer y={3} />
+            <Spacer y={12} />
             <Thumbnail frontMatter={frontMatter} />
           </>
         )}
-        <Spacer y={3} />
+        <Spacer y={12} />
         <Header frontMatter={frontMatter} />
         <Markdown content={body} />
         {nextPost && frontMatter.series && (
           <>
-            <Spacer y={3} />
+            <Spacer y={12} />
             <NextPost post={nextPost} />
           </>
         )}

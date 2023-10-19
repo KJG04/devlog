@@ -1,4 +1,4 @@
-.light-theme {
+.light {
   /**
    * VS theme by Andrew Lock (https://andrewlock.net)
    * Inspired by Visual Studio syntax coloring
@@ -49,7 +49,6 @@
   /* Code blocks */
   pre[class*='language-'] {
     padding: 1em;
-    margin: 0.5em 0;
     overflow: auto;
     background-color: white;
   }

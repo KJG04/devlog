@@ -10,6 +10,7 @@ import Footer from '#components/Footer';
 import Script from 'next/script';
 import { memo, useMemo } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { RecoilRoot } from 'recoil';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const googleAnalyticsScript = useMemo(
@@ -28,43 +29,45 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <ThemeProvider
-        defaultTheme="system"
-        attribute="class"
-        enableSystem={true}
-      >
-        <NextUIProvider>
-          <Script
-            defer
-            strategy="afterInteractive"
-            src="https://www.googletagmanager.com/gtag/js?id=G-Y0GBC8LJBX"
-          />
-          <Script
-            defer
-            id="google-analytics"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={googleAnalyticsScript}
-          />
-          <Head>
-            <Favicon />
-          </Head>
-          <NextNProgress
-            color="var(--nextui-colors-primaryLightContrast)"
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={3}
-            showOnShallow={true}
-            options={progressOptions}
-          />
-          <div className="flex flex-col min-h-[100vh]">
-            <NavigationBar />
-            <Component {...pageProps} />
-            <Footer />
-          </div>
-          <ThemeController />
-          <Analytics />
-        </NextUIProvider>
-      </ThemeProvider>
+      <RecoilRoot>
+        <ThemeProvider
+          defaultTheme="system"
+          attribute="class"
+          enableSystem={true}
+        >
+          <NextUIProvider>
+            <Script
+              defer
+              strategy="afterInteractive"
+              src="https://www.googletagmanager.com/gtag/js?id=G-Y0GBC8LJBX"
+            />
+            <Script
+              defer
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={googleAnalyticsScript}
+            />
+            <Head>
+              <Favicon />
+            </Head>
+            <NextNProgress
+              color="var(--nextui-colors-primaryLightContrast)"
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={3}
+              showOnShallow={true}
+              options={progressOptions}
+            />
+            <div className="flex flex-col min-h-[100vh]">
+              <NavigationBar />
+              <Component {...pageProps} />
+              <Footer />
+            </div>
+            <ThemeController />
+            <Analytics />
+          </NextUIProvider>
+        </ThemeProvider>
+      </RecoilRoot>
     </>
   );
 };

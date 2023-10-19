@@ -2,6 +2,8 @@ import { HTMLProps, memo, useRef } from 'react';
 import CopyButton from '#containers/post/components/MDXComponents/Pre/CopyButton';
 import highlightContext from '#context/highlight';
 import { useHighlightValue, usePathValue } from './hooks';
+import { useRecoilValue } from 'recoil';
+import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible';
 
 interface PropsType {
   showLineNumbers?: string;
@@ -24,14 +26,19 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
   const preRef = useRef<HTMLPreElement>(null);
   const highlight = useHighlightValue(line);
   const path = usePathValue(_path);
+  const visible = useRecoilValue(navigationBarVisibleAtom);
 
   return (
     <highlightContext.Provider value={highlight}>
       <div
-        className="relative top-0 left-0 rounded-md my-unit-md mx-0"
+        className="relative top-0 left-0 my-unit-lg mx-0 rounded-large w-full"
         style={{ contain: 'paint' }}
       >
-        <div className="sticky top-[69px] z-30 text-zinc-500 flex border-b-1 border-solid border-zinc-400 bg-codeBack before:content-[''] before:absolute before:left-0 before:bottom-full before:w-full before:h-[1000px]">
+        <div
+          className={`sticky ${
+            visible ? 'top-[64px]' : 'top-0'
+          } z-30 text-zinc-500 flex border-b-1 border-solid border-[#9ca3af33] bg-codeBack before:content-[''] before:absolute before:left-0 before:bottom-full before:w-full before:h-[1000px] before:bg-codeBack transition-[top] duration-400`}
+        >
           <div className="flex-1 flex items-center py-0 px-unit-md">
             {path?.join('  ') ?? className?.split('-')[1]}
           </div>
@@ -42,7 +49,7 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
           ref={preRef}
           className={`${className ?? ''} ${
             showLineNumbers ? 'show-line-numbers' : ''
-          } mt-0`}
+          } m-0`}
         >
           {children}
         </pre>

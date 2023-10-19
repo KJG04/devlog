@@ -1,5 +1,5 @@
 import { Navbar, NavbarBrand, NavbarContent, Switch } from '@nextui-org/react';
-import { FC, memo } from 'react';
+import { FC, memo, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useThemeSwitch } from './hooks';
 import NavigationBarLogo from '#components/NavigationBar/NavigationBarLogo';
@@ -7,9 +7,15 @@ import MoonIcon from '#components/NavigationBar/MoonIcon';
 import SunIcon from '#components/NavigationBar/SunIcon/SunIcon';
 import GithubLogo from '#components/GithubLogo';
 import MountOnly from '#components/MountOnly/MountOnly';
+import { useSetRecoilState } from 'recoil';
+import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible';
 
 const sunIcon = <SunIcon />;
 const moonIcon = <MoonIcon />;
+
+const switchClassNames = {
+  wrapper: 'mr-0',
+};
 
 const switchFallback = (
   <Switch
@@ -18,14 +24,35 @@ const switchFallback = (
     startContent={sunIcon}
     endContent={moonIcon}
     key="fallback"
+    classNames={switchClassNames}
   />
 );
 
 const NavigationBar: FC = () => {
   const { checked, onChangeTheme } = useThemeSwitch();
+  const currentScrollRef = useRef<number | null>(null);
+  const setNavigationBarVisible = useSetRecoilState(navigationBarVisibleAtom);
+
+  const onScrollPositionChange = useCallback(
+    (position: number) => {
+      if (currentScrollRef.current) {
+        if (currentScrollRef.current > position) setNavigationBarVisible(true);
+        else setNavigationBarVisible(false);
+      }
+
+      currentScrollRef.current = position;
+    },
+    [setNavigationBarVisible],
+  );
 
   return (
-    <Navbar position="sticky" maxWidth="lg" className="bg-navbar">
+    <Navbar
+      position="sticky"
+      maxWidth="lg"
+      className="bg-navbar"
+      shouldHideOnScroll
+      onScrollPositionChange={onScrollPositionChange}
+    >
       <NavbarBrand>
         <Link href="/" passHref>
           <NavigationBarLogo />
@@ -43,6 +70,7 @@ const NavigationBar: FC = () => {
             startContent={sunIcon}
             endContent={moonIcon}
             aria-label="theme toggle"
+            classNames={switchClassNames}
           />
         </MountOnly>
       </NavbarContent>

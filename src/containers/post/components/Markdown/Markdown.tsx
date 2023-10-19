@@ -82,7 +82,7 @@ const Markdown: FC<PropsType> = (props) => {
 
   return (
     <>
-      <div className="w-[768px]">
+      <div className="markdown">
         <MDXRemote {...content} components={components} />
       </div>
     </>

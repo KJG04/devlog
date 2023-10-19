@@ -9,6 +9,7 @@ export interface FrontMatter {
   description: string;
   keyword: string;
   thumbnail?: string;
+  darkThumbnail?: string;
   series?: string;
 }
 

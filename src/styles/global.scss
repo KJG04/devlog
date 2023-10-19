@@ -29,20 +29,34 @@
     @apply leading-loose tracking-normal;
   }
 
-  .medium-zoom-overlay {
-    backdrop-filter: saturate(180%) blur(16px);
-    @apply z-30;
-  }
+  .markdown {
+    h2 {
+      @apply text-4xl font-bold [&>a]:hover:opacity-100 mt-5 mb-5;
 
-  .medium-zoom-image--opened {
-    @apply z-30;
+      a {
+        @apply opacity-0 text-4xl font-bold text-zinc-500;
+      }
+    }
+
+    h3 {
+      @apply text-2xl font-bold [&>a]:hover:opacity-100 mt-5 mb-5;
+
+      a {
+        @apply opacity-0 text-2xl font-bold text-zinc-500;
+      }
+    }
+
+    blockquote {
+      @apply text-zinc-500 border-l-4 border-zinc-500 px-4 py-2 my-4;
+    }
   }
 }
 
-.dark-theme:root {
-  --code-background: #1e1e1e;
+.medium-zoom-overlay {
+  backdrop-filter: blur(4px) saturate(180%);
+  z-index: 50;
 }
 
-.light-theme:root {
-  --code-background: white;
+.medium-zoom-image--opened {
+  z-index: 50;
 }

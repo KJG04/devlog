@@ -24,6 +24,7 @@
       "#styles/*": ["src/styles/*"],
       "#components/*": ["src/components/*"],
       "#hooks/*": ["src/hooks/*"],
+      "#atoms/*": ["src/atoms/*"],
       "#context/*": ["src/context/*"]
     },
     "typeRoots": ["src/types", "./node_modules/@types"]
