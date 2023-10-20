@@ -39,6 +39,7 @@ export const getStaticProps: GetStaticProps<StaticPostProps> = async (
 
   try {
     const post = await getPostByPath(path);
+    if (!post.frontMatter.published) return { notFound: true };
 
     const props: StaticPostProps = {
       post,

@@ -19,14 +19,12 @@ module.exports = {
           colors: {
             html: '#F4F4F5',
             navbar: 'hsl(240 100% 97.8% / 0.6)',
-            codeBack: 'white',
           },
         },
         dark: {
           colors: {
             html: '#18181B',
             navbar: 'hsl(240 5.9% 10% / 0.6)',
-            codeBack: '#1e1e1e',
           },
         },
       },

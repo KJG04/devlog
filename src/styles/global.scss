@@ -50,6 +50,14 @@
       @apply text-zinc-500 border-l-4 border-zinc-500 px-4 py-2 my-4;
     }
   }
+
+  pre[class*='language-'] {
+    @apply bg-zinc-700 dark:bg-zinc-800;
+  }
+
+  :not(pre) > code[class*='language-'] {
+    @apply bg-zinc-700 dark:bg-zinc-800;
+  }
 }
 
 .medium-zoom-overlay {
