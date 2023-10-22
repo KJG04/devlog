@@ -1,6 +1,4 @@
-import { useCSS } from '#hooks/styles';
-import styled from '@emotion/styled';
-import { Button, Spacer, Text } from '@nextui-org/react';
+import { Button, Spacer } from '@nextui-org/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { memo, useCallback } from 'react';
@@ -15,12 +13,6 @@ const Error = () => {
     router.push('/');
   }, [router]);
 
-  const codeStyle = useCSS(() => ({ fontSize: '$9xl', margin: '$0' }), []);
-  const descriptionStyle = useCSS(
-    () => ({ fontSize: '$2xl', color: '$gray700' }),
-    [],
-  );
-
   return (
     <>
       <Head>
@@ -28,38 +20,30 @@ const Error = () => {
           페이지를 가져오는 도중 오류가 발생했습니다. | 김진근의 Devlog
         </title>
       </Head>
-      <Container>
-        <Text h1 css={codeStyle}>
-          500
-        </Text>
-        <Text b css={descriptionStyle}>
+      <div className="flex-1 flex justify-center items-center flex-col">
+        <h1 className="text-9xl m-0 font-bold">500</h1>
+        <Spacer y={8} />
+        <div className="text-2xl text-zinc-400 dark:text-zinc-500 font-semibold">
           페이지를 가져오는 도중 오류가 발생했습니다.
-        </Text>
-        <Spacer y={1} />
-        <ButtonContainer>
-          <Button size="sm" onClick={onClickBack}>
+        </div>
+        <Spacer y={4} />
+        <div className="flex">
+          <Button size="md" color="primary" onClick={onClickBack}>
             뒤로가기
           </Button>
-          <Spacer x={1} />
-          <Button bordered color="default" size="sm" onClick={onClickHome}>
+          <Spacer x={4} />
+          <Button
+            color="primary"
+            variant="bordered"
+            size="md"
+            onClick={onClickHome}
+          >
             홈으로
           </Button>
-        </ButtonContainer>
-      </Container>
+        </div>
+      </div>
     </>
   );
 };
 
 export default memo(Error);
-
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-`;
