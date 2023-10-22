@@ -19,6 +19,7 @@ const Thumbnail: FC<PropsType> = (props) => {
       className="rounded-[1rem] w-[100%] block"
       src={frontMatter.thumbnail}
       alt="blog-thumbnail"
+      width={976}
     />
   );
 };
