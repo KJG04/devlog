@@ -6,6 +6,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { memo } from 'react';
+import ProfileImage from 'public/img/profile-image.webp';
 
 interface PropsType {
   recentlyPost: Post[];
@@ -49,7 +50,7 @@ const Home: NextPage<PropsType> = (props) => {
             <div className="flex flex-col items-center">
               <div>
                 <Image
-                  src="/img/profile-image.webp"
+                  src={ProfileImage}
                   alt="profile"
                   height={200}
                   width={200}
