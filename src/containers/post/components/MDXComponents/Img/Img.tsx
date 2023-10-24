@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { HTMLProps, ImgHTMLAttributes, memo } from 'react';
+import IMAGE_LIST, { isInImageList } from 'src/constants/imageList';
 
 const Img = (
   props: Omit<
@@ -21,7 +22,7 @@ const Img = (
         crossOrigin as ImgHTMLAttributes<HTMLImageElement>['crossOrigin']
       }
       placeholder={placeholder as 'blur' | 'empty' | undefined}
-      src={src}
+      src={isInImageList(src) ? IMAGE_LIST[src] : src}
       alt={src}
       sizes="100vw"
       width={1000}

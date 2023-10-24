@@ -1,9 +1,11 @@
-import { Card, CardBody, CardFooter, Image, Spacer } from '@nextui-org/react';
+import { Card, CardBody, CardFooter, Spacer } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import { FC, memo, useCallback, useMemo } from 'react';
 import { FrontMatter } from 'src/types';
 import Tag from '#components/Tag';
 import { formatDateByYear } from '#utils/date';
+import IMAGE_LIST from 'src/constants/imageList';
+import Image from 'next/image';
 
 interface PropsType {
   frontMatter: FrontMatter;
@@ -37,12 +39,11 @@ const PostCard: FC<PropsType> = (props) => {
       {thumbnail && (
         <CardBody className="p-0 flex-none">
           <Image
-            src={thumbnail}
+            src={IMAGE_LIST[thumbnail]}
             alt={title}
-            className="aspect-video object-cover"
-            radius="lg"
-            loading="lazy"
+            className="aspect-video object-cover rounded-lg"
             width={591}
+            placeholder="blur"
           />
         </CardBody>
       )}

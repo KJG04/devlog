@@ -1,5 +1,6 @@
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { ParsedUrlQuery } from 'querystring';
+import IMAGE_LIST from 'src/constants/imageList';
 
 export interface FrontMatter {
   title: string;
@@ -8,7 +9,7 @@ export interface FrontMatter {
   date: string;
   description: string;
   keyword: string;
-  thumbnail?: string;
+  thumbnail?: keyof typeof IMAGE_LIST;
   darkThumbnail?: string;
   series?: string;
 }
