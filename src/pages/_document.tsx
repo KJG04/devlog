@@ -29,7 +29,7 @@ class MyDocument extends Document {
             content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
           />
           <link
-            rel="preload"
+            rel="stylesheet preload"
             as="style"
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
             type="text/css"
