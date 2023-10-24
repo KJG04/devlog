@@ -6,7 +6,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { memo } from 'react';
-import ProfileImage from 'public/img/profile-image.webp';
+import ProfileImage from 'public/images/profile-image.webp';
 
 interface PropsType {
   recentlyPost: Post[];

@@ -8,7 +8,7 @@ const Img = (
     'ref' | 'as' | 'onError' | 'width' | 'height'
   >,
 ) => {
-  const { src, crossOrigin, placeholder, ...rest } = props;
+  const { src, crossOrigin, className, ...rest } = props;
 
   if (!src) {
     return <div>{src} 이미지는 사용할 수 없습니다.</div>;
@@ -21,12 +21,10 @@ const Img = (
       crossOrigin={
         crossOrigin as ImgHTMLAttributes<HTMLImageElement>['crossOrigin']
       }
-      placeholder={placeholder as 'blur' | 'empty' | undefined}
+      placeholder="blur"
       src={isInImageList(src) ? IMAGE_LIST[src] : src}
       alt={src}
-      sizes="100vw"
-      width={1000}
-      height={1000}
+      className={`rounded-3xl mx-auto my-unit-xl ${className ?? ''}`}
     />
   );
 };
