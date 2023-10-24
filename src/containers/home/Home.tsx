@@ -56,6 +56,7 @@ const Home: NextPage<PropsType> = (props) => {
                   width={200}
                   className="w-[200px] h-[200px] rounded-full"
                   placeholder="blur"
+                  priority
                 />
               </div>
               <Spacer y={5} />

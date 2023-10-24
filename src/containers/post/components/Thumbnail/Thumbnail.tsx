@@ -22,6 +22,7 @@ const Thumbnail: FC<PropsType> = (props) => {
       alt="blog-thumbnail"
       width={976}
       placeholder="blur"
+      priority
     />
   );
 };
