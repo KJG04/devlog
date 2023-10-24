@@ -2,7 +2,6 @@ import { NextPage } from 'next';
 import { StaticPostProps } from 'src/types';
 import { Spacer } from '@nextui-org/react';
 import Head from '#containers/post/components/Head/Head';
-import Utterances from '#containers/post/components/Utterances';
 import Thumbnail from '#containers/post/components/Thumbnail';
 import Header from '#containers/post/components/Header';
 import Markdown from '#containers/post/components/Markdown';
@@ -12,6 +11,11 @@ import { useMediumZoom } from './hooks';
 import { memo } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { Blockquote } from '#containers/post/components/MDXComponents';
+import dynamic from 'next/dynamic';
+
+const Utterances = dynamic(
+  () => import('#containers/post/components/Utterances'),
+);
 
 const components = {
   Blockquote,
