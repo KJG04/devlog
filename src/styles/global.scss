@@ -48,6 +48,11 @@
     blockquote {
       @apply text-zinc-500 border-l-4 border-zinc-500 px-4 py-2 my-4;
     }
+
+
+    :not(pre) > code {
+      @apply px-2 py-1 h-fit font-mono font-normal inline-block whitespace-nowrap bg-default/40 text-default-foreground text-small rounded-small
+    }
   }
 
   pre[class*='language-'] {
