@@ -15,7 +15,6 @@ const Comment: React.FC = () => {
         categoryId="DIC_kwDOIBies84Caoqd"
         mapping="pathname"
         strict="0"
-        term="Welcome to @giscus/react component!"
         reactionsEnabled="1"
         emitMetadata="1"
         inputPosition="top"
