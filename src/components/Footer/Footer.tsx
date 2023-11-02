@@ -6,7 +6,10 @@ const Footer: FC = () => {
   return (
     <div>
       <div className="flex gap-x-[1rem] justify-center">
-        <Link href="mailto:freedom7113@gmail.com" aria-label="contact email">
+        <Link
+          href="mailto:freedom7113@gmail.com"
+          aria-label="이메일을 보내려면 여기를 클릭하세요"
+        >
           <svg
             width={30}
             height={30}
@@ -19,7 +22,11 @@ const Footer: FC = () => {
             />
           </svg>
         </Link>
-        <Link href="https://github.com/KJG04" target="_blank">
+        <Link
+          href="https://github.com/KJG04"
+          target="_blank"
+          aria-label="Github에 방문하고 싶으시면 여기를 클릭하세요"
+        >
           <GithubLogo />
         </Link>
       </div>

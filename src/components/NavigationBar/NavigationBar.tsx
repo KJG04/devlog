@@ -59,7 +59,11 @@ const NavigationBar: FC = () => {
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <Link href="https://github.com/KJG04" target="_blank">
+        <Link
+          href="https://github.com/KJG04"
+          target="_blank"
+          aria-label="Github에 방문하고 싶으시면 여기를 클릭하세요"
+        >
           <GithubLogo />
         </Link>
         <MountOnly fallback={switchFallback}>

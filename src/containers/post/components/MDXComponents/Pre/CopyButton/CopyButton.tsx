@@ -22,6 +22,7 @@ const CopyButton: FC<PropsType> = (props) => {
         className="p-0 w-[40px] h-[40px] bg-zinc-700 dark:bg-zinc-800 relative z-20 min-w-[40px] rounded-none justify-center items-center flex"
         onPress={onCopyPress}
         value="복사"
+        aria-label="복사 버튼"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
