@@ -10,6 +10,7 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "@giscus/react": "^2.3.0",
     "@next/bundle-analyzer": "^13.5.4",
     "@nextui-org/react": "^2.1.13",
     "@vercel/analytics": "^1.0.0",

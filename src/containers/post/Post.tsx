@@ -11,11 +11,7 @@ import { useMediumZoom } from './hooks';
 import { memo } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { Blockquote } from '#containers/post/components/MDXComponents';
-import dynamic from 'next/dynamic';
-
-const Utterances = dynamic(
-  () => import('#containers/post/components/Utterances'),
-);
+import Comment from '#containers/post/components/Comment';
 
 const components = {
   Blockquote,
@@ -46,7 +42,7 @@ const Post: NextPage<StaticPostProps> = (props) => {
           </>
         )}
         <Spacer y={3} />
-        <Utterances />
+        <Comment />
         <Spacer y={3} />
         <hr className="bg-zinc-600" />
         <Spacer y={3} />
