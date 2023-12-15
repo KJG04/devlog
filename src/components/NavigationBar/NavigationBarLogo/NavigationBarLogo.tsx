@@ -11,11 +11,11 @@ const NavigationBarLogo: React.FC = () => {
       >
         <path
           d="M0 963.588H279.529V845.941H153.412V177.706H279.529V61H0V963.588Z"
-          className="dark:fill-zinc-100 fill-zinc-900"
+          className="fill-zinc-900 dark:fill-zinc-100"
         />
         <path
           d="M1024 963.588V61H744.471V177.706H870.588V845.941H744.471V963.588H1024Z"
-          className="dark:fill-zinc-100 fill-zinc-900"
+          className="fill-zinc-900 dark:fill-zinc-100"
         />
       </svg>
       <div className="font-semibold">김진근의 Devlog</div>

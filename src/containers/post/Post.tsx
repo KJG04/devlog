@@ -25,7 +25,7 @@ const Post: NextPage<StaticPostProps> = (props) => {
   return (
     <MDXProvider components={components}>
       <Head frontMatter={frontMatter} />
-      <div className="max-w-screen-lg mx-auto px-6 w-full">
+      <div className="mx-auto w-full max-w-screen-lg px-6">
         {frontMatter.thumbnail && (
           <>
             <Spacer y={12} />

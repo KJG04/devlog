@@ -24,7 +24,7 @@ const Img = (
       placeholder="blur"
       src={isInImageList(src) ? IMAGE_LIST[src] : src}
       alt={src}
-      className={`rounded-3xl mx-auto my-unit-xl ${className ?? ''}`}
+      className={`mx-auto my-unit-xl rounded-3xl ${className ?? ''}`}
     />
   );
 };

@@ -7,7 +7,7 @@ const GithubLogo = () => {
       height="30"
       viewBox="0 0 30 30"
       xmlns="http://www.w3.org/2000/svg"
-      className="fill-zinc-900 dark:fill-zinc-100 w-[30px] h-[30px] inline-block"
+      className="inline-block h-[30px] w-[30px] fill-zinc-900 dark:fill-zinc-100"
     >
       <g clipPath="url(#clip0_404_2)">
         <path

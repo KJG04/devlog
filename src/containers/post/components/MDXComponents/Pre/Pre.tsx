@@ -31,15 +31,15 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
   return (
     <highlightContext.Provider value={highlight}>
       <div
-        className="relative top-0 left-0 my-unit-lg mx-0 rounded-large w-full"
+        className="relative left-0 top-0 mx-0 my-unit-lg w-full rounded-large"
         style={{ contain: 'paint' }}
       >
         <div
           className={`sticky ${
             visible ? 'top-[64px]' : 'top-0'
-          } z-30 text-zinc-400 flex border-b-1 border-solid border-[#9ca3af33] bg-zinc-700 dark:bg-zinc-800 before:content-[''] before:absolute before:left-0 before:bottom-full before:w-full before:h-[1000px] before:bg-zinc-700 dark:before:bg-zinc-800 transition-[top] duration-400`}
+          } z-30 flex border-b-1 border-solid border-[#9ca3af33] bg-zinc-700 text-zinc-400 transition-[top] duration-400 before:absolute before:bottom-full before:left-0 before:h-[1000px] before:w-full before:bg-zinc-700 before:content-[''] dark:bg-zinc-800 dark:before:bg-zinc-800`}
         >
-          <div className="flex-1 flex items-center py-0 px-unit-md">
+          <div className="flex flex-1 items-center px-unit-md py-0">
             {path?.join('  ') ?? className?.split('-')[1]}
           </div>
           <CopyButton preRef={preRef} />

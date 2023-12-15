@@ -24,11 +24,11 @@ const Header: FC<PropsType> = (props) => {
 
   return (
     <div>
-      <h1 className="text-5xl leading-normal font-bold">{title}</h1>
+      <h1 className="text-5xl font-bold leading-normal">{title}</h1>
       <Spacer y={4} />
-      <div className="flex justify-between flex-wrap gap-y-2">
+      <div className="flex flex-wrap justify-between gap-y-2">
         <div>
-          <div className="flex gap-2 flex-wrap">{renderedTags}</div>
+          <div className="flex flex-wrap gap-2">{renderedTags}</div>
         </div>
         {date && (
           <div className="text-zinc-800 dark:text-zinc-400">{dateText}</div>

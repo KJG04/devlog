@@ -18,10 +18,10 @@ const NotFound = () => {
       <Head>
         <title>페이지를 찾을 수 없습니다. | 김진근의 Devlog</title>
       </Head>
-      <div className="flex-1 flex justify-center items-center flex-col">
-        <h1 className="text-9xl m-0 font-bold">404</h1>
+      <div className="flex flex-1 flex-col items-center justify-center">
+        <h1 className="m-0 text-9xl font-bold">404</h1>
         <Spacer y={8} />
-        <div className="text-2xl text-zinc-400 dark:text-zinc-500 font-semibold">
+        <div className="text-2xl font-semibold text-zinc-400 dark:text-zinc-500">
           페이지를 찾을 수 없습니다.
         </div>
         <Spacer y={4} />

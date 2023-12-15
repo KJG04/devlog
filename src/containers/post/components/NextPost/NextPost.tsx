@@ -40,10 +40,10 @@ const NextPost: FC<PropsType> = (props) => {
         )}
         <CardBody>
           <div className="text-lg font-bold">{post.frontMatter.title}</div>
-          <div className="text-zinc-600 text-base">
+          <div className="text-base text-zinc-600">
             {post.frontMatter.description}
           </div>
-          <div className="flex gap-2 mt-4">{renderedTags}</div>
+          <div className="mt-4 flex gap-2">{renderedTags}</div>
         </CardBody>
       </Card>
     </>

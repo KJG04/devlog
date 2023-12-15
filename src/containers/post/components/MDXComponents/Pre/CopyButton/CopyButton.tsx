@@ -19,7 +19,7 @@ const CopyButton: FC<PropsType> = (props) => {
       isOpen={copyStatus !== 'idle'}
     >
       <Button
-        className="p-0 w-[40px] h-[40px] bg-zinc-700 dark:bg-zinc-800 relative z-20 min-w-[40px] rounded-none justify-center items-center flex"
+        className="relative z-20 flex h-[40px] w-[40px] min-w-[40px] items-center justify-center rounded-none bg-zinc-700 p-0 dark:bg-zinc-800"
         onPress={onCopyPress}
         value="복사"
         aria-label="복사 버튼"
@@ -27,7 +27,7 @@ const CopyButton: FC<PropsType> = (props) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
-          className="relative z-10 w-[17.5px] h-[17.5px]"
+          className="relative z-10 h-[17.5px] w-[17.5px]"
         >
           <path
             className="relative z-10 fill-zinc-400"

@@ -44,7 +44,7 @@ const Home: NextPage<PropsType> = (props) => {
         <meta name="twitter:card" content="blog" />
       </Head>
       <Spacer y={16} />
-      <div className="px-6 max-w-screen-lg m-auto">
+      <div className="m-auto max-w-screen-lg px-6">
         <div className="flex flex-col md:flex-row">
           <div className="mr-0 md:mr-12">
             <div className="flex flex-col items-center">
@@ -54,7 +54,7 @@ const Home: NextPage<PropsType> = (props) => {
                   alt="profile"
                   height={200}
                   width={200}
-                  className="w-[200px] h-[200px] rounded-full"
+                  className="h-[200px] w-[200px] rounded-full"
                   placeholder="blur"
                   priority
                 />
@@ -62,7 +62,7 @@ const Home: NextPage<PropsType> = (props) => {
               <Spacer y={5} />
               <h4 className="text-lg font-semibold">김진근</h4>
               <Spacer y={3} />
-              <div className="flex gap-x-[1rem] justify-center">
+              <div className="flex justify-center gap-x-[1rem]">
                 <Link
                   href="mailto:freedom7113@gmail.com"
                   aria-label="이메일을 보내려면 여기를 클릭하세요"

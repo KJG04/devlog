@@ -24,7 +24,6 @@ const Markdown: FC<PropsType> = (props) => {
     [],
   );
 
-
   return (
     <>
       <div className="markdown">

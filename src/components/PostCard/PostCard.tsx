@@ -34,14 +34,14 @@ const PostCard: FC<PropsType> = (props) => {
     <Card
       isPressable
       onPress={onPress}
-      className="shadow-none text-left bg-transparent"
+      className="bg-transparent text-left shadow-none"
     >
       {thumbnail && (
-        <CardBody className="p-0 flex-none">
+        <CardBody className="flex-none p-0">
           <Image
             src={IMAGE_LIST[thumbnail]}
             alt={title}
-            className="aspect-video object-cover rounded-lg"
+            className="aspect-video rounded-lg object-cover"
             width={591}
             placeholder="blur"
           />
@@ -55,16 +55,16 @@ const PostCard: FC<PropsType> = (props) => {
         } flex-1 items-start`}
       >
         <div className="max-w-[100%]">
-          <div className="dark:text-zinc-600 text-zinc-700 mt-unit-xs text-sm">
+          <div className="mt-unit-xs text-sm text-zinc-700 dark:text-zinc-600">
             {formatDateByYear(date)}
           </div>
           <h4 className="break-all text-large font-semibold">{title}</h4>
           <Spacer y={1} />
-          <div className="dark:text-zinc-500 text-zinc-800 lead">
+          <div className="lead text-zinc-800 dark:text-zinc-500">
             {description}
           </div>
           <Spacer y={2} />
-          <div className="flex gap-[0.5rem] flex-wrap">{renderedTags}</div>
+          <div className="flex flex-wrap gap-[0.5rem]">{renderedTags}</div>
         </div>
       </CardFooter>
     </Card>

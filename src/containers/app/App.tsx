@@ -58,7 +58,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               showOnShallow={true}
               options={progressOptions}
             />
-            <div className="flex flex-col min-h-[100vh]">
+            <div className="flex min-h-[100vh] flex-col">
               <NavigationBar />
               <Component {...pageProps} />
               <Footer />

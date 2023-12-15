@@ -17,7 +17,7 @@ const Thumbnail: FC<PropsType> = (props) => {
   return (
     <Image
       data-zoomable
-      className="rounded-[1rem] w-[100%] block"
+      className="block w-[100%] rounded-[1rem]"
       src={IMAGE_LIST[frontMatter.thumbnail]}
       alt="blog-thumbnail"
       width={976}
