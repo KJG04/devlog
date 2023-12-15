@@ -30,9 +30,7 @@ const Header: FC<PropsType> = (props) => {
         <div>
           <div className="flex flex-wrap gap-2">{renderedTags}</div>
         </div>
-        {date && (
-          <div className="text-zinc-800 dark:text-zinc-400">{dateText}</div>
-        )}
+        {date && <div className="text-zinc-400">{dateText}</div>}
       </div>
       <Spacer y={4} />
       <hr className="border-zinc-600" />

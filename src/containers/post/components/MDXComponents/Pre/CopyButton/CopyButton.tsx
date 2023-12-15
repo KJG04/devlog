@@ -19,7 +19,7 @@ const CopyButton: FC<PropsType> = (props) => {
       isOpen={copyStatus !== 'idle'}
     >
       <Button
-        className="relative z-20 flex h-[40px] w-[40px] min-w-[40px] items-center justify-center rounded-none bg-zinc-700 p-0 dark:bg-zinc-800"
+        className="relative z-20 flex h-[40px] w-[40px] min-w-[40px] items-center justify-center rounded-none p-0 bg-zinc-800"
         onPress={onCopyPress}
         value="복사"
         aria-label="복사 버튼"

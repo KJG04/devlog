@@ -21,7 +21,7 @@
       'Segoe UI Symbol',
       sans-serif;
 
-    @apply w-full scroll-smooth break-words break-keep bg-zinc-100 leading-relaxed text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100;
+    @apply w-full scroll-smooth break-words break-keep leading-relaxed bg-zinc-900 text-zinc-100;
   }
 
   p {
@@ -55,11 +55,11 @@
   }
 
   pre[class*='language-'] {
-    @apply bg-zinc-700 dark:bg-zinc-800;
+    @apply bg-zinc-800;
   }
 
   :not(pre) > code[class*='language-'] {
-    @apply bg-zinc-700 dark:bg-zinc-800;
+    @apply bg-zinc-800;
   }
 }
 

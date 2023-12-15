@@ -23,7 +23,7 @@ const Error = () => {
       <div className="flex flex-1 flex-col items-center justify-center">
         <h1 className="m-0 text-9xl font-bold">500</h1>
         <Spacer y={8} />
-        <div className="text-2xl font-semibold text-zinc-400 dark:text-zinc-500">
+        <div className="text-2xl font-semibold text-zinc-500">
           페이지를 가져오는 도중 오류가 발생했습니다.
         </div>
         <Spacer y={4} />

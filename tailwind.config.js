@@ -15,15 +15,8 @@ module.exports = {
   plugins: [
     nextui({
       themes: {
-        light: {
-          colors: {
-            html: '#F4F4F5',
-            navbar: 'hsl(240 100% 97.8% / 0.6)',
-          },
-        },
         dark: {
           colors: {
-            html: '#18181B',
             navbar: 'hsl(240 5.9% 10% / 0.6)',
           },
         },

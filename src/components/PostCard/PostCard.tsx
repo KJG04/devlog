@@ -49,20 +49,16 @@ const PostCard: FC<PropsType> = (props) => {
       )}
       <CardFooter
         className={`${
-          thumbnail
-            ? 'bg-transparent pl-0 pr-0'
-            : 'bg-zinc-200 dark:bg-zinc-800'
+          thumbnail ? 'bg-transparent pl-0 pr-0' : 'bg-zinc-800'
         } flex-1 items-start`}
       >
         <div className="max-w-[100%]">
-          <div className="mt-unit-xs text-sm text-zinc-700 dark:text-zinc-600">
+          <div className="mt-unit-xs text-sm text-zinc-600">
             {formatDateByYear(date)}
           </div>
           <h4 className="break-all text-large font-semibold">{title}</h4>
           <Spacer y={1} />
-          <div className="lead text-zinc-800 dark:text-zinc-500">
-            {description}
-          </div>
+          <div className="lead text-zinc-500">{description}</div>
           <Spacer y={2} />
           <div className="flex flex-wrap gap-[0.5rem]">{renderedTags}</div>
         </div>

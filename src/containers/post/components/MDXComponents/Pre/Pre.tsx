@@ -37,7 +37,7 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
         <div
           className={`sticky ${
             visible ? 'top-[64px]' : 'top-0'
-          } z-30 flex border-b-1 border-solid border-[#9ca3af33] bg-zinc-700 text-zinc-400 transition-[top] duration-400 before:absolute before:bottom-full before:left-0 before:h-[1000px] before:w-full before:bg-zinc-700 before:content-[''] dark:bg-zinc-800 dark:before:bg-zinc-800`}
+          } z-30 flex border-b-1 border-solid border-[#9ca3af33]  text-zinc-400 transition-[top] duration-400 before:absolute before:bottom-full before:left-0 before:h-[1000px] before:w-full before:content-[''] bg-zinc-800 before:bg-zinc-800`}
         >
           <div className="flex flex-1 items-center px-unit-md py-0">
             {path?.join('  ') ?? className?.split('-')[1]}
