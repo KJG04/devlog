@@ -1,17 +1,18 @@
-import { Button, Spacer } from '@nextui-org/react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { memo, useCallback } from 'react';
+import { Button } from '@nextui-org/button'
+import { Spacer } from '@nextui-org/spacer'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { memo, useCallback } from 'react'
 
 const Error = () => {
-  const router = useRouter();
+  const router = useRouter()
   const onClickBack = useCallback(() => {
-    router.back();
-  }, [router]);
+    router.back()
+  }, [router])
 
   const onClickHome = useCallback(() => {
-    router.push('/');
-  }, [router]);
+    router.push('/')
+  }, [router])
 
   return (
     <>
@@ -43,7 +44,7 @@ const Error = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default memo(Error);
+export default memo(Error)

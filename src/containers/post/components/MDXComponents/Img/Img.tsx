@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { HTMLProps, ImgHTMLAttributes, memo } from 'react';
-import IMAGE_LIST, { isInImageList } from 'src/constants/imageList';
+import Image from 'next/image'
+import { HTMLProps, ImgHTMLAttributes, memo } from 'react'
+import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'
 
 const Img = (
   props: Omit<
@@ -8,10 +8,10 @@ const Img = (
     'ref' | 'as' | 'onError' | 'width' | 'height'
   >,
 ) => {
-  const { src, crossOrigin, className, ...rest } = props;
+  const { src, crossOrigin, className, ...rest } = props
 
   if (!src) {
-    return <div>{src} 이미지는 사용할 수 없습니다.</div>;
+    return <div>{src} 이미지는 사용할 수 없습니다.</div>
   }
 
   return (
@@ -26,7 +26,7 @@ const Img = (
       alt={src}
       className={`mx-auto my-unit-xl rounded-3xl ${className ?? ''}`}
     />
-  );
-};
+  )
+}
 
-export default memo(Img) as typeof Img;
+export default memo(Img) as typeof Img

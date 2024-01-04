@@ -1,7 +1,7 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react'
 
-const highlightContext = createContext<number[]>([]);
+const highlightContext = createContext<number[]>([])
 
-export const useHighlightContext = () => useContext(highlightContext);
+export const useHighlightContext = () => useContext(highlightContext)
 
-export default highlightContext;
+export default highlightContext

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
 export const useHighlightValue = (line: string | undefined) =>
   useMemo(() => {
@@ -7,22 +7,22 @@ export const useHighlightValue = (line: string | undefined) =>
         ?.split(',')
         .map((num) => {
           if (isNaN(Number(num))) {
-            const [start, end] = num.split('-');
-            const startNum = Number(start);
-            const endNum = Number(end);
-            const arr = [];
+            const [start, end] = num.split('-')
+            const startNum = Number(start)
+            const endNum = Number(end)
+            const arr = []
 
             for (let i = startNum; i <= endNum; i++) {
-              arr.push(i);
+              arr.push(i)
             }
 
-            return arr;
+            return arr
           } else {
-            return Number(num);
+            return Number(num)
           }
         })
         .flat() ?? []
-    );
-  }, [line]);
+    )
+  }, [line])
 
-export const usePathValue = (path: string | undefined) => path?.split('/');
+export const usePathValue = (path: string | undefined) => path?.split('/')

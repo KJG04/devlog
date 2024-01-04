@@ -1,26 +1,27 @@
-import { NextPage } from 'next';
-import { StaticPostProps } from 'src/types';
-import { Spacer } from '@nextui-org/react';
-import Head from '#containers/post/components/Head/Head';
-import Thumbnail from '#containers/post/components/Thumbnail';
-import Header from '#containers/post/components/Header';
-import Markdown from '#containers/post/components/Markdown';
-import NextPost from '#containers/post/components/NextPost';
-import RecentlyPost from '#components/RecentlyPost';
-import { useMediumZoom } from './hooks';
-import { memo } from 'react';
-import { MDXProvider } from '@mdx-js/react';
-import { Blockquote } from '#containers/post/components/MDXComponents';
-import Comment from '#containers/post/components/Comment';
+import { NextPage } from 'next'
+import { StaticPostProps } from 'src/types'
+
+import Head from '#containers/post/components/Head/Head'
+import Thumbnail from '#containers/post/components/Thumbnail'
+import Header from '#containers/post/components/Header'
+import Markdown from '#containers/post/components/Markdown'
+import NextPost from '#containers/post/components/NextPost'
+import RecentlyPost from '#components/RecentlyPost'
+import { useMediumZoom } from './hooks'
+import { memo } from 'react'
+import { MDXProvider } from '@mdx-js/react'
+import { Blockquote } from '#containers/post/components/MDXComponents'
+import Comment from '#containers/post/components/Comment'
+import { Spacer } from '@nextui-org/spacer'
 
 const components = {
   Blockquote,
-};
+}
 
 const Post: NextPage<StaticPostProps> = (props) => {
-  const { post, nextPost, recentlyPost } = props;
-  const { body, frontMatter } = post;
-  useMediumZoom();
+  const { post, nextPost, recentlyPost } = props
+  const { body, frontMatter } = post
+  useMediumZoom()
 
   return (
     <MDXProvider components={components}>
@@ -50,7 +51,7 @@ const Post: NextPage<StaticPostProps> = (props) => {
         <Spacer y={3} />
       </div>
     </MDXProvider>
-  );
-};
+  )
+}
 
-export default memo(Post);
+export default memo(Post)

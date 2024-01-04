@@ -1,2 +1,2 @@
-import CopyButton from './CopyButton';
-export default CopyButton;
+import CopyButton from './CopyButton'
+export default CopyButton

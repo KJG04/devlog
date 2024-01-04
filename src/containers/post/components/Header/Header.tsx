@@ -1,26 +1,27 @@
-import { Spacer } from '@nextui-org/react';
-import { FC, memo } from 'react';
-import { FrontMatter } from 'src/types';
-import { useMemo } from 'react';
-import Tag from '#components/Tag';
-import 'dayjs/locale/ko';
-import dayjs from 'dayjs';
+
+import { FC, memo } from 'react'
+import { FrontMatter } from 'src/types'
+import { useMemo } from 'react'
+import Tag from '#components/Tag'
+import 'dayjs/locale/ko'
+import dayjs from 'dayjs'
+import { Spacer } from '@nextui-org/spacer'
 
 interface PropsType {
-  frontMatter: FrontMatter;
+  frontMatter: FrontMatter
 }
 
 const Header: FC<PropsType> = (props) => {
-  const { title, date, tags } = props.frontMatter;
+  const { title, date, tags } = props.frontMatter
   const dateText = useMemo(
     () => dayjs(date).format('YYYY년 M월 D일 HH:mm:ss'),
     [date],
-  );
+  )
 
   const renderedTags = useMemo(
     () => tags.map((tag) => <Tag key={tag}>{tag}</Tag>),
     [tags],
-  );
+  )
 
   return (
     <div>
@@ -36,7 +37,7 @@ const Header: FC<PropsType> = (props) => {
       <hr className="border-zinc-600" />
       <Spacer y={4} />
     </div>
-  );
-};
+  )
+}
 
-export default memo(Header);
+export default memo(Header)

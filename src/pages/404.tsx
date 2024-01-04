@@ -1,3 +1,3 @@
-import NotFound from '#containers/notFound';
+import NotFound from '#containers/notFound'
 
-export default NotFound;
+export default NotFound

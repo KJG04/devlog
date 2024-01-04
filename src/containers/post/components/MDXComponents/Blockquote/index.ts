@@ -1,2 +1,2 @@
-import Blockquote from './Blockquote';
-export default Blockquote;
+import Blockquote from './Blockquote'
+export default Blockquote

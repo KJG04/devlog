@@ -1,10 +1,7 @@
-import Giscus from '@giscus/react';
-import { useTheme } from 'next-themes';
-import { memo } from 'react';
+import Giscus from '@giscus/react'
+import { memo } from 'react'
 
 const Comment: React.FC = () => {
-  const { theme } = useTheme();
-
   return (
     <div>
       <Giscus
@@ -18,12 +15,12 @@ const Comment: React.FC = () => {
         reactionsEnabled="1"
         emitMetadata="1"
         inputPosition="top"
-        theme={theme}
+        theme={'dark'}
         lang="ko"
         loading="lazy"
       />
     </div>
-  );
-};
+  )
+}
 
-export default memo(Comment);
+export default memo(Comment)

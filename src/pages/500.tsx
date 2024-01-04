@@ -1,3 +1,3 @@
-import Error from '#containers/error';
+import Error from '#containers/error'
 
-export default Error;
+export default Error

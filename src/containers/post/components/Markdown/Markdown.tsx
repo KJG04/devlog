@@ -1,19 +1,19 @@
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { FC, memo, useMemo } from 'react';
-import { MDXComponents } from 'src/types';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { FC, memo, useMemo } from 'react'
+import { MDXComponents } from 'src/types'
 import {
   Pre,
   Anchor,
   Img,
   Span,
-} from '#containers/post/components/MDXComponents';
+} from '#containers/post/components/MDXComponents'
 
 interface PropsType {
-  content: MDXRemoteSerializeResult;
+  content: MDXRemoteSerializeResult
 }
 
 const Markdown: FC<PropsType> = (props) => {
-  const { content } = props;
+  const { content } = props
   const components = useMemo<MDXComponents>(
     () => ({
       pre: Pre,
@@ -22,7 +22,7 @@ const Markdown: FC<PropsType> = (props) => {
       span: Span,
     }),
     [],
-  );
+  )
 
   return (
     <>
@@ -30,7 +30,7 @@ const Markdown: FC<PropsType> = (props) => {
         <MDXRemote {...content} components={components} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default memo(Markdown);
+export default memo(Markdown)

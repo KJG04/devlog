@@ -1,27 +1,27 @@
-import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
-import { FC, memo, useCallback, useRef } from 'react';
-import Link from 'next/link';
-import NavigationBarLogo from '#components/NavigationBar/NavigationBarLogo';
-import GithubLogo from '#components/GithubLogo';
+import { FC, memo, useCallback, useRef } from 'react'
+import Link from 'next/link'
+import NavigationBarLogo from '#components/NavigationBar/NavigationBarLogo'
+import GithubLogo from '#components/GithubLogo'
 
-import { useSetRecoilState } from 'recoil';
-import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible';
+import { useSetRecoilState } from 'recoil'
+import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible'
+import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/navbar'
 
 const NavigationBar: FC = () => {
-  const currentScrollRef = useRef<number | null>(null);
-  const setNavigationBarVisible = useSetRecoilState(navigationBarVisibleAtom);
+  const currentScrollRef = useRef<number | null>(null)
+  const setNavigationBarVisible = useSetRecoilState(navigationBarVisibleAtom)
 
   const onScrollPositionChange = useCallback(
     (position: number) => {
       if (currentScrollRef.current) {
-        if (currentScrollRef.current > position) setNavigationBarVisible(true);
-        else setNavigationBarVisible(false);
+        if (currentScrollRef.current > position) setNavigationBarVisible(true)
+        else setNavigationBarVisible(false)
       }
 
-      currentScrollRef.current = position;
+      currentScrollRef.current = position
     },
     [setNavigationBarVisible],
-  );
+  )
 
   return (
     <Navbar
@@ -46,7 +46,7 @@ const NavigationBar: FC = () => {
         </Link>
       </NavbarContent>
     </Navbar>
-  );
-};
+  )
+}
 
-export default memo(NavigationBar);
+export default memo(NavigationBar)

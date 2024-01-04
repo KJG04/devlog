@@ -1,6 +1,7 @@
-import GithubLogo from '#components/GithubLogo';
-import { Link, Spacer } from '@nextui-org/react';
-import { FC, memo } from 'react';
+import GithubLogo from '#components/GithubLogo'
+import { Link } from '@nextui-org/link'
+import { Spacer } from '@nextui-org/spacer'
+import { FC, memo } from 'react'
 
 const Footer: FC = () => {
   return (
@@ -34,7 +35,7 @@ const Footer: FC = () => {
       <div className="text-center">김진근 • © {new Date().getFullYear()}</div>
       <Spacer y={4} />
     </div>
-  );
-};
+  )
+}
 
-export default memo(Footer);
+export default memo(Footer)

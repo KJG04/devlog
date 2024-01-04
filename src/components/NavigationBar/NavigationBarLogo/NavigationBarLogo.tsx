@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 
 const NavigationBarLogo: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ const NavigationBarLogo: React.FC = () => {
       </svg>
       <div className="font-semibold">김진근의 Devlog</div>
     </div>
-  );
-};
+  )
+}
 
-export default memo(NavigationBarLogo);
+export default memo(NavigationBarLogo)

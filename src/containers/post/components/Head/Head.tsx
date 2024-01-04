@@ -1,14 +1,14 @@
-import NextHead from 'next/head';
-import { FC, memo } from 'react';
-import { FrontMatter } from 'src/types';
+import NextHead from 'next/head'
+import { FC, memo } from 'react'
+import { FrontMatter } from 'src/types'
 
 interface PropsType {
-  frontMatter: FrontMatter;
+  frontMatter: FrontMatter
 }
 
 const Head: FC<PropsType> = (props) => {
-  const { frontMatter } = props;
-  const title = `${frontMatter.title} | 김진근의 devlog`;
+  const { frontMatter } = props
+  const title = `${frontMatter.title} | 김진근의 devlog`
 
   return (
     <NextHead>
@@ -34,7 +34,7 @@ const Head: FC<PropsType> = (props) => {
       )}
       <meta name="twitter:card" content="blog" />
     </NextHead>
-  );
-};
+  )
+}
 
-export default memo(Head);
+export default memo(Head)

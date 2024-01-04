@@ -21,7 +21,7 @@
       'Segoe UI Symbol',
       sans-serif;
 
-    @apply w-full scroll-smooth break-words break-keep leading-relaxed bg-zinc-900 text-zinc-100;
+    @apply w-full scroll-smooth break-words break-keep bg-zinc-900 leading-relaxed text-zinc-100;
   }
 
   p {
@@ -50,7 +50,7 @@
     }
 
     :not(pre) > code {
-      @apply inline-block h-fit whitespace-nowrap rounded-small bg-default/40 px-2 py-1 font-mono text-small font-normal text-default-foreground;
+      @apply mx-1 my-1 inline-block h-fit whitespace-nowrap rounded-lg bg-zinc-600 px-2 py-1 font-mono text-sm font-normal;
     }
   }
 

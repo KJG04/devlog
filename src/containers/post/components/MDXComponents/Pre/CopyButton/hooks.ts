@@ -1,33 +1,33 @@
-import { RefObject, useCallback, useRef, useState } from 'react';
+import { RefObject, useCallback, useRef, useState } from 'react'
 
 export const useCopy = () => {
   const copy = useCallback(async (text: string) => {
     if (navigator.clipboard) {
-      await navigator.clipboard.writeText(text);
-      return;
+      await navigator.clipboard.writeText(text)
+      return
     }
 
     if (!document.queryCommandSupported('copy')) {
-      throw new Error();
+      throw new Error()
     }
 
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.top = '0';
-    textarea.style.left = '0';
-    textarea.style.visibility = 'hidden';
-    textarea.style.position = 'fixed';
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    textarea.style.top = '0'
+    textarea.style.left = '0'
+    textarea.style.visibility = 'hidden'
+    textarea.style.position = 'fixed'
 
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
+    document.body.appendChild(textarea)
+    textarea.focus()
+    textarea.select()
 
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-  }, []);
+    document.execCommand('copy')
+    document.body.removeChild(textarea)
+  }, [])
 
-  return copy;
-};
+  return copy
+}
 
 export const useCopyButton = (
   preRef: RefObject<HTMLPreElement>,
@@ -35,29 +35,29 @@ export const useCopyButton = (
 ) => {
   const [copyStatus, setCopyStatus] = useState<'idle' | 'success' | 'error'>(
     'idle',
-  );
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  )
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const onCopyPress = useCallback(async () => {
     if (!preRef.current) {
-      return;
+      return
     }
 
-    const text = preRef.current.innerText;
+    const text = preRef.current.innerText
 
     try {
-      await copy(text);
-      setCopyStatus('success');
+      await copy(text)
+      setCopyStatus('success')
     } catch (error) {
-      setCopyStatus('error');
+      setCopyStatus('error')
     }
 
-    timeoutRef.current && clearTimeout(timeoutRef.current);
+    timeoutRef.current && clearTimeout(timeoutRef.current)
     timeoutRef.current = setTimeout(() => {
-      setCopyStatus('idle');
-      timeoutRef.current = null;
-    }, 1000);
-  }, [copy, preRef]);
+      setCopyStatus('idle')
+      timeoutRef.current = null
+    }, 1000)
+  }, [copy, preRef])
 
-  return { onCopyPress, copyStatus };
-};
+  return { onCopyPress, copyStatus }
+}

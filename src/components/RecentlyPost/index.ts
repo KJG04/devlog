@@ -1,2 +1,2 @@
-import RecentlyPost from './RecentlyPost';
-export default RecentlyPost;
+import RecentlyPost from './RecentlyPost'
+export default RecentlyPost

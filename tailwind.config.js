@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { nextui } = require('@nextui-org/react');
+const { nextui } = require('@nextui-org/theme')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,18 +10,7 @@ module.exports = {
 
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@nextui-org/theme/dist/components/(breadcrumbs|button|card|chip|image|link|navbar|spacer|tooltip).js',
   ],
-  plugins: [
-    nextui({
-      themes: {
-        dark: {
-          colors: {
-            navbar: 'hsl(240 5.9% 10% / 0.6)',
-          },
-        },
-      },
-    }),
-  ],
-  darkMode: 'class',
-};
+  plugins: [nextui()],
+}

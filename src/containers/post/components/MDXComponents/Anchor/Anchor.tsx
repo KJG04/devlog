@@ -1,8 +1,9 @@
-import { Link } from '@nextui-org/react';
-import { HTMLProps, memo } from 'react';
+
+import { Link } from '@nextui-org/link'
+import { HTMLProps, memo } from 'react'
 
 const Anchor = (props: HTMLProps<HTMLAnchorElement>) => {
-  const { href, children } = props;
+  const { href, children } = props
 
   return (
     <Link
@@ -13,7 +14,7 @@ const Anchor = (props: HTMLProps<HTMLAnchorElement>) => {
     >
       {children}
     </Link>
-  );
-};
+  )
+}
 
-export default memo(Anchor) as typeof Anchor;
+export default memo(Anchor) as typeof Anchor

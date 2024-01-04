@@ -1,19 +1,21 @@
-import GithubLogo from '#components/GithubLogo';
-import RecentlyPost from '#components/RecentlyPost';
-import { Post } from '#types';
-import { Link, Spacer } from '@nextui-org/react';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import { memo } from 'react';
-import ProfileImage from 'public/images/profile-image.webp';
+import GithubLogo from '#components/GithubLogo'
+import RecentlyPost from '#components/RecentlyPost'
+import { Post } from '#types'
+
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Image from 'next/image'
+import { memo } from 'react'
+import ProfileImage from 'public/images/profile-image.webp'
+import { Spacer } from '@nextui-org/spacer'
+import { Link } from '@nextui-org/link'
 
 interface PropsType {
-  recentlyPost: Post[];
+  recentlyPost: Post[]
 }
 
 const Home: NextPage<PropsType> = (props) => {
-  const { recentlyPost } = props;
+  const { recentlyPost } = props
 
   return (
     <>
@@ -44,7 +46,7 @@ const Home: NextPage<PropsType> = (props) => {
         <meta name="twitter:card" content="blog" />
       </Head>
       <Spacer y={16} />
-      <div className="m-auto max-w-screen-lg px-6">
+      <div className="relative z-10 m-auto max-w-screen-lg px-6">
         <div className="flex flex-col md:flex-row">
           <div className="mr-0 md:mr-12">
             <div className="flex flex-col items-center">
@@ -114,7 +116,7 @@ const Home: NextPage<PropsType> = (props) => {
         <Spacer y={16} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default memo(Home);
+export default memo(Home)

@@ -3,21 +3,21 @@
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-});
+})
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: true,
   webpack: (config) => {
-    config.resolve.fallback = { fs: false };
+    config.resolve.fallback = { fs: false }
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
-    });
+    })
 
-    return config;
+    return config
   },
-};
+}
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = withBundleAnalyzer(nextConfig)

@@ -1,45 +1,45 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next'
 import {
   getAllPaths,
   getNextPost,
   getPostByPath,
   getRecentPosts,
-} from '#utils/post';
-import Post from '#containers/post';
-import { StaticPostProps } from '#types';
+} from '#utils/post'
+import Post from '#containers/post'
+import { StaticPostProps } from '#types'
 
-export default Post;
+export default Post
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: await getAllPaths(),
     fallback: false,
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps<StaticPostProps> = async (
   context,
 ) => {
-  const { params } = context;
+  const { params } = context
   if (!params) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
-  const { date, name } = params;
+  const { date, name } = params
   if (!date || !name || typeof date !== 'string' || typeof name !== 'string') {
-    return { notFound: true };
+    return { notFound: true }
   }
 
-  const [year, month, ...rest] = date.split('-');
+  const [year, month, ...rest] = date.split('-')
   if (rest.length) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
-  const path = `${year}/${month}/${name}`;
+  const path = `${year}/${month}/${name}`
 
   try {
-    const post = await getPostByPath(path);
-    if (!post.frontMatter.published) return { notFound: true };
+    const post = await getPostByPath(path)
+    if (!post.frontMatter.published) return { notFound: true }
 
     const props: StaticPostProps = {
       post,
@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<StaticPostProps> = async (
         ? await getNextPost(post.frontMatter)
         : null,
       recentlyPost: (await getRecentPosts()).map((value) => {
-        const date = value.frontMatter.date.toString();
+        const date = value.frontMatter.date.toString()
 
         return {
           ...value,
@@ -55,12 +55,12 @@ export const getStaticProps: GetStaticProps<StaticPostProps> = async (
             ...value.frontMatter,
             date,
           },
-        };
+        }
       }),
-    };
+    }
 
-    return { notFound: false, props };
+    return { notFound: false, props }
   } catch (error) {
-    return { notFound: true };
+    return { notFound: true }
   }
-};
+}

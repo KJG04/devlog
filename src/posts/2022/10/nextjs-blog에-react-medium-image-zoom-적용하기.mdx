@@ -43,13 +43,13 @@ npm install --save react-medium-image-zoom
 우선 `Img` 컴포넌트를 생성합니다.
 
 ```tsx showLineNumbers="true" path="src/components/Img.tsx"
-import { HTMLProps } from 'react';
+import { HTMLProps } from 'react'
 
 const Img = (props: HTMLProps<HTMLImageElement>) => {
-  const { src, ...rest } = props;
+  const { src, ...rest } = props
 
   if (!src) {
-    return <p>이미지를 사용할 수 없습니다.</p>;
+    return <p>이미지를 사용할 수 없습니다.</p>
   }
 
   return (
@@ -61,31 +61,31 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
       placeholder="empty"
       objectFit="contain"
     />
-  );
-};
+  )
+}
 
-export default Img;
+export default Img
 ```
 
 그리고 생성한 `Img` 컴포넌트를 `MDXRemote`의 components에 넣어줍니다.
 
 ```tsx showLineNumbers="true" path="src/components/Markdown.tsx"
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { FC } from 'react';
-import { Img } from 'src/components/Img';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { FC } from 'react'
+import { Img } from 'src/components/Img'
 
 interface PropsType {
-  content: MDXRemoteSerializeResult;
+  content: MDXRemoteSerializeResult
 }
 
 const Markdown: FC<PropsType> = (props) => {
-  const { content } = props;
-  const components = { img: Img };
+  const { content } = props
+  const components = { img: Img }
 
-  return <MDXRemote {...content} components={components} />;
-};
+  return <MDXRemote {...content} components={components} />
+}
 
-export default Markdown;
+export default Markdown
 ```
 
 이미지가 들어있는 mdx 파일을 `Markdown` 컴포넌트를 통해 렌더링하면 이미지가 렌더링 되는 것을 확인할 수 있습니다.
@@ -95,14 +95,14 @@ export default Markdown;
 이제 `react-medium-image-zoom`을 적용해봅시다.
 
 ```tsx showLineNumbers="true" path="src/components/Img.tsx"
-import { HTMLProps } from 'react';
-import Zoom from 'react-medium-image-zoom';
+import { HTMLProps } from 'react'
+import Zoom from 'react-medium-image-zoom'
 
 const Img = (props: HTMLProps<HTMLImageElement>) => {
-  const { src, ...rest } = props;
+  const { src, ...rest } = props
 
   if (!src) {
-    return <p>이미지를 사용할 수 없습니다.</p>;
+    return <p>이미지를 사용할 수 없습니다.</p>
   }
 
   return (
@@ -116,10 +116,10 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
         objectFit="contain"
       />
     </Zoom>
-  );
-};
+  )
+}
 
-export default Img;
+export default Img
 ```
 
 적용 방법은 굉장히 쉽습니다. 위 코드처럼 이미지를 `Zoom` 컴포넌트로 감싸면 됩니다.
@@ -138,16 +138,16 @@ Error: Hydration failed because the initial UI does not match what was rendered 
 Next.js의 기능 중 하나인 [Dynamic Import](https://nextjs.org/docs/advanced-features/dynamic-import)를 사용하면 됩니다.
 
 ```tsx showLineNumbers="true" path="src/components/Img.tsx"
-import { HTMLProps } from 'react';
-import dynamic from 'next/dynamic';
+import { HTMLProps } from 'react'
+import dynamic from 'next/dynamic'
 
-const Zoom = dynamic(() => import('react-medium-image-zoom'), { ssr: false });
+const Zoom = dynamic(() => import('react-medium-image-zoom'), { ssr: false })
 
 const Img = (props: HTMLProps<HTMLImageElement>) => {
-  const { src, ...rest } = props;
+  const { src, ...rest } = props
 
   if (!src) {
-    return <p>이미지를 사용할 수 없습니다.</p>;
+    return <p>이미지를 사용할 수 없습니다.</p>
   }
 
   return (
@@ -161,10 +161,10 @@ const Img = (props: HTMLProps<HTMLImageElement>) => {
         objectFit="contain"
       />
     </Zoom>
-  );
-};
+  )
+}
 
-export default Img;
+export default Img
 ```
 
 `Img` 컴포넌트를 위와 같은 코드로 수정 후 결과물을 확인하면 오류가 발생하지 않는 것을 확인할 수 있습니다.

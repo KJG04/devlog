@@ -1,2 +1,2 @@
-import NextPost from './NextPost';
-export default NextPost;
+import NextPost from './NextPost'
+export default NextPost

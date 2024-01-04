@@ -1,2 +1,2 @@
-import GithubLogo from './GithubLogo';
-export default GithubLogo;
+import GithubLogo from './GithubLogo'
+export default GithubLogo

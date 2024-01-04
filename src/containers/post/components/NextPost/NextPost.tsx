@@ -1,22 +1,25 @@
-import { FC, useMemo } from 'react';
-import { Card, CardBody, Image, Spacer } from '@nextui-org/react';
-import { memo } from 'react';
-import { Post } from '#types';
-import { useNextPost } from './hooks';
-import Tag from '#components/Tag';
+import { FC, useMemo } from 'react'
+
+import { memo } from 'react'
+import { Post } from '#types'
+import { useNextPost } from './hooks'
+import Tag from '#components/Tag'
+import { Spacer } from '@nextui-org/spacer'
+import { Card, CardBody } from '@nextui-org/card'
+import { Image } from '@nextui-org/image'
 
 interface PropsType {
-  post: Post;
+  post: Post
 }
 
 const NextPost: FC<PropsType> = (props) => {
-  const { post } = props;
-  const { onPress } = useNextPost(post);
+  const { post } = props
+  const { onPress } = useNextPost(post)
 
   const renderedTags = useMemo(
     () => post.frontMatter.tags.map((item) => <Tag key={item}>{item}</Tag>),
     [post.frontMatter.tags],
-  );
+  )
 
   return (
     <>
@@ -47,7 +50,7 @@ const NextPost: FC<PropsType> = (props) => {
         </CardBody>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default memo(NextPost);
+export default memo(NextPost)

@@ -1,5 +1,5 @@
-import App from '#containers/app';
-import '#styles/prism-dark.scss';
-import '#styles/global.scss';
+import App from '#containers/app'
+import '#styles/prism-dark.scss'
+import '#styles/global.scss'
 
-export default App;
+export default App

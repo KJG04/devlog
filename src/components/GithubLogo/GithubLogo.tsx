@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from 'react'
 
 const GithubLogo = () => {
   return (
@@ -18,7 +18,7 @@ const GithubLogo = () => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}
 
-export default memo(GithubLogo);
+export default memo(GithubLogo)

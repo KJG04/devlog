@@ -1,14 +1,15 @@
-import PostCard from '#components/PostCard/PostCard';
-import { Post } from '#types';
-import { Spacer } from '@nextui-org/react';
-import { FC, memo, useMemo } from 'react';
+import PostCard from '#components/PostCard/PostCard'
+import { Post } from '#types'
+import { Spacer } from '@nextui-org/spacer'
+
+import { FC, memo, useMemo } from 'react'
 
 interface PropsType {
-  recentlyPost: Post[];
+  recentlyPost: Post[]
 }
 
 const RecentlyPost: FC<PropsType> = (props) => {
-  const { recentlyPost } = props;
+  const { recentlyPost } = props
 
   const renderedRecentlyPost = useMemo(
     () =>
@@ -20,7 +21,7 @@ const RecentlyPost: FC<PropsType> = (props) => {
         />
       )),
     [recentlyPost],
-  );
+  )
 
   return (
     <>
@@ -30,7 +31,7 @@ const RecentlyPost: FC<PropsType> = (props) => {
         {renderedRecentlyPost}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default memo(RecentlyPost);
+export default memo(RecentlyPost)

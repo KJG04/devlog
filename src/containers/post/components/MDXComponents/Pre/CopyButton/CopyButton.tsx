@@ -1,15 +1,16 @@
-import { Button, Tooltip } from '@nextui-org/react';
-import { useCopy, useCopyButton } from './hooks';
-import { FC, memo, RefObject } from 'react';
+import { Button } from '@nextui-org/button'
+import { useCopy, useCopyButton } from './hooks'
+import { FC, memo, RefObject } from 'react'
+import { Tooltip } from '@nextui-org/tooltip'
 
 interface PropsType {
-  preRef: RefObject<HTMLPreElement>;
+  preRef: RefObject<HTMLPreElement>
 }
 
 const CopyButton: FC<PropsType> = (props) => {
-  const { preRef } = props;
-  const copy = useCopy();
-  const { onCopyPress, copyStatus } = useCopyButton(preRef, copy);
+  const { preRef } = props
+  const copy = useCopy()
+  const { onCopyPress, copyStatus } = useCopyButton(preRef, copy)
 
   return (
     <Tooltip
@@ -19,7 +20,7 @@ const CopyButton: FC<PropsType> = (props) => {
       isOpen={copyStatus !== 'idle'}
     >
       <Button
-        className="relative z-20 flex h-[40px] w-[40px] min-w-[40px] items-center justify-center rounded-none p-0 bg-zinc-800"
+        className="relative z-20 flex h-[40px] w-[40px] min-w-[40px] items-center justify-center rounded-none bg-zinc-800 p-0"
         onPress={onCopyPress}
         value="복사"
         aria-label="복사 버튼"
@@ -36,7 +37,7 @@ const CopyButton: FC<PropsType> = (props) => {
         </svg>
       </Button>
     </Tooltip>
-  );
-};
+  )
+}
 
-export default memo(CopyButton);
+export default memo(CopyButton)
