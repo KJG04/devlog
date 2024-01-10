@@ -38,19 +38,41 @@
     }
 
     h3 {
-      @apply mb-5 mt-5 text-2xl font-bold [&>a]:hover:opacity-100;
+      @apply mb-4 mt-8 text-2xl font-bold [&>a]:hover:opacity-100;
 
       a {
         @apply text-2xl font-bold text-zinc-500 opacity-0;
       }
     }
 
-    blockquote {
-      @apply my-4 border-l-4 border-zinc-500 px-4 py-2 text-zinc-500;
+    :not(pre) > code {
+      @apply mx-1 my-1 inline-block h-fit whitespace-nowrap rounded-lg bg-zinc-700 px-2 py-1 font-mono text-sm font-normal text-zinc-300;
     }
 
-    :not(pre) > code {
-      @apply mx-1 my-1 inline-block h-fit whitespace-nowrap rounded-lg bg-zinc-600 px-2 py-1 font-mono text-sm font-normal;
+    blockquote {
+      @apply my-4 border-l-4 border-zinc-500 px-4 py-2 text-zinc-500;
+
+      code {
+        @apply bg-zinc-800 text-zinc-500;
+      }
+    }
+
+    ol {
+      @apply mb-2 list-inside list-decimal;
+
+      ul,
+      ol {
+        @apply mb-2 pl-6;
+      }
+    }
+
+    ul {
+      @apply mb-2 list-inside list-disc;
+
+      ul,
+      ol {
+        @apply mb-2 pl-6;
+      }
     }
   }
 
