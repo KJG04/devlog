@@ -10,7 +10,11 @@ const Tag: FC<PropsWithChildren> = (props) => {
   const { children } = props
 
   return (
-    <Chip color="default" className="bg-zinc-700" classNames={classNames}>
+    <Chip
+      color="default"
+      className="bg-zinc-700 py-1"
+      classNames={classNames}
+    >
       {children}
     </Chip>
   )

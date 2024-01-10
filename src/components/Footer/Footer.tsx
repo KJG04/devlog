@@ -6,7 +6,7 @@ import { FC, memo } from 'react'
 const Footer: FC = () => {
   return (
     <div>
-      <div className="flex justify-center gap-x-[1rem]">
+      <div className="mt-24 flex justify-center gap-x-[1rem]">
         <Link
           href="mailto:freedom7113@gmail.com"
           aria-label="이메일을 보내려면 여기를 클릭하세요"

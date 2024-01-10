@@ -1,5 +1,6 @@
 import NextHead from 'next/head'
 import { FC, memo } from 'react'
+import IMAGE_LIST from 'src/constants/imageList'
 import { FrontMatter } from 'src/types'
 
 interface PropsType {
@@ -28,8 +29,14 @@ const Head: FC<PropsType> = (props) => {
       <meta name="twitter:description" content={frontMatter.description} />
       {frontMatter.thumbnail && (
         <>
-          <meta name="twitter:url" content={frontMatter.thumbnail} />
-          <meta property="og:image" content={frontMatter.thumbnail} />
+          <meta
+            name="twitter:url"
+            content={IMAGE_LIST[frontMatter.thumbnail].src}
+          />
+          <meta
+            property="og:image"
+            content={IMAGE_LIST[frontMatter.thumbnail].src}
+          />
         </>
       )}
       <meta name="twitter:card" content="blog" />

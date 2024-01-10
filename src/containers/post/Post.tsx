@@ -44,9 +44,9 @@ const Post: NextPage<StaticPostProps> = (props) => {
         )}
         <Spacer y={3} />
         <Comment />
-        <Spacer y={3} />
-        <hr className="bg-zinc-600" />
-        <Spacer y={3} />
+        <Spacer y={12} />
+        <hr className="border-zinc-600" />
+        <Spacer y={12} />
         <RecentlyPost recentlyPost={recentlyPost} />
         <Spacer y={3} />
       </div>

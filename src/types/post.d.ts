@@ -9,8 +9,7 @@ export interface FrontMatter {
   date: string
   description: string
   keyword: string
-  thumbnail?: keyof typeof IMAGE_LIST
-  darkThumbnail?: string
+  thumbnail: keyof typeof IMAGE_LIST
   series?: string
 }
 

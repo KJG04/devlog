@@ -38,7 +38,7 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
   return (
     <highlightContext.Provider value={highlight}>
       <div
-        className="relative left-0 top-0 mx-0 my-4 w-full rounded-2xl"
+        className="relative left-0 top-0 mx-0 my-8 w-full rounded-2xl"
         style={{ contain: 'paint' }}
       >
         <div

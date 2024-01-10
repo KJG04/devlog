@@ -56,7 +56,7 @@ const PostCard: FC<PropsType> = (props) => {
         )}
       >
         <div className="max-w-full">
-          <div className="mt-unit-xs text-sm text-zinc-600">
+          <div className="mb-1 mt-unit-xs text-sm text-zinc-600">
             {formatDateByYear(date)}
           </div>
           <h4 className="break-all text-large font-semibold text-zinc-100">
