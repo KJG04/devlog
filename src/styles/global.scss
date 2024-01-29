@@ -30,7 +30,7 @@
 
   .markdown {
     h2 {
-      @apply mb-4 mt-12 text-4xl font-bold [&>a]:hover:opacity-100;
+      @apply mb-4 mt-8 text-3xl font-bold md:mt-12 md:text-4xl [&>a]:hover:opacity-100;
 
       a {
         @apply text-4xl font-bold text-zinc-500 opacity-0;
@@ -38,7 +38,7 @@
     }
 
     h3 {
-      @apply mb-4 mt-8 text-2xl font-bold [&>a]:hover:opacity-100;
+      @apply mb-4 mt-6 text-2xl font-bold md:mt-8 [&>a]:hover:opacity-100;
 
       a {
         @apply text-2xl font-bold text-zinc-500 opacity-0;
@@ -57,7 +57,7 @@
       }
     }
 
-    ol {
+    :not(nav) > ol {
       @apply mb-2 list-inside list-decimal;
 
       ul,

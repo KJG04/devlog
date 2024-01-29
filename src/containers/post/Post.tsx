@@ -21,6 +21,7 @@ const components = {
 const Post: NextPage<StaticPostProps> = (props) => {
   const { post, nextPost, recentlyPost } = props
   const { body, frontMatter } = post
+
   useMediumZoom()
 
   return (
@@ -29,11 +30,11 @@ const Post: NextPage<StaticPostProps> = (props) => {
       <div className="mx-auto w-full max-w-screen-lg px-6">
         {frontMatter.thumbnail && (
           <>
-            <Spacer y={12} />
+            <div className="mb-8 md:mb-12" />
             <Thumbnail frontMatter={frontMatter} />
           </>
         )}
-        <Spacer y={12} />
+        <div className="mb-8 md:mb-12" />
         <Header frontMatter={frontMatter} />
         <Markdown content={body} />
         {nextPost && frontMatter.series && (

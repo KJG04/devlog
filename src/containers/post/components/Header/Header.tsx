@@ -1,4 +1,3 @@
-
 import { FC, memo } from 'react'
 import { FrontMatter } from 'src/types'
 import { useMemo } from 'react'
@@ -25,7 +24,7 @@ const Header: FC<PropsType> = (props) => {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold leading-normal">{title}</h1>
+      <h1 className="text-4xl font-bold leading-normal md:text-5xl">{title}</h1>
       <Spacer y={4} />
       <div className="flex flex-wrap justify-between gap-y-2">
         <div>
