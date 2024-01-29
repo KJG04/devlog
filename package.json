@@ -26,6 +26,7 @@
     "@types/uuid": "^9.0.6",
     "@vercel/analytics": "^1.0.0",
     "dayjs": "^1.11.7",
+    "eslint-plugin-import": "^2.29.1",
     "framer-motion": "^10.16.4",
     "front-matter": "^4.0.2",
     "glob": "^10.2.2",
@@ -49,7 +50,6 @@
     "remark-slug": "^7.0.1",
     "remark-toc": "^8.0.1",
     "tailwind-merge": "^2.1.0",
-    "use-debounce": "^9.0.4",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
