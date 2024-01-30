@@ -1,7 +1,8 @@
+'use client'
+
 import { NextPage } from 'next'
 import { StaticPostProps } from 'src/types'
 
-import Head from '#containers/post/components/Head/Head'
 import Thumbnail from '#containers/post/components/Thumbnail'
 import Header from '#containers/post/components/Header'
 import Markdown from '#containers/post/components/Markdown'
@@ -26,7 +27,6 @@ const Post: NextPage<StaticPostProps> = (props) => {
 
   return (
     <MDXProvider components={components}>
-      <Head frontMatter={frontMatter} />
       <div className="mx-auto w-full max-w-screen-lg px-6">
         {frontMatter.thumbnail && (
           <>

@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import { FC, memo, useCallback, useMemo } from 'react'
 import { FrontMatter } from 'src/types'
 import Tag from '#components/Tag'

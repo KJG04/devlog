@@ -1,3 +1,5 @@
+'use client'
+
 import { FC, memo, useCallback, useRef } from 'react'
 import Link from 'next/link'
 import GithubLogo from '#components/GithubLogo'

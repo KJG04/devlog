@@ -1,3 +1,5 @@
+'use client'
+
 import { HTMLProps, memo, useRef } from 'react'
 import highlightContext from '#context/highlight'
 import { useHighlightValue, usePathValue } from './hooks'

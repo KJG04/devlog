@@ -1,3 +1,5 @@
+'use client'
+
 import mediumZoom from 'medium-zoom'
 import { useEffect } from 'react'
 

@@ -130,11 +130,6 @@ export const getNextPost = async (
   const currPostIndex = posts.findIndex(
     (item) => item.frontMatter.date === currPost.date,
   )
-  console.log({
-    currPostIndex,
-    currPost: currPost.date,
-    posts: posts.map(({ frontMatter }) => frontMatter.date),
-  })
 
   if (currPostIndex >= 0) {
     const nextPostIndex = currPostIndex + 1

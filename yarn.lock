@@ -1581,18 +1581,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@giscus/react@npm:^2.3.0":
-  version: 2.4.0
-  resolution: "@giscus/react@npm:2.4.0"
-  dependencies:
-    giscus: "npm:^1.4.0"
-  peerDependencies:
-    react: ^16 || ^17 || ^18
-    react-dom: ^16 || ^17 || ^18
-  checksum: a3bd55dcb137a47f7a21319232136b54405cf9f53976ebc6b556fc4206c73dbb49a441d8d182ea98b15b48fb1be863f03aa78695731637cbfc6aedfa214813ea
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -1708,22 +1696,6 @@ __metadata:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
   checksum: 18cf19f88e2792c1c91515f2b629aae05f3cdbb2e60c3886e16e80725234ce26dd10144c4981c05d9366e7094498c0b4fe5c1a89f4a730d7376a4ba4af448149
-  languageName: node
-  linkType: hard
-
-"@lit-labs/ssr-dom-shim@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@lit-labs/ssr-dom-shim@npm:1.1.2"
-  checksum: e51c7c156317ac95cac8d534d8608ac2a9dda7441f14f73e9e66a995d277851a90315324fe74690d1169a66dce645ed9674a8f5a9a467d183156de1c87549b23
-  languageName: node
-  linkType: hard
-
-"@lit/reactive-element@npm:^2.0.0":
-  version: 2.0.3
-  resolution: "@lit/reactive-element@npm:2.0.3"
-  dependencies:
-    "@lit-labs/ssr-dom-shim": "npm:^1.1.2"
-  checksum: daa5c52046d0f7969ca3de028c1ccc1cfa7a54c1cafc4587be28158a52acf18c47928158f89c0abbb88244359fec53dd05aba84d9358f3b3ddb15b6154859db4
   languageName: node
   linkType: hard
 
@@ -3111,13 +3083,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/trusted-types@npm:^2.0.2":
-  version: 2.0.7
-  resolution: "@types/trusted-types@npm:2.0.7"
-  checksum: 4c4855f10de7c6c135e0d32ce462419d8abbbc33713b31d294596c0cc34ae1fa6112a2f9da729c8f7a20707782b0d69da3b1f8df6645b0366d08825ca1522e0c
-  languageName: node
-  linkType: hard
-
 "@types/unist@npm:*":
   version: 3.0.2
   resolution: "@types/unist@npm:3.0.2"
@@ -4341,7 +4306,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "devlog@workspace:."
   dependencies:
-    "@giscus/react": "npm:^2.3.0"
     "@next/bundle-analyzer": "npm:^14.0.4"
     "@nextui-org/breadcrumbs": "npm:^2.0.4"
     "@nextui-org/button": "npm:^2.0.26"
@@ -5467,15 +5431,6 @@ __metadata:
   dependencies:
     resolve-pkg-maps: "npm:^1.0.0"
   checksum: 169b2beababfbb16e8a0ae813ee59d3e14d4960231c816615161ab5be68ec07a394dce59695742ac84295e2efab8d9e89bcf3abaf5e253dfbec3496e01bb9a65
-  languageName: node
-  linkType: hard
-
-"giscus@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "giscus@npm:1.4.0"
-  dependencies:
-    lit: "npm:^3.1.0"
-  checksum: bb980b79f62a948349949967809f8495f1f08da9d4c037ce2c72a396406e576fafc3a774f8d844afaf459474554f41347b36222c91b7f2d168a23c94ed7913a2
   languageName: node
   linkType: hard
 
@@ -6729,37 +6684,6 @@ __metadata:
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
   checksum: 3da6ee62d4cd9f03f5dc90b4df2540fb85b352081bee77fe4bbcd12c9000ead7f35e0a38b8d09a9bb99b13223446dd8689ff3c4959807620726d788701a83d2d
-  languageName: node
-  linkType: hard
-
-"lit-element@npm:^4.0.0":
-  version: 4.0.3
-  resolution: "lit-element@npm:4.0.3"
-  dependencies:
-    "@lit-labs/ssr-dom-shim": "npm:^1.1.2"
-    "@lit/reactive-element": "npm:^2.0.0"
-    lit-html: "npm:^3.1.0"
-  checksum: f2a744c96c62c5a391ec8e465dd28d99f154898c46ca2c9dff75a71053d3d33debdac2bf1daf3f2630224be4277ed6100340dd97ad881c00e5a2d3f5e79eb0af
-  languageName: node
-  linkType: hard
-
-"lit-html@npm:^3.1.0":
-  version: 3.1.1
-  resolution: "lit-html@npm:3.1.1"
-  dependencies:
-    "@types/trusted-types": "npm:^2.0.2"
-  checksum: c4f12b0b49739b1dd83e172b20e5b8f2ad5b92a72c25aa19e3cc169823164b7aeb12fb098ef6ab1031e6ed15b4119659190832e0b066df785d903bebe6734b87
-  languageName: node
-  linkType: hard
-
-"lit@npm:^3.1.0":
-  version: 3.1.1
-  resolution: "lit@npm:3.1.1"
-  dependencies:
-    "@lit/reactive-element": "npm:^2.0.0"
-    lit-element: "npm:^4.0.0"
-    lit-html: "npm:^3.1.0"
-  checksum: fea579d9e7e27bf984a9dfe2b617e4c21d3bd428a38de63719797b266b1548cc3a89155bbb630f46edf337641d9d02106f749b6ca4a439daba47a1e1045937b7
   languageName: node
   linkType: hard
 

@@ -1,3 +1,5 @@
+'use client'
+
 import { FC, useMemo } from 'react'
 
 import { memo } from 'react'

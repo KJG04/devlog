@@ -18,12 +18,10 @@ export interface PostWithHTMLBody {
   body: MDXRemoteSerializeResult
 }
 
-export type Path =
-  | string
-  | {
-      params: ParsedUrlQuery
-      locale?: string | undefined
-    }
+export type Path = {
+  params: ParsedUrlQuery
+  locale?: string | undefined
+}
 
 export interface Post {
   frontMatter: FrontMatter
