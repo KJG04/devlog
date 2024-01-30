@@ -5,8 +5,61 @@ tags:
   - next.js
   - migration
 keyword: react, create react app, migration, 점진적, next.js
-published: false
+published: true
 date: 2023-11-26T19:12:00+09:00
-description: 기존 코드를 하나도 변경하지 않고 점진적으로 Next.js로 마이그레이션하는 방법.
-thumbnail: RouterCodeSplitThumbnail
+description: 기존 코드를 변경하지 않고 점진적으로 Next.js로 마이그레이션하는 방법.
+thumbnail: MigrateToNextJSThumbnail
 ---
+
+## 문제
+
+개발중인 서비스는 CRA 기반으로 개발되고 있는데, 여기에 다양한 문제들이 발생하고 있습니다.
+
+<br />
+
+1. SEO
+   - CRA는 SSR을 지원하지 않기 때문에 SEO에 취약합니다.
+2. 초기 로딩 속도 문제
+   - 서비스에서 타켓하는 유저는 느린 네트워크와 느린 디바이스를 사용하는 환경이 대부분인데, CRA는 js 파일을 다 받고 코드를 실행해야 화면에 표시되기 때문에 느린 네트워크와 느린 디바이스에서는 초기 로딩 속도가 매우 느립니다.
+3. 개발 경험
+   - 코드 변경후 변경 사항을 확인하려면 5초 정도 기다려야 했습니다. 그리고 자주 메모리 부족으로 인해 서버가 죽었습니다.
+
+위 문제를 해결하기 위해 Next.js로 마이그레이션을 진행하려고 합니다.
+
+<br />
+
+하지만 서비스는 3년 동안 개발된 서비스이기 떄문에 많은 양의 코드가 존재합니다. 또한 서비스는 빠른 속도로 개발되고 있고, 마이그레이션을 한 후 QA에도 많은 시간이 소요되기 때문에 적은 인원과 빠른 속도가 중요한 스타트업에서는 모든 코드를 한번에 마이그레이션 하는 것은 불가능 하다고 생각했습니다. 따라서 기존 코드를 건들지 않고 마이그레이션 할 방법이 필요했습니다.
+
+## 해결 방법
+
+Next.js의 `rewrites` 기능을 사용하여 기존 배포된 CRA 서비스는 유지하고 페이지 하나하나씩 Next.js로 마이그레이션 하는 방법을 사용했습니다. 설명하자면 다음과 같습니다.
+
+<br />
+
+1. 기존 서비스가 `example.com`에 배포되어 있다면, `old.example.com`으로 변경하여 배포합니다.
+2. 새로운 Next.js는 `example.com`으로 배포합니다.
+3. 사용자가 요청한 페이지가 Next.js에 없다면, Next.js 앱에서 받는 모든 요청을 `rewrites`를 통해 CRA 서비스로 넘깁니다. 예를들어 `example.com/about`으로 요청이 들어오면 `old.example.com/about`으로 요청을 넘깁니다.
+
+## 구현
+
+```tsx showLineNumbers="true" path="next.config.js"
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  rewrites() {
+    return {
+      fallback: [
+        {
+          source: '/:path*',
+          destination: `https://old.example.com/:path*`,
+        },
+      ],
+    }
+  },
+}
+```
+
+`next.config.js`에서 위처럼 `rewrites`를 설정하면 됩니다. `fallback`은 페이지와 동적 라우팅이 전부 확인된 다음에 `rewrites` 될 경로를 지정하는 옵션입니다. `source`에서 모든 경로를 `destination`으로 요청하도록 하여서, `example.com/about`으로 요청이 들어오면 `old.example.com/about`으로 요청을 넘기게 됩니다.
+
+## 마무리
+
+위 방법을 사용하면 기존 서비스를 건들지 않고 점진적으로 Next.js로 마이그레이션 할 수 있습니다. 저와 같은 상황이여서 고민하시는 분들이 있다면 도움이 되었으면 좋겠습니다.
