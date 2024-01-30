@@ -25,17 +25,12 @@ export const getStaticProps: GetStaticProps<StaticPostProps> = async (
     return { notFound: true }
   }
 
-  const { date, name } = params
-  if (!date || !name || typeof date !== 'string' || typeof name !== 'string') {
+  const { name } = params
+  if (!name || typeof name !== 'string') {
     return { notFound: true }
   }
 
-  const [year, month, ...rest] = date.split('-')
-  if (rest.length) {
-    return { notFound: true }
-  }
-
-  const path = `${year}/${month}/${name}`
+  const path = name
 
   try {
     const post = await getPostByPath(path)

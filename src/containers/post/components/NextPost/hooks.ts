@@ -6,8 +6,8 @@ export const useNextPost = (post: Post) => {
   const router = useRouter()
 
   const onPress = useCallback(() => {
-    router.push(`/post/${post.pathParam.date}/${post.pathParam.name}`)
-  }, [post.pathParam.date, post.pathParam.name, router])
+    router.push(`/post/${post.pathParam.name}`)
+  }, [post.pathParam.name, router])
 
   return { onPress }
 }

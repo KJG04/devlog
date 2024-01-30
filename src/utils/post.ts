@@ -31,7 +31,7 @@ export const getAllPaths = async (): Promise<Path[]> => {
         .replaceAll(regex, '')
         .split('/')
         .filter((item) => item.length > 0)
-      const params = { date: `${slug[0]}-${slug[1]}`, name: slug[2] }
+      const params = { name: slug[0] }
 
       return { params }
     })
@@ -44,7 +44,7 @@ export const getPostByPath = async (
   const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
 
   const { attributes, body } = frontMatter<FrontMatter>(file)
-  attributes.date = dayjs(attributes.date).format('YYYY-MM-DD HH:mm:ss')
+  attributes.date = dayjs(attributes.date).toISOString()
 
   return {
     frontMatter: attributes,
@@ -87,7 +87,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
         .replaceAll(regex, '')
         .split('/')
         .filter((item) => item.length > 0)
-      const pathParam = { date: `${slug[0]}-${slug[1]}`, name: slug[2] }
+      const pathParam = { name: slug[0] }
 
       return {
         frontMatter: attributes,
@@ -108,17 +108,13 @@ export const getSeriesPosts = async (series: string): Promise<Post[]> => {
 
   return posts
     .filter((post) => post.frontMatter.series === series)
-    .map((item) => {
-      return {
-        ...item,
-        frontMatter: {
-          ...item.frontMatter,
-          date: dayjs(item.frontMatter.date)
-            .add(-9, 'hours')
-            .format('YYYY-MM-DD HH:mm:ss'),
-        },
-      }
-    })
+    .map((item) => ({
+      ...item,
+      frontMatter: {
+        ...item.frontMatter,
+        date: dayjs(item.frontMatter.date).toISOString(),
+      },
+    }))
 }
 
 export const getNextPost = async (
@@ -131,8 +127,13 @@ export const getNextPost = async (
   }
 
   const posts = await getSeriesPosts(currSeries)
-  const currPostIndex = posts.findIndex((item) => {
-    return item.frontMatter.date === currPost.date
+  const currPostIndex = posts.findIndex(
+    (item) => item.frontMatter.date === currPost.date,
+  )
+  console.log({
+    currPostIndex,
+    currPost: currPost.date,
+    posts: posts.map(({ frontMatter }) => frontMatter.date),
   })
 
   if (currPostIndex >= 0) {

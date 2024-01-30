@@ -28,7 +28,7 @@ export type Path =
 export interface Post {
   frontMatter: FrontMatter
   body: string
-  pathParam: { date: string; name: string }
+  pathParam: { name: string }
 }
 
 export interface StaticPostProps {

@@ -12,7 +12,6 @@ import { Spacer } from '@nextui-org/spacer'
 interface PropsType {
   frontMatter: FrontMatter
   pathParam: {
-    date: string
     name: string
   }
 }
@@ -21,11 +20,11 @@ const PostCard: FC<PropsType> = (props) => {
   const { frontMatter, pathParam } = props
   const router = useRouter()
   const { description, date, tags, title, thumbnail } = frontMatter
-  const { date: pathDate, name } = pathParam
+  const { name } = pathParam
 
   const onPress = useCallback(() => {
-    router.push(`/post/${pathDate}/${name}`)
-  }, [pathDate, name, router])
+    router.push(`/post/${name}`)
+  }, [name, router])
 
   const renderedTags = useMemo(
     () => tags.map((item) => <Tag key={item}>{item}</Tag>),
