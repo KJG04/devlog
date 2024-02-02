@@ -29,7 +29,7 @@ const Home: NextPage<PropsType> = (props) => {
                   alt="profile"
                   height={200}
                   width={200}
-                  className="h-[200px] w-[200px] rounded-full"
+                  className="h-[200px] w-[200px] select-none rounded-full"
                   placeholder="blur"
                   priority
                 />

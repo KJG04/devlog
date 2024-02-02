@@ -12,7 +12,7 @@ const Tag: FC<PropsWithChildren> = (props) => {
   return (
     <Chip
       color="default"
-      className="bg-zinc-700 py-1"
+      className="select-none bg-zinc-700 py-1"
       classNames={classNames}
     >
       {children}

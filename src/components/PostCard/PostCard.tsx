@@ -34,42 +34,44 @@ const PostCard: FC<PropsType> = (props) => {
   )
 
   return (
-    <Card
-      isPressable
-      onPress={onPress}
-      className="bg-transparent text-left shadow-none"
-    >
-      {thumbnail && (
-        <CardBody className="flex-none p-0">
-          <Image
-            src={IMAGE_LIST[thumbnail]}
-            alt={title}
-            className="aspect-video rounded-lg object-cover"
-            width={591}
-            placeholder="blur"
-          />
-        </CardBody>
-      )}
-      <CardFooter
-        className={twMerge(
-          thumbnail ? 'bg-transparent pl-0 pr-0' : 'bg-zinc-800',
-          'flex-1 items-start',
-        )}
+    <div>
+      <Card
+        isPressable
+        onPress={onPress}
+        className="relative bg-transparent text-left shadow-none transition-shadow"
       >
-        <div className="max-w-full">
-          <div className="mb-1 mt-unit-xs text-sm text-zinc-600">
-            {formatDateByYear(date)}
+        {thumbnail && (
+          <CardBody className="flex-none p-0">
+            <Image
+              src={IMAGE_LIST[thumbnail]}
+              alt={title}
+              className="aspect-video select-none rounded-lg object-cover"
+              width={591}
+              placeholder="blur"
+            />
+          </CardBody>
+        )}
+        <CardFooter
+          className={twMerge(
+            thumbnail ? 'bg-transparent pl-0 pr-0' : '',
+            'flex-1 items-start',
+          )}
+        >
+          <div className="max-w-full">
+            <div className="mb-1 mt-unit-xs text-sm text-zinc-600">
+              {formatDateByYear(date)}
+            </div>
+            <h4 className="break-all text-large font-semibold text-zinc-100">
+              {title}
+            </h4>
+            <Spacer y={1} />
+            <div className="lead text-zinc-500">{description}</div>
+            <Spacer y={2} />
+            <div className="flex flex-wrap gap-[0.5rem]">{renderedTags}</div>
           </div>
-          <h4 className="break-all text-large font-semibold text-zinc-100">
-            {title}
-          </h4>
-          <Spacer y={1} />
-          <div className="lead text-zinc-500">{description}</div>
-          <Spacer y={2} />
-          <div className="flex flex-wrap gap-[0.5rem]">{renderedTags}</div>
-        </div>
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }
 

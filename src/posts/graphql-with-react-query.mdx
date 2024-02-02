@@ -1,0 +1,130 @@
+---
+title: GraphQL과 React Query로 서버 상태 관리하기
+tags:
+  - graphql
+  - react query
+  - hook
+keyword: react, graphql, react query, hook, graphql-request, apollo client
+published: false
+date: 2024-02-02T15:55:00+09:00
+description: GraphQL을 react-query를 사용해서 다루어보자.
+thumbnail: MigrateToNextJSThumbnail
+---
+
+실무에서 React Query와 GraphQL을 같이 사용해야 했는데, 구글링 해보니 자료가 많이 없어서 제가 사용한 방법을 정리해보려고 합니다.
+
+`@apollo/client`의 `useQuery`와 `useMutation`의 인터페이스를 참고하였습니다.
+
+## `useQuery`
+
+```tsx showLineNumbers="true" path="src/hooks/useQuery.ts"
+import {
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+} from '@tanstack/react-query'
+import type { DocumentNode, GraphQLError } from 'graphql'
+import { useCallback, useMemo } from 'react'
+
+import { useGraphQLClient } from './graphQL'
+
+import { graphQLClientWithNoAuth } from '#components/providers/GraphQLProvider'
+import { getNameFromGQL } from '#utils/graphql'
+
+interface UseQueryParam<DataType, VariableType> {
+  variables?: VariableType
+  options?: Parameters<
+    typeof useQuery<Promise<DataType | null>, GraphQLError, DataType>
+  >[2]
+}
+
+type OperationVariables = {
+  [x: string]: any
+}
+
+const createKeyByVariables = <
+  VariableType extends OperationVariables = OperationVariables,
+>(
+  variables: VariableType,
+) => {
+  const keys = Object.keys(variables)
+  return keys.map(
+    (key) =>
+      `${key}-${
+        typeof variables[key] === 'object'
+          ? JSON.stringify(variables[key])
+          : variables[key]
+      }`,
+  )
+}
+
+/**
+ * ### useQueryWithReactQuery
+ * #### react-query를 gql 기반으로 사용하는 hook입니다.
+ *
+ * @example
+ * const { data, isLoading } =
+ *   useQueryWithReactQuery<MyCurrentDessertMatchRoomQuery>(
+ *     documentNode: MY_CURRENT_DESSERT_MATCH_ROOM,
+ *     options: {
+ *       refetchOnMount: "always",
+ *       enabled: !pathname.includes(ROUTE.DESSERT_MATCH_BATTLE),
+ *     },
+ * );
+ */
+export const useQueryWithReactQuery = <
+  DataType = Record<string, unknown>,
+  VariableType extends OperationVariables = OperationVariables,
+>(
+  documentNode: DocumentNode,
+  param?:
+    | (UseQueryParam<DataType, VariableType> & { auth?: boolean })
+    | undefined,
+) => {
+  const auth = param?.auth ?? true
+  const _client = useGraphQLClient()
+  const client = auth ? _client : graphQLClientWithNoAuth
+
+  const useQueryKey = getNameFromGQL(documentNode)
+  const keys = useMemo(
+    () => createKeyByVariables(param?.variables ?? {}),
+    [param?.variables],
+  )
+
+  const queryFn = useCallback(async () => {
+    return client.request<DataType>(documentNode, param?.variables)
+  }, [client, documentNode, param?.variables])
+
+  return useQuery<Promise<DataType | null>, GraphQLError, DataType>(
+    [useQueryKey, ...keys],
+    queryFn,
+    param?.options,
+  )
+}
+
+export const useMutationWithReactQuery = <
+  DataType = Record<string, unknown>,
+  VariableType extends OperationVariables = OperationVariables,
+>(
+  documentNode: DocumentNode,
+  options?:
+    | (Omit<
+        UseMutationOptions<DataType, unknown, VariableType, unknown>,
+        'mutationFn'
+      > & { auth?: boolean })
+    | undefined,
+) => {
+  const auth = options?.auth ?? true
+  const _client = useGraphQLClient()
+  const client = auth ? _client : graphQLClientWithNoAuth
+
+  const mutationFn = useCallback(
+    async (variable: VariableType) => {
+      return client.request<DataType>(documentNode, variable)
+    },
+    [client, documentNode],
+  )
+
+  return useMutation(mutationFn, options)
+}
+```
