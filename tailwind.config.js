@@ -13,4 +13,11 @@ module.exports = {
     './node_modules/@nextui-org/theme/dist/components/(breadcrumbs|button|card|chip|image|link|navbar|spacer|tooltip).js',
   ],
   plugins: [nextui()],
+  theme: {
+    extend: {
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+      },
+    },
+  },
 }

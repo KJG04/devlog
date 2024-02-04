@@ -33,7 +33,7 @@ const NavigationBar: FC = () => {
       onScrollPositionChange={onScrollPositionChange}
     >
       <NavbarBrand>
-        <Link href="/" passHref>
+        <Link href="/">
           <div className="flex gap-x-2 align-middle">
             <svg
               width="24"

@@ -2,11 +2,64 @@ import '#styles/global.scss'
 import '#styles/prism-dark.scss'
 
 import { PropsWithChildren } from 'react'
-import { Providers } from './providers'
+import Providers from './providers'
 import Script from 'next/script'
 import NavigationBar from '#components/NavigationBar'
 import Footer from '#components/Footer'
 import { Analytics } from '@vercel/analytics/react'
+import localFont from 'next/font/local'
+
+const pretendardFont = localFont({
+  src: [
+    {
+      path: '../../public/fonts/pretendard/Pretendard-Thin.woff',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-ExtraLight.woff',
+      weight: '200',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-Light.woff',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-Medium.woff',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-SemiBold.woff',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-Bold.woff',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-ExtraBold.woff',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/pretendard/Pretendard-Black.woff',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-pretendard',
+})
 
 const AppLayout = ({ children }: PropsWithChildren) => {
   const googleAnalyticsScript = {
@@ -19,17 +72,11 @@ const AppLayout = ({ children }: PropsWithChildren) => {
   }
 
   return (
-    <html lang="ko-KR" className="bg-[#18181B]">
+    <html lang="ko-KR" className={`bg-[#18181B] ${pretendardFont.variable}`}>
       <head>
         <meta
           name="google-site-verification"
           content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
-        />
-        <link
-          rel="stylesheet preload"
-          as="style"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-          type="text/css"
         />
         <link
           rel="apple-touch-icon"
@@ -69,8 +116,8 @@ const AppLayout = ({ children }: PropsWithChildren) => {
             {children}
             <Footer />
           </div>
-          <Analytics />
         </Providers>
+        <Analytics />
       </body>
     </html>
   )
