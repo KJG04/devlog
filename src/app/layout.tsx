@@ -58,7 +58,7 @@ const pretendardFont = localFont({
       style: 'normal',
     },
   ],
-  display: 'auto',
+  display: 'swap',
   variable: '--font-pretendard',
   preload: false,
 })
