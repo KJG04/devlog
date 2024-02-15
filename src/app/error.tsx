@@ -1,11 +1,7 @@
 'use client'
 
-import ErrorContainer from '#containers/error'
+import Error from '#containers/error'
 import { Metadata } from 'next'
-
-const Error = () => {
-  return <ErrorContainer />
-}
 
 export default Error
 

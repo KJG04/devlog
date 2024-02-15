@@ -1,12 +1,18 @@
 'use client'
 
 import { FC, memo, useCallback, useRef } from 'react'
-import Link from 'next/link'
+
 import GithubLogo from '#components/GithubLogo'
 
 import { useSetRecoilState } from 'recoil'
 import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible'
-import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/navbar'
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from '@nextui-org/navbar'
+import { Link } from '@nextui-org/link'
 
 const NavigationBar: FC = () => {
   const currentScrollRef = useRef<number | null>(null)
@@ -33,7 +39,7 @@ const NavigationBar: FC = () => {
       onScrollPositionChange={onScrollPositionChange}
     >
       <NavbarBrand>
-        <Link href="/">
+        <Link href="/" color="foreground">
           <div className="flex gap-x-2 align-middle">
             <svg
               width="24"
@@ -55,13 +61,21 @@ const NavigationBar: FC = () => {
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <Link
-          href="https://github.com/KJG04"
-          target="_blank"
-          aria-label="Github에 방문하고 싶으시면 여기를 클릭하세요"
-        >
-          <GithubLogo />
-        </Link>
+        <NavbarItem>
+          <Link href="/about" color="foreground">
+            About
+          </Link>
+        </NavbarItem>
+        <div className="select-none text-zinc-500">/</div>
+        <NavbarItem>
+          <Link
+            href="https://github.com/KJG04"
+            target="_blank"
+            aria-label="Github에 방문하고 싶으시면 여기를 클릭하세요"
+          >
+            <GithubLogo />
+          </Link>
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   )

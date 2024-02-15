@@ -1,9 +1,5 @@
-import NotFoundContainer from '#containers/notFound'
+import NotFound from '#containers/notFound'
 import { Metadata } from 'next'
-
-const NotFound = () => {
-  return <NotFoundContainer />
-}
 
 export default NotFound
 

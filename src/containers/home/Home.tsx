@@ -1,11 +1,11 @@
 import GithubLogo from '#components/GithubLogo'
 import RecentlyPost from '#components/RecentlyPost'
+import ProfileImage from 'public/images/profile-image.webp'
 import { Post } from '#types'
 
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { memo } from 'react'
-import ProfileImage from 'public/images/profile-image.webp'
 import { Spacer } from '@nextui-org/spacer'
 import { Link } from '@nextui-org/link'
 
