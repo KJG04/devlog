@@ -1,3 +1,6 @@
+import EmailLogo from '#components/EmailLogo'
+import GithubLogo from '#components/GithubLogo'
+import { Link } from '@nextui-org/link'
 import Image from 'next/image'
 import ProfileImage from 'public/images/profile-image.webp'
 
@@ -20,6 +23,21 @@ const InfoSection = () => {
         <div className="text-center text-2xl font-medium text-zinc-400">
           프론트엔드 개발자
         </div>
+        <div className="mt-3 flex gap-3">
+          <Link
+            href="mailto:freedom7113@gmail.com"
+            aria-label="이메일을 보내려면 여기를 클릭하세요"
+          >
+            <EmailLogo />
+          </Link>
+          <Link
+            href="https://github.com/KJG04"
+            target="_blank"
+            aria-label="Github에 방문하고 싶으시면 여기를 클릭하세요"
+          >
+            <GithubLogo />
+          </Link>
+        </div>
       </div>
       <div className="mt-12" />
       <div className="m-auto max-w-screen-lg px-4">
@@ -30,7 +48,7 @@ const InfoSection = () => {
             김진근입니다.
           </div>
           React, Next.js를 사용해 웹 서비스를 개발, 유지보수 해보았습니다. React
-          Native를 사용해 크로스플랫폼 앱 개발을 해보았습니다.
+          Native를 사용해 크로스 플랫폼 앱 개발을 해보았습니다.
           <br />
           &apos;어제의 나보다 성장한 오늘의 나&apos;가 되기위해 노력합니다.
           뛰어난 사람이 되기 위해 끊임없이 공부합니다.
