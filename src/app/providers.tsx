@@ -2,10 +2,7 @@
 
 import { NextUIProvider } from '@nextui-org/system'
 import { RecoilRoot } from 'recoil'
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
-import { PropsWithChildren, Suspense } from 'react'
-
-const progressOptions = { showSpinner: false }
+import { PropsWithChildren } from 'react'
 
 function Providers(props: PropsWithChildren) {
   const { children } = props
@@ -13,16 +10,7 @@ function Providers(props: PropsWithChildren) {
   return (
     <>
       <NextUIProvider>
-        <RecoilRoot>
-          {children}
-          <Suspense>
-            <ProgressBar
-              height="4px"
-              color="#006FEE"
-              options={progressOptions}
-            />
-          </Suspense>
-        </RecoilRoot>
+        <RecoilRoot>{children}</RecoilRoot>
       </NextUIProvider>
     </>
   )

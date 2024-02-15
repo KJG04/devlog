@@ -8,6 +8,7 @@ import NavigationBar from '#components/NavigationBar'
 import Footer from '#components/Footer'
 import { Analytics } from '@vercel/analytics/react'
 import localFont from 'next/font/local'
+import NextTopLoader from 'nextjs-toploader'
 
 const pretendardFont = localFont({
   src: [
@@ -110,6 +111,7 @@ const AppLayout = ({ children }: PropsWithChildren) => {
           strategy="afterInteractive"
           dangerouslySetInnerHTML={googleAnalyticsScript}
         />
+        <NextTopLoader color="#006FEE" showSpinner={false} />
         <Providers>
           <div className="relative flex min-h-[100vh] flex-col dark">
             <NavigationBar />

@@ -2994,6 +2994,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/nprogress@npm:^0.2.2":
+  version: 0.2.3
+  resolution: "@types/nprogress@npm:0.2.3"
+  checksum: cac0fe73aca79bc1472a1556f56303df72026f2fcd8dbe311fe84b1f46e454b9040c1e69223d94e3bf156a5986382170c52ebda19aa70f555f1b6855d8f744a6
+  languageName: node
+  linkType: hard
+
 "@types/parse5@npm:^6.0.0":
   version: 6.0.3
   resolution: "@types/parse5@npm:6.0.3"
@@ -4339,8 +4346,8 @@ __metadata:
     medium-zoom: "npm:^1.0.8"
     next: "npm:^14.0.4"
     next-mdx-remote: "npm:^4.4.1"
-    next-nprogress-bar: "npm:^2.1.2"
     next-sitemap: "npm:^4.2.3"
+    nextjs-toploader: "npm:^1.6.6"
     postcss: "npm:^8.4.31"
     prettier: "npm:^3.0.3"
     prettier-plugin-tailwindcss: "npm:^0.5.9"
@@ -7790,15 +7797,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-nprogress-bar@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "next-nprogress-bar@npm:2.1.2"
-  dependencies:
-    nprogress: "npm:^0.2.0"
-  checksum: 8680f3062478e3f7b9fbbc0489d76dc7f76ea989c6119c9887af3fcf0190cd7b53b9c49907452d37ca9a29a50b4a0fa1b42f4aedf634d2a9386b02f2cf82bf9b
-  languageName: node
-  linkType: hard
-
 "next-sitemap@npm:^4.2.3":
   version: 4.2.3
   resolution: "next-sitemap@npm:4.2.3"
@@ -7868,6 +7866,21 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: dbb1ef8d22eec29a9127d28ed46eb34f14e3f7f7b4e4b91dc96027feb4d9ead554a804275484d9a54026e6e55d632d3997561e598c1fb8e8956e77614f39765f
+  languageName: node
+  linkType: hard
+
+"nextjs-toploader@npm:^1.6.6":
+  version: 1.6.6
+  resolution: "nextjs-toploader@npm:1.6.6"
+  dependencies:
+    "@types/nprogress": "npm:^0.2.2"
+    nprogress: "npm:^0.2.0"
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    next: ">= 6.0.0"
+    react: ">= 16.0.0"
+    react-dom: ">= 16.0.0"
+  checksum: 1be1aece9291058895a44a6f496dc355635616ad9c46eec1061cf13f685ce9fef9362346aaecde88a6ad7a0bc9e512c35851884eb1af15058bdedc85ab6d7f24
   languageName: node
   linkType: hard
 
