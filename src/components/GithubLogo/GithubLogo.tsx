@@ -1,11 +1,22 @@
-const GithubLogo = () => {
+import { useMemo } from 'react'
+
+interface GithubLogoProps {
+  size?: number
+}
+
+const GithubLogo = (props: GithubLogoProps) => {
+  const { size = 30 } = props
+
+  const style = useMemo(() => ({ width: size, height: size }), [size])
+
   return (
     <svg
-      width="30"
-      height="30"
+      width={size}
+      height={size}
       viewBox="0 0 30 30"
       xmlns="http://www.w3.org/2000/svg"
-      className="inline-block h-[30px] w-[30px] fill-zinc-100"
+      className="inline-block fill-zinc-100"
+      style={style}
     >
       <g clipPath="url(#clip0_404_2)">
         <path

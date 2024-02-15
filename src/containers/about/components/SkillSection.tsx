@@ -30,9 +30,9 @@ const secondSkillList = ['Recoil', 'TailwindCSS', 'Framer Motion', 'i18n']
 const SkillSection = () => {
   return (
     <section className="m-auto max-w-screen-lg px-4">
-      <motion.div className="text-6xl font-black" {...slideAnimationProps}>
+      <motion.h1 className="text-6xl font-black" {...slideAnimationProps}>
         Skill
-      </motion.div>
+      </motion.h1>
       <motion.div className="mt-6" {...slideAnimationProps}>
         깊이 이해하고, 실무에서 사용해본 적 있어요.
       </motion.div>

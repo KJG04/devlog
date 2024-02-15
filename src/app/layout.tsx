@@ -58,8 +58,9 @@ const pretendardFont = localFont({
       style: 'normal',
     },
   ],
-  display: 'swap',
+  display: 'auto',
   variable: '--font-pretendard',
+  preload: false,
 })
 
 const AppLayout = ({ children }: PropsWithChildren) => {

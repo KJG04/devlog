@@ -21,7 +21,7 @@ const slideAnimationProps = {
 
 const MotionImage = motion(Image)
 
-const MathpangActivity = () => {
+const MathpangSection = () => {
   const visible = useRecoilValue(navigationBarVisibleAtom)
   const headerRef = useRef<HTMLDivElement>(null)
   const isHeaderVisible = useInView(headerRef)
@@ -210,4 +210,4 @@ const MathpangActivity = () => {
   )
 }
 
-export default MathpangActivity
+export default MathpangSection

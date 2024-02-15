@@ -53,14 +53,14 @@ const PostCard: FC<PropsType> = (props) => {
             )}
           >
             <div className="max-w-full">
-              <div className="mb-1 mt-unit-xs text-sm text-zinc-600">
+              <div className="mb-1 mt-unit-xs text-sm text-zinc-400">
                 {formatDateByYear(date)}
               </div>
               <h4 className="break-all text-large font-semibold text-zinc-100">
                 {title}
               </h4>
               <Spacer y={1} />
-              <div className="lead text-zinc-500">{description}</div>
+              <div className="lead text-zinc-400">{description}</div>
               <Spacer y={2} />
               <div className="flex flex-wrap gap-[0.5rem]">{renderedTags}</div>
             </div>

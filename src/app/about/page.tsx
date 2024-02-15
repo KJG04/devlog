@@ -1,5 +1,9 @@
-import About from '#containers/about'
+import AboutContainer from '#containers/about'
 import { Metadata } from 'next'
+
+const About = () => {
+  return <AboutContainer />
+}
 
 export default About
 
