@@ -5,126 +5,141 @@ tags:
   - react query
   - hook
 keyword: react, graphql, react query, hook, graphql-request, apollo client
-published: false
+published: true
 date: 2024-02-02T15:55:00+09:00
 description: GraphQL을 react-query를 사용해서 다루어보자.
-thumbnail: MigrateToNextJSThumbnail
+thumbnail: ReactQueryWithGraphqlThumbnail
 ---
 
 실무에서 React Query와 GraphQL을 같이 사용해야 했는데, 구글링 해보니 자료가 많이 없어서 제가 사용한 방법을 정리해보려고 합니다.
 
 `@apollo/client`의 `useQuery`와 `useMutation`의 인터페이스를 참고하였습니다.
 
-## `useQuery`
+## useQuery
 
 ```tsx showLineNumbers="true" path="src/hooks/useQuery.ts"
+import { RequestOptions, Variables, request } from 'graphql-request'
+
 import {
-  useMutation,
-  UseMutationOptions,
-  useQuery,
+  DefaultError,
+  UndefinedInitialDataOptions,
+  useQuery as useTanstackQuery,
 } from '@tanstack/react-query'
-import type { DocumentNode, GraphQLError } from 'graphql'
-import { useCallback, useMemo } from 'react'
 
-import { useGraphQLClient } from './graphQL'
+export const useQuery = <
+  T,
+  V extends Variables = Variables,
+  TError = DefaultError,
+>({
+  document,
+  variables,
+  ...rest
+}: Pick<RequestOptions<V>, 'document' | 'variables'> &
+  Omit<
+    UndefinedInitialDataOptions<
+      T,
+      TError,
+      T,
+      [
+        RequestOptions<V>['document'],
+        RequestOptions<V>['variables'] | undefined,
+      ]
+    >,
+    'queryKey' | 'queryFn'
+  >) => {
+  // queryKey는
+  const queryKey: [
+    RequestOptions<V>['document'],
+    RequestOptions<V>['variables'] | undefined,
+  ] = [document, variables]
 
-import { graphQLClientWithNoAuth } from '#components/providers/GraphQLProvider'
-import { getNameFromGQL } from '#utils/graphql'
-
-interface UseQueryParam<DataType, VariableType> {
-  variables?: VariableType
-  options?: Parameters<
-    typeof useQuery<Promise<DataType | null>, GraphQLError, DataType>
-  >[2]
+  return useTanstackQuery({
+    queryKey,
+    queryFn: ({ queryKey }) =>
+      // queryKey[0], queryKey[1]은 항상 document, variables인 것이 타입적으로 보장됨
+      request<T>('https://example.com/graphql', queryKey[0], queryKey[1]),
+    ...rest,
+  })
 }
+```
 
-type OperationVariables = {
-  [x: string]: any
+`document`와 `variables`가 동일하다면 같은 쿼리라고 보고 `queryKey`를 구성하였습니다.
+
+아래 코드를 보시면 `@apollo/client`의 `useQuery`를 사용할 떄와 비슷하게 사용할 수 있다는 것을 확인 할 수 있습니다.
+
+```tsx showLineNumbers="true" path="App.tsx"
+// @apollo/client의 경우
+const { loading, error, data } = useQuery<
+  GetDogPhotoQuery,
+  GetDogPhotoQueryVariables
+>(GET_DOG_PHOTO, {
+  variables: { breed },
+  skip: true,
+})
+
+// 작성한 훅의 경우
+const { isLoading, error, data } = useQuery<
+  GetDogPhotoQuery,
+  GetDogPhotoQueryVariables
+>({
+  document: GET_DOG_PHOTO,
+  variables: { breed },
+  enabled: false,
+})
+```
+
+## useMutation
+
+```tsx showLineNumbers="true" path="src/hooks/useMutation.ts"
+import {
+  DefaultError,
+  UseMutationOptions,
+  useMutation as useTanstackMutation,
+} from '@tanstack/react-query'
+import request, { RequestOptions, Variables } from 'graphql-request'
+
+export const useMutation = <
+  T,
+  V extends Variables = Variables,
+  TError = DefaultError,
+>({
+  document,
+  ...rest
+}: Pick<RequestOptions<V>, 'document'> &
+  Omit<UseMutationOptions<T, TError, V>, 'mutationKey' | 'mutationFn'>) => {
+  const mutationKey: [RequestOptions<V>['document']] = [document]
+
+  return useTanstackMutation({
+    mutationKey,
+    mutationFn: (variables) =>
+      request<T>(
+        'https://countries.trevorblades.com/graphql',
+        document,
+        variables,
+      ),
+    ...rest,
+  })
 }
+```
 
-const createKeyByVariables = <
-  VariableType extends OperationVariables = OperationVariables,
->(
-  variables: VariableType,
-) => {
-  const keys = Object.keys(variables)
-  return keys.map(
-    (key) =>
-      `${key}-${
-        typeof variables[key] === 'object'
-          ? JSON.stringify(variables[key])
-          : variables[key]
-      }`,
-  )
-}
+이렇게 하면 `@apollo/client`의 `useMutation` 훅 인터페이스와 비슷하게 사용할 수 있습니다.
 
-/**
- * ### useQueryWithReactQuery
- * #### react-query를 gql 기반으로 사용하는 hook입니다.
- *
- * @example
- * const { data, isLoading } =
- *   useQueryWithReactQuery<MyCurrentDessertMatchRoomQuery>(
- *     documentNode: MY_CURRENT_DESSERT_MATCH_ROOM,
- *     options: {
- *       refetchOnMount: "always",
- *       enabled: !pathname.includes(ROUTE.DESSERT_MATCH_BATTLE),
- *     },
- * );
- */
-export const useQueryWithReactQuery = <
-  DataType = Record<string, unknown>,
-  VariableType extends OperationVariables = OperationVariables,
->(
-  documentNode: DocumentNode,
-  param?:
-    | (UseQueryParam<DataType, VariableType> & { auth?: boolean })
-    | undefined,
-) => {
-  const auth = param?.auth ?? true
-  const _client = useGraphQLClient()
-  const client = auth ? _client : graphQLClientWithNoAuth
+```tsx showLineNumbers="true" path="App.tsx"
+// @apollo/client의 경우
+const [addTodo, { data, loading, error }] = useMutation<
+  AddTodoMutation,
+  AddTodoMutationVariables
+>(ADD_TODO)
+addTodo({ variables: { type: input.value } })
 
-  const useQueryKey = getNameFromGQL(documentNode)
-  const keys = useMemo(
-    () => createKeyByVariables(param?.variables ?? {}),
-    [param?.variables],
-  )
-
-  const queryFn = useCallback(async () => {
-    return client.request<DataType>(documentNode, param?.variables)
-  }, [client, documentNode, param?.variables])
-
-  return useQuery<Promise<DataType | null>, GraphQLError, DataType>(
-    [useQueryKey, ...keys],
-    queryFn,
-    param?.options,
-  )
-}
-
-export const useMutationWithReactQuery = <
-  DataType = Record<string, unknown>,
-  VariableType extends OperationVariables = OperationVariables,
->(
-  documentNode: DocumentNode,
-  options?:
-    | (Omit<
-        UseMutationOptions<DataType, unknown, VariableType, unknown>,
-        'mutationFn'
-      > & { auth?: boolean })
-    | undefined,
-) => {
-  const auth = options?.auth ?? true
-  const _client = useGraphQLClient()
-  const client = auth ? _client : graphQLClientWithNoAuth
-
-  const mutationFn = useCallback(
-    async (variable: VariableType) => {
-      return client.request<DataType>(documentNode, variable)
-    },
-    [client, documentNode],
-  )
-
-  return useMutation(mutationFn, options)
-}
+// 작성한 훅의 경우
+const {
+  mutate: addTodo,
+  isLoading,
+  error,
+  data,
+} = useMutation<AddTodoMutation, AddTodoMutationVariables>({
+  document: ADD_TODO,
+})
+addTodo({ type: input.value })
 ```

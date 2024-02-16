@@ -5,6 +5,7 @@ import CodeSplitSlackMessage from 'public/post-images/code-split-slack-message.p
 import RouterCodeSplitThumbnail from 'public/post-images/router-code-split-thumbnail.jpg'
 import MessageBetweenAppAndWebThumbnail from 'public/post-images/message-between-app-and-web-thumbnail.jpg'
 import MigrateToNextJSThumbnail from 'public/post-images/migrate-to-nextjs-thumbnail.jpg'
+import ReactQueryWithGraphqlThumbnail from 'public/post-images/react-query-with-graphql-thumbnail.jpg'
 
 const IMAGE_LIST = {
   BeforeCodeSplit,
@@ -14,6 +15,7 @@ const IMAGE_LIST = {
   RouterCodeSplitThumbnail,
   MessageBetweenAppAndWebThumbnail,
   MigrateToNextJSThumbnail,
+  ReactQueryWithGraphqlThumbnail,
 }
 
 export const isInImageList = (str: string): str is keyof typeof IMAGE_LIST =>
