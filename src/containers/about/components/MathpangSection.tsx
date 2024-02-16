@@ -173,6 +173,10 @@ const MathpangSection = () => {
               React Query 도입을 리딩하여 팀원 분들이 빠르게 사용하실 수 있도록
               기존 apollo client의 개발 경험과 비슷하도록 커스텀 훅을 작성하여
               도입하였습니다.
+              <br />
+              <Link href="/post/graphql-with-react-query">
+                GraphQL과 React Query로 서버 상태 관리하기
+              </Link>
             </div>
           </motion.div>
           <div className="mt-4" />
