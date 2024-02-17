@@ -15,10 +15,14 @@ const SectionTrigger = (props: PropsWithChildren<SectionTriggerPropsType>) => {
   const onScroll = useCallback(() => {
     if (typeof window === 'undefined' || !ref.current) return
     const { y, height } = ref.current.getBoundingClientRect()
-    const ofs = offsetPercent ? window.screen.height * offsetPercent : offset
+    const startY = y
+    const endY = y + height
+    const ofs = offsetPercent
+      ? window.screen.availHeight * offsetPercent
+      : offset
 
     // 상단 기준 offset에 걸쳐있다.
-    if (y <= ofs && height >= ofs) {
+    if (ofs >= startY && ofs <= endY) {
       onTrigger?.()
     }
   }, [offset, offsetPercent, onTrigger])
