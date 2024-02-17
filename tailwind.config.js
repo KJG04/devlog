@@ -10,7 +10,7 @@ module.exports = {
 
     // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/components/(breadcrumbs|button|card|chip|image|link|navbar|spacer|tooltip|tabs).js',
+    './node_modules/@nextui-org/theme/dist/components/(breadcrumbs|button|card|chip|image|link|navbar|scroll-shadow|spacer|tabs|tooltip).js',
   ],
   plugins: [nextui()],
   theme: {

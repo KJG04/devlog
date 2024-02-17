@@ -46,7 +46,7 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
         <div
           className={twMerge(
             visible ? 'top-[64px]' : 'top-0',
-            `sticky z-30 flex border-b-[1px] border-[#9ca3af33] bg-zinc-800 px-0 py-0 text-zinc-400 transition-[top] duration-400 before:absolute before:bottom-full before:left-0 before:h-[1000px] before:w-full before:bg-zinc-800 before:content-['']`,
+            `sticky z-30 flex h-[41px] border-b-[1px] border-[#9ca3af33] bg-zinc-800 px-0 py-0 text-zinc-400 transition-[top] duration-400 before:absolute before:bottom-full before:left-0 before:h-[1000px] before:w-full before:bg-zinc-800 before:content-['']`,
           )}
         >
           <div className="flex flex-1 items-center px-5">

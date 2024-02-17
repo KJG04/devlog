@@ -29,7 +29,7 @@ const PostCard: FC<PropsType> = (props) => {
   )
 
   return (
-    <div>
+    <article>
       <Link href={`/post/${name}`}>
         <Card
           isPressable
@@ -67,7 +67,7 @@ const PostCard: FC<PropsType> = (props) => {
           </CardFooter>
         </Card>
       </Link>
-    </div>
+    </article>
   )
 }
 
