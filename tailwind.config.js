@@ -14,6 +14,7 @@ module.exports = {
     './node_modules/@nextui-org/theme/dist/components/(breadcrumbs|button|card|chip|image|link|navbar|scroll-shadow|spacer|tabs|tooltip).js',
   ],
   plugins: [nextui({ defaultTheme: 'dark' })],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
