@@ -6,7 +6,7 @@ import { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 import { twMerge } from 'tailwind-merge'
 import { Chip } from '@nextui-org/chip'
-import { Link } from '@nextui-org/link'
+import { Link, LinkIcon } from '@nextui-org/link'
 import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible'
 
 const slideUpInitial = { opacity: 0, y: 10 } as const
@@ -127,6 +127,7 @@ const MathpangWork = () => {
               <br />
               <Link href="/post/gradual-migrate-to-nextjs">
                 Create React App에서 Next.js로 점진적 마이그레이션 하기
+                <LinkIcon />
               </Link>
             </div>
           </motion.div>
@@ -160,6 +161,7 @@ const MathpangWork = () => {
               <br />
               <Link href="/post/route-based-code-split">
                 라우트 기반 코드분할로 로딩 속도 개선하기
+                <LinkIcon />
               </Link>
             </div>
           </motion.div>
@@ -176,6 +178,7 @@ const MathpangWork = () => {
               <br />
               <Link href="/post/graphql-with-react-query">
                 GraphQL과 React Query로 서버 상태 관리하기
+                <LinkIcon />
               </Link>
             </div>
           </motion.div>
@@ -194,6 +197,7 @@ const MathpangWork = () => {
               코드를 훅으로 작성해 재사용성을 높였습니다.
               <Link href="/post/sending-messages-to-and-from-the-web-and-react-native">
                 라우트 기반 코드분할로 로딩 속도 개선하기
+                <LinkIcon />
               </Link>
             </div>
           </motion.div>
