@@ -13,7 +13,7 @@ module.exports = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
     './node_modules/@nextui-org/theme/dist/components/(breadcrumbs|button|card|chip|image|link|navbar|scroll-shadow|spacer|tabs|tooltip).js',
   ],
-  plugins: [nextui()],
+  plugins: [nextui({ defaultTheme: 'dark' })],
   theme: {
     extend: {
       fontFamily: {
