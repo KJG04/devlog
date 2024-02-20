@@ -116,7 +116,7 @@ const AppLayout = ({ children }: PropsWithChildren) => {
         <Providers>
           <div className="relative flex min-h-[100vh] flex-col dark">
             <NavigationBar />
-            <main>{children}</main>
+            <main className="flex flex-1 flex-col">{children}</main>
             <Footer />
           </div>
         </Providers>
