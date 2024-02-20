@@ -20,7 +20,7 @@ const slideAnimationProps = {
 
 const MotionImage = motion(Image)
 
-const ModoodocSection = () => {
+const ModoodocWork = () => {
   const visible = useRecoilValue(navigationBarVisibleAtom)
   const headerRef = useRef<HTMLDivElement>(null)
   const isHeaderVisible = useInView(headerRef)
@@ -103,4 +103,4 @@ const ModoodocSection = () => {
   )
 }
 
-export default ModoodocSection
+export default ModoodocWork

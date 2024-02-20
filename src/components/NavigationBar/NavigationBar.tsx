@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useCallback, useRef } from 'react'
+import { FC, useCallback, useRef } from 'react'
 
 import GithubLogo from '#components/GithubLogo'
 
@@ -81,4 +81,4 @@ const NavigationBar: FC = () => {
   )
 }
 
-export default memo(NavigationBar)
+export default NavigationBar

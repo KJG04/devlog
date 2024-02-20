@@ -17,7 +17,7 @@ const slideAnimationProps = {
   viewport: viewport,
 } as const
 
-const DevlogSection = () => {
+const DevlogProject = () => {
   const visible = useRecoilValue(navigationBarVisibleAtom)
   const headerRef = useRef<HTMLDivElement>(null)
   const isHeaderVisible = useInView(headerRef)
@@ -155,4 +155,4 @@ const DevlogSection = () => {
   )
 }
 
-export default DevlogSection
+export default DevlogProject

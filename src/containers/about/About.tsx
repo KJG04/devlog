@@ -8,6 +8,7 @@ import WorkSection from './components/WorkSection'
 import ProjectSection from './components/ProjectSection'
 import ActivitySection from './components/ActivitySection'
 import SectionTrigger from '#components/SectionTrigger'
+import EducationSection from './components/EducationSection'
 
 const tabList = ['Detail', 'Skill', 'Work', 'Project', 'Activity']
 
@@ -66,6 +67,8 @@ const About = () => {
       >
         <ProjectSection />
       </SectionTrigger>
+      <div className="mt-32" />
+      <EducationSection />
       <div className="mt-32" />
       <div ref={setScrollToRef(4)} />
       <SectionTrigger

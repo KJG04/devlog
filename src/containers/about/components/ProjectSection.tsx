@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import DevlogSection from './DevlogSection'
+import DevlogProject from './project/DevlogProject'
+import TeamitProject from './project/TeamitProject'
 
 const slideUpInitial = { opacity: 0, y: 10 } as const
 const slideUpAnimate = { opacity: 1, y: 0 } as const
@@ -17,9 +18,10 @@ const ProjectSection = () => {
       <motion.h1 className="text-6xl font-black" {...slideAnimationProps}>
         Project
       </motion.h1>
-      <div className="mt-16">
-        <DevlogSection />
-      </div>
+      <div className="mt-16" />
+      <DevlogProject />
+      <div className="mt-16" />
+      <TeamitProject />
     </section>
   )
 }
