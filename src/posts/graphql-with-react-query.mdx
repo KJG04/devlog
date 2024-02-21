@@ -56,7 +56,7 @@ export const useQuery = <
   return useTanstackQuery({
     queryKey,
     queryFn: ({ queryKey }) =>
-      // queryKey[0], queryKey[1]은 항상 document, variables인 것이 타입적으로 보장됨
+      // queryKey[0], queryKey[1]은 항상 document, variables인 것이 보장됨
       request<T>('https://example.com/graphql', queryKey[0], queryKey[1]),
     ...rest,
   })
@@ -113,7 +113,7 @@ export const useMutation = <
     mutationKey,
     mutationFn: (variables) =>
       request<T>(
-        'https://countries.trevorblades.com/graphql',
+        'https://example.com/graphql',
         document,
         variables,
       ),
