@@ -33,9 +33,9 @@ const SkillSection = () => {
       <motion.h1 className="text-6xl font-black" {...slideAnimationProps}>
         Skill
       </motion.h1>
-      <motion.div className="mt-6" {...slideAnimationProps}>
+      <motion.p className="mt-6" {...slideAnimationProps}>
         깊이 이해하고, 실무에서 사용해본 적 있어요.
-      </motion.div>
+      </motion.p>
       <div className="mt-4 flex max-w-[500px] flex-wrap gap-2">
         {firstSkillList.map((name, index) => (
           <MotionChip
@@ -48,9 +48,9 @@ const SkillSection = () => {
           </MotionChip>
         ))}
       </div>
-      <motion.div className="mt-6" {...slideAnimationProps}>
+      <motion.p className="mt-6" {...slideAnimationProps}>
         다루어본적 있어요.
-      </motion.div>
+      </motion.p>
       <div className="mt-4 flex flex-wrap gap-2">
         {secondSkillList.map((name, index) => (
           <MotionChip
