@@ -2,20 +2,22 @@ import BeforeCodeSplit from 'public/post-images/before-code-split.png'
 import AfterCodeSplit from 'public/post-images/after-code-split.png'
 import PhaserBundleSize from 'public/post-images/phaser-bundle-size.png'
 import CodeSplitSlackMessage from 'public/post-images/code-split-slack-message.png'
-import RouterCodeSplitThumbnail from 'public/post-images/router-code-split-thumbnail.jpg'
-import MessageBetweenAppAndWebThumbnail from 'public/post-images/message-between-app-and-web-thumbnail.jpg'
-import MigrateToNextJSThumbnail from 'public/post-images/migrate-to-nextjs-thumbnail.jpg'
-import ReactQueryWithGraphqlThumbnail from 'public/post-images/react-query-with-graphql-thumbnail.jpg'
+import RouteBasedCodeSplitThumbnail from 'public/post-images/route-based-code-split-thumbnail.jpg'
+import SendingMessagesToAndFromTheWebAndReactNativeThumbnail from 'public/post-images/sending-messages-to-and-from-the-web-and-react-native-thumbnail.jpg'
+import GradualMigrateToNextjsThumbnail from 'public/post-images/gradual-migrate-to-nextjs-thumbnail.jpg'
+import GraphqlWithReactQueryThumbnail from 'public/post-images/graphql-with-react-query-thumbnail.jpg'
+import PrefetchQueryWithReactQueryThumbnail from 'public/post-images/prefetch-query-with-react-query-thumbnail.jpg'
 
 const IMAGE_LIST = {
   BeforeCodeSplit,
   AfterCodeSplit,
   PhaserBundleSize,
   CodeSplitSlackMessage,
-  RouterCodeSplitThumbnail,
-  MessageBetweenAppAndWebThumbnail,
-  MigrateToNextJSThumbnail,
-  ReactQueryWithGraphqlThumbnail,
+  RouteBasedCodeSplitThumbnail,
+  SendingMessagesToAndFromTheWebAndReactNativeThumbnail,
+  GradualMigrateToNextjsThumbnail,
+  GraphqlWithReactQueryThumbnail,
+  PrefetchQueryWithReactQueryThumbnail,
 }
 
 export const isInImageList = (str: string): str is keyof typeof IMAGE_LIST =>

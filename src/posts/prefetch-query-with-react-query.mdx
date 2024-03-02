@@ -1,0 +1,248 @@
+---
+title: React Query로 서버 사이드에서 GraphQL 쿼리 Prefetch 하기
+tags:
+  - graphql
+  - react query
+  - hook
+keyword: react, graphql, react query, hook, graphql-request
+published: true
+date: 2024-02-27T22:38:00+09:00
+description: Next.js App router 환경에서 GraphQL 쿼리 Prefetch 해보자.
+thumbnail: PrefetchQueryWithReactQueryThumbnail
+series: React Query & GraphQL
+---
+
+## 도입 배경
+
+서버사이드에서 미리 데이터를 Prefetch 하게 되면 클라이언트에서는 Prefetch된 데이터를 캐시에서 가져온 후 화면에 보여주기 때문에 데이터를 로딩하느라 보여주는 로딩 화면을 보지 않아도 됩니다. 또한 로딩된 데이터가 HTML에 담겨서 오기 때문에 SEO에도 좋은 영향을 미칩니다.
+
+## Prefetch 과정
+
+```tsx showLineNumbers="true" path="app/posts/page.tsx"
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query'
+import Posts from './posts'
+
+export default async function PostsPage() {
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ['posts'],
+    queryFn: getPosts,
+  })
+
+  return (
+    // Neat! Serialization is now as easy as passing props.
+    // HydrationBoundary is a Client Component, so hydration will happen there.
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Posts />
+    </HydrationBoundary>
+  )
+}
+```
+
+위 코드는 [React Query 문서 예제 코드](https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#prefetching-and-dehydrating-data)입니다. 코드를 보면 Prefetch 과정은 두가지로 나눌 수 있습니다.
+
+- `queryClient.prefetchQuery`를 사용해 prefetch를 수행한다.
+- `HydrationBoundary` 컴포넌트의 prop으로 dehydrate된 queryClient를 state로 제공한다.
+
+위 코드는 prefetch를 수행하는 하나의 컴포넌트로 추상화 가능해보입니다.
+
+```tsx showLineNumbers="true" path="app/PrefetchedQueryHydrationBoundary.tsx"
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query'
+
+export default async function PrefetchedQueryHydrationBoundary({
+  children,
+  queryList,
+}) {
+  const queryClient = new QueryClient()
+
+  // 모든 쿼리를 병렬로 prefetch함
+  await Promise.all(
+    queryList.map(({ queryKey, queryFn }) =>
+      queryClient.prefetchQuery({
+        queryKey,
+        queryFn,
+      }),
+    ),
+  )
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      {children}
+    </HydrationBoundary>
+  )
+}
+```
+
+```tsx showLineNumbers="true" path="app/posts/page.tsx"
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query'
+import Posts from './posts'
+import PrefetchedQueryHydrationBoundary from '../PrefetchedQueryHydrationBoundary'
+
+export default async function PostsPage() {
+  return (
+    <PrefetchedQueryHydrationBoundary
+      queryList={[{ queryKey: ['posts'], queryFn: getPosts }]}
+    >
+      <Posts />
+    </PrefetchedQueryHydrationBoundary>
+  )
+}
+```
+
+위와 같은식으로 `PrefetchedQueryHydrationBoundary`라는 컴포넌트는 prop으로 미리 가져올 `queryList`를 받아 prefetch 하고 그 값을 hydration하는 컴포넌트로 추상화가 가능합니다.
+
+## GraphQL을 위한 코드 변경
+
+이제 GraphQL 쿼리를 위한 변경을 해보겠습니다.
+
+<br />
+
+우선 GraphQL 쿼리를 prefetch하는 함수를 작성해보겠습니다.
+
+```tsx showLineNumbers="true" path="app/PrefetchedGraphQLQueryHydrationBoundary.tsx"
+// param으로 client를 받고 해당 client로 prefetch를 수행하는 함수를 리턴한다.
+// 타입은 편의상 생략됨.
+function generatePrefetchGraphQLQuery({
+  graphQLClient: _graphQLClient,
+  queryClient,
+}) {
+  return function prefetchGraphQLQuery({
+    document,
+    variables,
+    graphQLClient,
+    ...rest
+  }) {
+    const queryKey = [document, variables]
+
+    return queryClient.prefetchQuery({
+      queryKey,
+      queryFn: async ({ queryKey }) =>
+        (graphQLClient ?? _graphQLClient).request(queryKey[0], queryKey[1]),
+      ...rest,
+    })
+  }
+}
+```
+
+위 함수는 **prefetch를 수행하는 함수를 반환**하는 고차 함수입니다. 반환된 함수는 항상 같은 client를 사용하여 prefetch를 하게 됩니다.
+그리고 위 `PrefetchedQueryHydrationBoundary` 코드와 같이 작성하면 됩니다.
+
+```tsx showLineNumbers="true" path="app/PrefetchedGraphQLQueryHydrationBoundary.tsx"
+// prop으로 prefetch할 쿼리 배열을 받고 hydration 한다.
+// 타입은 편의상 생략됨.
+export async function PrefetchedGraphQLQueryHydrationBoundary({
+  graphQLClient,
+  prefetchQueryList,
+  children,
+}) {
+  const queryClient = new QueryClient()
+
+  // props으로 받은 graphQLClient와 queryClient를 사용하는 prefetch 함수
+  const prefetchGraphQLQuery = generatePrefetchGraphQLQuery({
+    queryClient,
+    graphQLClient,
+  })
+
+  // prefetchQueryList의 값을 사용하여 prefetchGraphQLQuery를 진행한다.
+  await Promise.all(prefetchQueryList.map(prefetchGraphQLQuery))
+
+  const dehydratedState = dehydrate(queryClient)
+
+  return (
+    <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
+  )
+}
+```
+
+## 사용 예제
+
+```tsx showLineNumbers="true" path="src/gql/country.ts"
+import { gql } from 'graphql-request'
+
+export const COUNTRY = gql`
+  query Query {
+    country(code: "BR") {
+      name
+      native
+      capital
+      emoji
+      currency
+      languages {
+        code
+        name
+      }
+    }
+  }
+`
+```
+
+```tsx showLineNumbers="true" path="src/components/Country.tsx"
+'use client'
+
+import { COUNTRY } from '@/gql/country'
+import { useGraphQLQuery } from '@/util'
+
+function Country() {
+  const { data, isLoading } = useGraphQLQuery({
+    document: COUNTRY,
+    variables: {
+      code: 'BR',
+    },
+  })
+
+  return (
+    <div>
+      <div>isLoading: {`${isLoading}`}</div>
+      <div>{JSON.stringify(data)}</div>
+    </div>
+  )
+}
+
+export default Country
+```
+
+```tsx showLineNumbers="true" path="src/app/page.tsx"
+'use client'
+
+import Country from '@/components/Comp'
+import { GraphQLClient } from 'graphql-request'
+import { PrefetchedGraphQLQueryHydrationBoundary } from '@/util/server'
+import { COUNTRY } from '@/gql/country'
+
+export default function Home() {
+  const graphQLClient = new GraphQLClient(
+    'https://countries.trevorblades.com/graphql',
+  )
+
+  return (
+    <PrefetchedGraphQLQueryHydrationBoundary
+      graphQLClient={graphQLClient}
+      prefetchQueryList={[
+        {
+          document: COUNTRY,
+          variables: {
+            code: 'BR',
+          },
+        },
+      ]}
+    >
+      <Country />
+    </PrefetchedGraphQLQueryHydrationBoundary>
+  )
+}
+```
+
+이제 `COUNTRY` 쿼리는 서버 사이드에서 미리 가져오게 됩니다.

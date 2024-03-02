@@ -4,11 +4,11 @@ import { FC, useMemo } from 'react'
 
 import { memo } from 'react'
 import { Post } from '#types'
-import { useNextPost } from './hooks'
 import Tag from '#components/Tag'
-import { Spacer } from '@nextui-org/spacer'
-import { Card, CardBody } from '@nextui-org/card'
-import { Image } from '@nextui-org/image'
+import { Card, CardBody, CardFooter } from '@nextui-org/card'
+import IMAGE_LIST from 'src/constants/imageList'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface PropsType {
   post: Post
@@ -16,7 +16,6 @@ interface PropsType {
 
 const NextPost: FC<PropsType> = (props) => {
   const { post } = props
-  const { onPress } = useNextPost(post)
 
   const renderedTags = useMemo(
     () => post.frontMatter.tags.map((item) => <Tag key={item}>{item}</Tag>),
@@ -24,34 +23,32 @@ const NextPost: FC<PropsType> = (props) => {
   )
 
   return (
-    <>
-      <h3 className="font-bold">이어서 읽기</h3>
-      <Spacer y={1} />
+    <Link
+      href={`/post/${post.pathParam.name}`}
+      className="pointer-events-auto flex-1 md:flex-[unset]"
+    >
       <Card
-        onPress={onPress}
         isPressable
-        className={`flex gap-1 ${
-          post.frontMatter.thumbnail ? 'bg-transparent' : 'bg-slate-50'
-        }`}
+        className="flex w-full max-w-[unset] flex-1 gap-1 md:w-[unset] md:max-w-[400px]"
       >
-        {post.frontMatter.thumbnail && (
+        <CardBody className="p-0">
           <Image
-            src={post.frontMatter.thumbnail}
+            src={IMAGE_LIST[post.frontMatter.thumbnail]}
             alt={`${post.frontMatter.title} 썸네일`}
-            className="aspect-video rounded-lg"
-            width={100}
-            height={100}
+            className="hidden rounded-lg md:block"
+            width={400}
           />
-        )}
-        <CardBody>
+        </CardBody>
+        <CardFooter className="flex-col items-start text-left">
+          <div className="text-lg text-zinc-400">이어서 읽기 </div>
           <div className="text-lg font-bold">{post.frontMatter.title}</div>
           <div className="text-base text-zinc-600">
             {post.frontMatter.description}
           </div>
           <div className="mt-4 flex gap-2">{renderedTags}</div>
-        </CardBody>
+        </CardFooter>
       </Card>
-    </>
+    </Link>
   )
 }
 

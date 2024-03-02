@@ -11,56 +11,10 @@ import localFont from 'next/font/local'
 import NextTopLoader from 'nextjs-toploader'
 
 const pretendardFont = localFont({
-  src: [
-    {
-      path: '../../public/fonts/pretendard/Pretendard-Thin.woff',
-      weight: '100',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-ExtraLight.woff',
-      weight: '200',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-Light.woff',
-      weight: '300',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-Regular.woff',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-Medium.woff',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-SemiBold.woff',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-Bold.woff',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-ExtraBold.woff',
-      weight: '800',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/pretendard/Pretendard-Black.woff',
-      weight: '900',
-      style: 'normal',
-    },
-  ],
+  src: '../../public/fonts/PretendardVariable.woff2',
   display: 'swap',
+  weight: '45 920',
   variable: '--font-pretendard',
-  preload: false,
 })
 
 const AppLayout = ({ children }: PropsWithChildren) => {
