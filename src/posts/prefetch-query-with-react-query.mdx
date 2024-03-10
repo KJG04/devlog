@@ -1,9 +1,10 @@
 ---
 title: React Query로 서버 사이드에서 GraphQL 쿼리 Prefetch 하기
 tags:
+  - Next.js
   - graphql
   - react query
-  - ssr
+  - SSR
 keyword: react, graphql, react query, hook, graphql-request, ssr, server side rendering, prefetch, hydration
 published: true
 date: 2024-02-27T22:38:00+09:00
@@ -141,6 +142,30 @@ function generatePrefetchGraphQLQuery({
 그리고 위 `PrefetchedQueryHydrationBoundary` 코드와 같이 작성하면 됩니다.
 
 ```tsx showLineNumbers="true" path="app/PrefetchedGraphQLQueryHydrationBoundary.tsx"
+interface PrefetchGraphQLQuery<R> {
+  (
+    callback: (
+      options: PrefetchGraphQLQueryOptions<
+        TQueryFnData,
+        Variables,
+        TError,
+        TData
+      >,
+    ) => R,
+  ): R
+}
+
+export function prefetchGraphQLQuery<
+  TQueryFnData = unknown,
+  Variables extends DefaultVariables = DefaultVariables,
+  TError = DefaultError,
+  TData = TQueryFnData,
+>(
+  options: PrefetchGraphQLQueryOptions<TQueryFnData, Variables, TError, TData>,
+): PrefetchGraphQLQuery {
+  return (callback) => callback(options)
+}
+
 // prop으로 prefetch할 쿼리 배열을 받고 hydration 한다.
 // 타입은 편의상 생략됨.
 export async function PrefetchedGraphQLQueryHydrationBoundary({
@@ -157,7 +182,9 @@ export async function PrefetchedGraphQLQueryHydrationBoundary({
   })
 
   // prefetchQueryList의 값을 사용하여 prefetchGraphQLQuery를 진행한다.
-  await Promise.all(prefetchQueryList.map(prefetchGraphQLQuery))
+  await Promise.all(
+    prefetchQueryList.map((callback) => callback(prefetchGraphQLQuery)),
+  )
 
   const dehydratedState = dehydrate(queryClient)
 
@@ -219,7 +246,10 @@ export default Country
 
 import Country from '@/components/Comp'
 import { GraphQLClient } from 'graphql-request'
-import { PrefetchedGraphQLQueryHydrationBoundary } from '@/util/server'
+import {
+  PrefetchedGraphQLQueryHydrationBoundary,
+  prefetchGraphQLQuery,
+} from '@/util/server'
 import { COUNTRY } from '@/gql/country'
 
 export default function Home() {
@@ -231,12 +261,12 @@ export default function Home() {
     <PrefetchedGraphQLQueryHydrationBoundary
       graphQLClient={graphQLClient}
       prefetchQueryList={[
-        {
+        prefetchGraphQLQuery<CountryQuery, CountryQueryVariables>({
           document: COUNTRY,
           variables: {
             code: 'BR',
           },
-        },
+        }),
       ]}
     >
       <Country />
