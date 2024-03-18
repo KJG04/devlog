@@ -67,9 +67,6 @@ const Home: NextPage<PropsType> = (props) => {
               <br />
               &apos;어제의 나보다 성장한 오늘의 나&apos;가 되기위해 노력합니다.
               뛰어난 사람이 되기 위해 끊임없이 공부합니다.
-              <br />
-              <br />
-              현재 매쓰팡의 프론트엔드 개발을 맡고 있습니다.
             </div>
           </div>
         </div>
