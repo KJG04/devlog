@@ -12,10 +12,7 @@ interface PropsType {
 
 const Header: FC<PropsType> = (props) => {
   const { title, date, tags } = props.frontMatter
-  const dateText = useMemo(
-    () => dayjs(date).format('YYYY년 M월 D일 HH:mm:ss'),
-    [date],
-  )
+  const dateText = useMemo(() => dayjs(date).format('YYYY년 M월 D일'), [date])
 
   const renderedTags = useMemo(
     () => tags.map((tag) => <Tag key={tag}>{tag}</Tag>),
