@@ -83,7 +83,7 @@ const About = () => {
           selectedKey={selectedTab}
           onSelectionChange={onSelectionChange}
           radius="full"
-          color="default"
+          color="primary"
         >
           {tabList.map((tab) => (
             <Tab key={tab} title={tab} />
