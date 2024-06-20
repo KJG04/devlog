@@ -9,6 +9,7 @@ import Footer from '#components/Footer'
 import { Analytics } from '@vercel/analytics/react'
 import localFont from 'next/font/local'
 import NextTopLoader from 'nextjs-toploader'
+import { Metadata } from 'next'
 
 const pretendardFont = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
@@ -34,25 +35,6 @@ const AppLayout = ({ children }: PropsWithChildren) => {
           name="google-site-verification"
           content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
         />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
-        />
-        <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
-        <link rel="/manifest" href="/favicon/site.webmanifest" />
       </head>
       <body>
         <Script
@@ -81,3 +63,34 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 }
 
 export default AppLayout
+
+export const metadata: Metadata = {
+  icons: {
+    icon: [
+      {
+        url: '/favicon/apple-touch-icon.png',
+        sizes: '180x180',
+      },
+      {
+        url: '/favicon/favicon-32x32.png',
+        sizes: '32x32',
+      },
+      {
+        url: '/favicon/favicon-32x32.png',
+        sizes: '16x16',
+      },
+      {
+        url: '/favicon/android-chrome-192x192',
+        sizes: '192x192',
+      },
+      {
+        url: '/favicon/android-chrome-512x512',
+        sizes: '512x512',
+      },
+      {
+        url: '/favicon/favicon.ico',
+        type: 'image/x-icon',
+      },
+    ],
+  },
+}
