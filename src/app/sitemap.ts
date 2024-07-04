@@ -7,13 +7,13 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 
   return [
     {
-      url: baseURL,
+      url: `${baseURL}/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseURL}/about`,
+      url: `${baseURL}/about/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
@@ -21,7 +21,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     ...allPosts.map(
       ({ pathParam, frontMatter }) =>
         ({
-          url: `${baseURL}/post/${pathParam.name}`,
+          url: `${baseURL}/post/${pathParam.name}/`,
           lastModified: frontMatter.date,
           changeFrequency: 'weekly',
           priority: 0.8,
