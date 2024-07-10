@@ -3,11 +3,10 @@ import Mathpang from 'public/images/mathpang.webp'
 import { motion, useInView } from 'framer-motion'
 import Image from 'next/image'
 import { useRef } from 'react'
-import { useRecoilValue } from 'recoil'
 import { twMerge } from 'tailwind-merge'
 import { Chip } from '@nextui-org/chip'
 import { Link, LinkIcon } from '@nextui-org/link'
-import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible'
+import { useNavigationBarVisibleStore } from '#utils/navigationBarVisible'
 
 const slideUpInitial = { opacity: 0, y: 10 } as const
 const slideUpAnimate = { opacity: 1, y: 0 } as const
@@ -22,7 +21,7 @@ const slideAnimationProps = {
 const MotionImage = motion(Image)
 
 const MathpangWork = () => {
-  const visible = useRecoilValue(navigationBarVisibleAtom)
+  const { visible } = useNavigationBarVisibleStore()
   const headerRef = useRef<HTMLDivElement>(null)
   const isHeaderVisible = useInView(headerRef)
 

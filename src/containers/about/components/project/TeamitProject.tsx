@@ -1,13 +1,12 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { useRecoilValue } from 'recoil'
 import { twMerge } from 'tailwind-merge'
 import { Chip } from '@nextui-org/chip'
-import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible'
 import { Link, LinkIcon } from '@nextui-org/link'
 import GithubLogo from '#components/GithubLogo'
 import Image from 'next/image'
 import Teamit from 'public/images/teamit.png'
+import { useNavigationBarVisibleStore } from '#utils/navigationBarVisible'
 
 const MotionImage = motion(Image)
 
@@ -22,7 +21,7 @@ const slideAnimationProps = {
 } as const
 
 const TeamitProject = () => {
-  const visible = useRecoilValue(navigationBarVisibleAtom)
+  const { visible } = useNavigationBarVisibleStore()
   const headerRef = useRef<HTMLDivElement>(null)
   const isHeaderVisible = useInView(headerRef)
 

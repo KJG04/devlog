@@ -13,26 +13,31 @@ import { h } from 'hastscript'
 import { glob } from 'glob'
 import dayjs from 'dayjs'
 import rehypeMetaAsAttributes from '#utils/rehypeMetaAsAttributes'
+import p from 'path'
 
-const DIR_REPLACE_STRING = '/src/posts'
-const POST_PATH = `${process.cwd()}${DIR_REPLACE_STRING}`
+const DIR_REPLACE_STRING = p.normalize('/src/posts')
+const POST_PATH = p.normalize(`${process.cwd()}${DIR_REPLACE_STRING}`)
+
+function getFileNameByPath(path: string) {
+  const pathList = path.split(p.sep)
+  const fileName = pathList[pathList.length - 1]
+  const fileNameWithoutExt = fileName
+    .split('.')
+    .slice(0, -1)
+    .reduce((prev, curr) => prev + curr, '')
+  return fileNameWithoutExt
+}
 
 export const getAllPaths = async (): Promise<Path[]> => {
   const paths = glob.sync(`${POST_PATH}/**/*.md*`)
 
-  const regex = new RegExp(`${POST_PATH}|\.mdx`, 'g')
   return paths
     .filter(async (path) => {
-      const post = await getPostByPath(path.replaceAll(regex, ''))
+      const post = await getPostByPath(getFileNameByPath(path))
       return post.frontMatter.published
     })
     .map((path) => {
-      const slug = path
-        .replaceAll(regex, '')
-        .split('/')
-        .filter((item) => item.length > 0)
-      const params = { name: slug[0] }
-
+      const params = { name: getFileNameByPath(path) }
       return { params }
     })
 }
@@ -81,13 +86,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
       const fullPath = path
       const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
       const { attributes, body } = frontMatter<FrontMatter>(file)
-
-      const regex = new RegExp(`${POST_PATH}|.mdx`, 'g')
-      const slug = path
-        .replaceAll(regex, '')
-        .split('/')
-        .filter((item) => item.length > 0)
-      const pathParam = { name: slug[0] }
+      const pathParam = { name: getFileNameByPath(path) }
 
       return {
         frontMatter: attributes,

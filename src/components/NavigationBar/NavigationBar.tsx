@@ -4,8 +4,7 @@ import { FC, useCallback, useRef } from 'react'
 
 import GithubLogo from '#components/GithubLogo'
 
-import { useSetRecoilState } from 'recoil'
-import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible'
+import { useNavigationBarVisibleStore } from '#utils/navigationBarVisible'
 import {
   Navbar,
   NavbarBrand,
@@ -16,18 +15,18 @@ import { Link } from '@nextui-org/link'
 
 const NavigationBar: FC = () => {
   const currentScrollRef = useRef<number | null>(null)
-  const setNavigationBarVisible = useSetRecoilState(navigationBarVisibleAtom)
+  const { setVisibleFalse, setVisibleTrue } = useNavigationBarVisibleStore()
 
   const onScrollPositionChange = useCallback(
     (position: number) => {
       if (currentScrollRef.current) {
-        if (currentScrollRef.current > position) setNavigationBarVisible(true)
-        else setNavigationBarVisible(false)
+        if (currentScrollRef.current > position) setVisibleTrue()
+        else setVisibleFalse()
       }
 
       currentScrollRef.current = position
     },
-    [setNavigationBarVisible],
+    [setVisibleFalse, setVisibleTrue],
   )
 
   return (

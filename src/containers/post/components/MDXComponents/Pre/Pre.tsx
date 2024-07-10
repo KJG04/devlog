@@ -3,11 +3,10 @@
 import { HTMLProps, memo, useRef } from 'react'
 import highlightContext from '#context/highlight'
 import { useHighlightValue, usePathValue } from './hooks'
-import { useRecoilValue } from 'recoil'
-import { navigationBarVisibleAtom } from '#atoms/navigationBarVisible'
 import { twMerge } from 'tailwind-merge'
 import dynamic from 'next/dynamic'
 import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/breadcrumbs'
+import { useNavigationBarVisibleStore } from '#utils/navigationBarVisible'
 
 const CopyButton = dynamic(
   () => import('#containers/post/components/MDXComponents/Pre/CopyButton'),
@@ -35,7 +34,7 @@ const Pre = (props: HTMLProps<HTMLPreElement>) => {
   const preRef = useRef<HTMLPreElement>(null)
   const highlight = useHighlightValue(line)
   const path = usePathValue(_path)
-  const visible = useRecoilValue(navigationBarVisibleAtom)
+  const { visible } = useNavigationBarVisibleStore()
 
   return (
     <highlightContext.Provider value={highlight}>
