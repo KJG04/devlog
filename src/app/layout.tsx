@@ -29,24 +29,8 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <html lang="ko-KR" className={`bg-[#18181B] ${pretendardFont.variable}`}>
+      <link  />
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: `{
-“@context”: “http://schema.org”,
-“@type”: “WebSite”,
-“url”: “https://devlog-kjg04.vercel.app/“,
-“name”: “김진근의 devlog“,
-“author”: {
-“@type”: “Person”,
-“name”: “김진근”
-},
-“description”: “개발하며 이것저것을 기록하는 블로그“,
-}`,
-          }}
-        />
-
         <meta
           name="google-site-verification"
           content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
@@ -105,6 +89,9 @@ export const metadata: Metadata = {
       {
         url: '/favicon/favicon.ico',
         type: 'image/x-icon',
+      },
+      {
+        url: '/favicon/favicon.ico',
       },
     ],
   },

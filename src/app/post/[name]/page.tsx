@@ -45,6 +45,7 @@ const Post = async ({ params }: { params: Params }) => {
       post={post}
       nextPost={nextPost}
       recentlyPost={recentlyPost}
+      pathName={name}
     />
   )
 }

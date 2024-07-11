@@ -21,7 +21,7 @@ const components = {
 }
 
 const Post: NextPage<StaticPostProps> = (props) => {
-  const { post, nextPost, recentlyPost } = props
+  const { post, nextPost, recentlyPost, pathName } = props
   const { body, frontMatter } = post
   const ref = useRef<HTMLDivElement>(null)
   const isViewComment = useInView(ref, { once: true })
@@ -30,6 +30,21 @@ const Post: NextPage<StaticPostProps> = (props) => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `{
+ "@context": "http://schema.org",
+ "@type": "WebSite",
+ "name": "${post.frontMatter.title} | 김진근의 devlog",
+ "url": "https://devlog-kjg04.vercel.app/post/${pathName}",
+ "author": {
+  "@type": "Person",
+  "name": "김진근"
+ }
+}`,
+        }}
+      />
       <MDXProvider components={components}>
         <div className="mx-auto w-full max-w-screen-lg px-6">
           <div className="mb-8 md:mb-12" />

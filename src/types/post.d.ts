@@ -33,4 +33,5 @@ export interface StaticPostProps {
   post: PostWithHTMLBody
   nextPost: Post | null
   recentlyPost: Post[]
+  pathName: string
 }

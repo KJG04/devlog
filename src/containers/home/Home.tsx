@@ -19,6 +19,21 @@ const Home: NextPage<PropsType> = (props) => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `{
+ "@context": "http://schema.org",
+ "@type": "WebSite",
+ "name": "김진근의 devlog",
+ "url": "https://devlog-kjg04.vercel.app/",
+ "author": {
+  "@type": "Person",
+  "name": "김진근"
+ }
+}`,
+        }}
+      />
       <Spacer y={16} />
       <div className="relative z-10 m-auto max-w-screen-lg px-6">
         <div className="flex flex-col md:flex-row">
