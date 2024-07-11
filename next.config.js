@@ -18,6 +18,7 @@ const nextConfig = {
 
     return config
   },
+  transpilePackages: ['next-mdx-remote'],
 }
 
 module.exports = withBundleAnalyzer(nextConfig)
