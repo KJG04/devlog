@@ -14,7 +14,7 @@ interface PropsType {
   post: Post
 }
 
-const NextPost: FC<PropsType> = (props) => {
+const NextPostCard: FC<PropsType> = (props) => {
   const { post } = props
 
   const renderedTags = useMemo(
@@ -42,7 +42,7 @@ const NextPost: FC<PropsType> = (props) => {
         <CardFooter className="flex-col items-start text-left">
           <div className="text-lg text-zinc-400">이어서 읽기 </div>
           <div className="text-lg font-bold">{post.frontMatter.title}</div>
-          <div className="text-base text-zinc-600">
+          <div className="text-base text-zinc-400">
             {post.frontMatter.description}
           </div>
           <div className="mt-4 flex gap-2">{renderedTags}</div>
@@ -52,4 +52,4 @@ const NextPost: FC<PropsType> = (props) => {
   )
 }
 
-export default memo(NextPost)
+export default memo(NextPostCard)

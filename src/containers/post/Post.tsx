@@ -6,7 +6,7 @@ import { StaticPostProps } from 'src/types'
 import Thumbnail from '#containers/post/components/Thumbnail'
 import Header from '#containers/post/components/Header'
 import Markdown from '#containers/post/components/Markdown'
-import NextPost from '#containers/post/components/NextPost'
+import NextPostCard from '#containers/post/components/NextPostCard'
 import RecentlyPost from '#components/RecentlyPost'
 import { useMediumZoom } from './hooks'
 import { memo, useRef } from 'react'
@@ -52,7 +52,7 @@ const Post: NextPage<StaticPostProps> = (props) => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <NextPost post={nextPost} />
+          <NextPostCard post={nextPost} />
         </motion.div>
       )}
     </>

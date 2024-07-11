@@ -1,9 +1,7 @@
 'use client'
 
 import { FC, useCallback, useRef } from 'react'
-
 import GithubLogo from '#components/GithubLogo'
-
 import { useNavigationBarVisibleStore } from '#utils/navigationBarVisible'
 import {
   Navbar,
@@ -55,7 +53,7 @@ const NavigationBar: FC = () => {
                 className="fill-zinc-100"
               />
             </svg>
-            <div className="font-semibold">김진근의 Devlog</div>
+            <div className="font-semibold">김진근의 devlog</div>
           </div>
         </Link>
       </NavbarBrand>

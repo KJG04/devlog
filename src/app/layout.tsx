@@ -6,7 +6,6 @@ import Providers from './providers'
 import Script from 'next/script'
 import NavigationBar from '#components/NavigationBar'
 import Footer from '#components/Footer'
-import { Analytics } from '@vercel/analytics/react'
 import localFont from 'next/font/local'
 import NextTopLoader from 'nextjs-toploader'
 import { Metadata } from 'next'
@@ -31,6 +30,23 @@ const AppLayout = ({ children }: PropsWithChildren) => {
   return (
     <html lang="ko-KR" className={`bg-[#18181B] ${pretendardFont.variable}`}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `{
+“@context”: “http://schema.org”,
+“@type”: “WebSite”,
+“url”: “https://devlog-kjg04.vercel.app/“,
+“name”: “김진근의 devlog“,
+“author”: {
+“@type”: “Person”,
+“name”: “김진근”
+},
+“description”: “개발하며 이것저것을 기록하는 블로그“,
+}`,
+          }}
+        />
+
         <meta
           name="google-site-verification"
           content="_t993ryqkfkZtQ2TCWO8l2P2oXHwFfba2hMwaCQVP5s"
@@ -56,7 +72,6 @@ const AppLayout = ({ children }: PropsWithChildren) => {
             <Footer />
           </div>
         </Providers>
-        <Analytics />
       </body>
     </html>
   )

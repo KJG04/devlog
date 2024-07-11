@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords,
     authors: [{ name: '김진근', url: 'https://github.com/KJG04' }],
     openGraph: {
-      siteName: '김진근의 Devlog',
+      siteName: '김진근의 devlog',
       title,
       description,
       type: 'article',

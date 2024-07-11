@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  body,
+  html {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    @apply font-pretendard w-full scroll-smooth break-words break-keep bg-zinc-900 leading-relaxed text-zinc-100;
+  }
+  p {
+    @apply leading-loose tracking-normal;
+  }
+  .markdown h2 {
+    @apply mb-4 mt-8 text-3xl font-bold md:mt-12 md:text-4xl [&>a]:hover:opacity-100;
+  }
+  .markdown h2 a {
+    @apply text-4xl font-bold text-zinc-500 opacity-0;
+  }
+  .markdown h3 {
+    @apply mb-4 mt-6 text-2xl font-bold md:mt-8 [&>a]:hover:opacity-100;
+  }
+  .markdown h3 a {
+    @apply text-2xl font-bold text-zinc-500 opacity-0;
+  }
+  .markdown :not(pre) > code {
+    @apply mx-1 my-1 inline-block h-fit whitespace-nowrap rounded-lg bg-zinc-700 px-2 py-1 font-mono text-sm font-normal text-zinc-300;
+  }
+  .markdown blockquote {
+    @apply my-4 border-l-4 border-zinc-500 px-4 py-2 text-zinc-500;
+  }
+  .markdown blockquote code {
+    @apply bg-zinc-800 text-zinc-500;
+  }
+  .markdown:not(nav) > ol {
+    @apply mb-2 list-outside list-decimal pl-4;
+  }
+  .markdown:not(nav) > ol ul,
+  .markdown:not(nav) > ol ol {
+    @apply mb-2 pl-6;
+  }
+  .markdown ul {
+    @apply mb-2 list-outside list-disc pl-4;
+  }
+  .markdown ul ul,
+  .markdown ul ol {
+    @apply mb-2 pl-6;
+  }
+  pre[class*=language-] {
+    @apply bg-zinc-800;
+  }
+  :not(pre) > code[class*=language-] {
+    @apply bg-zinc-800;
+  }
+}
+.medium-zoom-overlay {
+  -webkit-backdrop-filter: blur(4px) saturate(180%);
+          backdrop-filter: blur(4px) saturate(180%);
+  z-index: 50;
+}
+
+.medium-zoom-image--opened {
+  z-index: 50;
+}/*# sourceMappingURL=global.css.map */

@@ -53,7 +53,7 @@ const DevlogProject = () => {
               animate={isHeaderVisible ? slideUpInitial : slideUpAnimate}
               className="mt-4 hidden sm:block"
             >
-              <div className="font-bold">김진근의 Devlog</div>
+              <div className="font-bold">김진근의 devlog</div>
               <div className="text-zinc-400">개인 프로젝트</div>
               <div className="text-zinc-400">2022.09 ~ 2022.10</div>
               <Link
