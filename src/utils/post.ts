@@ -3,7 +3,7 @@ import frontMatter from 'front-matter'
 import { FrontMatter, Path, Post, PostWithHTMLBody } from '#types'
 import remarkMath from 'remark-math'
 import toc from 'remark-toc'
-import slug from 'remark-slug'
+import slug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import prism from 'rehype-prism-plus'
@@ -55,8 +55,9 @@ export const getPostByPath = async (
     frontMatter: attributes,
     body: await serialize(body, {
       mdxOptions: {
-        remarkPlugins: [remarkMath, toc, slug, remarkGfm],
+        remarkPlugins: [remarkMath, toc, remarkGfm],
         rehypePlugins: [
+          slug,
           rehypeKatex,
           rehypeMetaAsAttributes,
           [prism, { showLineNumbers: true }],
