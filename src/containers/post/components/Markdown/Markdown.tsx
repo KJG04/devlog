@@ -9,7 +9,7 @@ import {
   Img,
   Span,
 } from '#containers/post/components/MDXComponents'
-
+import { Snippet } from '@nextui-org/snippet'
 interface PropsType {
   content: MDXRemoteSerializeResult
 }
@@ -22,6 +22,7 @@ const Markdown: FC<PropsType> = (props) => {
       a: Anchor,
       img: Img,
       span: Span,
+      Snippet,
     }),
     [],
   )

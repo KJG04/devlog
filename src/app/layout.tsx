@@ -29,7 +29,6 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <html lang="ko-KR" className={`bg-[#18181B] ${pretendardFont.variable}`}>
-      <link  />
       <head>
         <meta
           name="google-site-verification"

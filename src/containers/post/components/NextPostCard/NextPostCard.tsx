@@ -6,7 +6,7 @@ import { memo } from 'react'
 import { Post } from '#types'
 import Tag from '#components/Tag'
 import { Card, CardBody, CardFooter } from '@nextui-org/card'
-import IMAGE_LIST from 'src/constants/imageList'
+import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -33,7 +33,11 @@ const NextPostCard: FC<PropsType> = (props) => {
       >
         <CardBody className="p-0">
           <Image
-            src={IMAGE_LIST[post.frontMatter.thumbnail]}
+            src={
+              isInImageList(post.frontMatter.thumbnail)
+                ? IMAGE_LIST[post.frontMatter.thumbnail]
+                : post.frontMatter.thumbnail
+            }
             alt={`${post.frontMatter.title} 썸네일`}
             className="hidden rounded-lg md:block"
             width={400}

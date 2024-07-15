@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { FC, memo } from 'react'
-import IMAGE_LIST from 'src/constants/imageList'
+import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'
 import { FrontMatter } from 'src/types'
 
 interface PropsType {
@@ -17,11 +17,16 @@ const Thumbnail: FC<PropsType> = (props) => {
   return (
     <Image
       data-zoomable
-      className="block w-full rounded-xl md:rounded-2xl select-none"
-      src={IMAGE_LIST[frontMatter.thumbnail]}
+      className="block w-full select-none rounded-xl md:rounded-2xl"
+      src={
+        isInImageList(frontMatter.thumbnail)
+          ? IMAGE_LIST[frontMatter.thumbnail]
+          : frontMatter.thumbnail
+      }
       alt="blog-thumbnail"
       width={976}
-      placeholder="blur"
+      height={976}
+      placeholder={isInImageList(frontMatter.thumbnail) ? 'blur' : 'empty'}
       priority
     />
   )

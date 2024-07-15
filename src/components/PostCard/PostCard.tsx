@@ -4,7 +4,7 @@ import { FC, memo, useMemo } from 'react'
 import { FrontMatter } from 'src/types'
 import Tag from '#components/Tag'
 import { formatDateByYear } from '#utils/date'
-import IMAGE_LIST from 'src/constants/imageList'
+import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 import { Card, CardBody, CardFooter } from '@nextui-org/card'
@@ -38,11 +38,14 @@ const PostCard: FC<PropsType> = (props) => {
           {thumbnail && (
             <CardBody className="flex-none p-0">
               <Image
-                src={IMAGE_LIST[thumbnail]}
+                src={
+                  isInImageList(thumbnail) ? IMAGE_LIST[thumbnail] : thumbnail
+                }
                 alt={title}
                 className="aspect-video select-none rounded-lg object-cover"
                 width={591}
-                placeholder="blur"
+                height={296}
+                placeholder={isInImageList(thumbnail) ? 'blur' : 'empty'}
               />
             </CardBody>
           )}
@@ -53,7 +56,7 @@ const PostCard: FC<PropsType> = (props) => {
             )}
           >
             <div className="max-w-full">
-              <div className="mb-1 mt-unit-xs text-sm text-zinc-400">
+              <div className="mt-unit-xs mb-1 text-sm text-zinc-400">
                 {formatDateByYear(date)}
               </div>
               <h4 className="break-all text-large font-semibold text-zinc-100">

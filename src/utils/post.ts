@@ -20,7 +20,9 @@ const POST_PATH = p.normalize(`${process.cwd()}${DIR_REPLACE_STRING}`)
 
 function getFileNameByPath(path: string) {
   const pathList = path.split(p.sep)
-  const fileName = pathList[pathList.length - 1]
+  const index = pathList.findIndex((v) => v === 'posts')
+  const fileName = pathList.slice(index - pathList.length + 1).join('/')
+
   const fileNameWithoutExt = fileName
     .split('.')
     .slice(0, -1)

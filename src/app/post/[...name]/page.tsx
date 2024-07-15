@@ -8,16 +8,15 @@ import {
 } from '#utils/post'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import IMAGE_LIST from 'src/constants/imageList'
+import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'
 
 interface Params {
-  name: string
+  name: string[]
 }
 
 const Post = async ({ params }: { params: Params }) => {
   const { name } = params
-  const path = name
-
+  const path = name.join('/')
   const post = await getPostByPath(path)
 
   if (!post.frontMatter.published) {
@@ -45,7 +44,7 @@ const Post = async ({ params }: { params: Params }) => {
       post={post}
       nextPost={nextPost}
       recentlyPost={recentlyPost}
-      pathName={name}
+      pathName={path}
     />
   )
 }
@@ -62,8 +61,7 @@ export async function generateMetadata({
   params: Params
 }): Promise<Metadata> {
   const { name } = params
-  const path = name
-
+  const path = name.join('/')
   const post = await getPostByPath(path)
 
   const title = `${post.frontMatter.title} | 김진근의 devlog`
@@ -84,14 +82,22 @@ export async function generateMetadata({
       tags: post.frontMatter.tags,
       publishedTime: post.frontMatter.date,
       locale: 'ko',
-      images: [IMAGE_LIST[post.frontMatter.thumbnail].src],
+      images: [
+        isInImageList(post.frontMatter.thumbnail)
+          ? IMAGE_LIST[post.frontMatter.thumbnail].src
+          : post.frontMatter.thumbnail,
+      ],
     },
     twitter: {
       description,
       title,
       card: 'summary',
       creator: '김진근',
-      images: [IMAGE_LIST[post.frontMatter.thumbnail].src],
+      images: [
+        isInImageList(post.frontMatter.thumbnail)
+          ? IMAGE_LIST[post.frontMatter.thumbnail].src
+          : post.frontMatter.thumbnail,
+      ],
     },
     publisher: '김진근',
     robots: { follow: true, index: true },
