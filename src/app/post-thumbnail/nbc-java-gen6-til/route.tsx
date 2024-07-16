@@ -21,12 +21,6 @@ const dayTextMap: Record<DayEnum, string> = {
 }
 
 export const runtime = 'edge'
-export const contentType = 'image/png'
-
-export const size = {
-  width: 1280,
-  height: 640,
-}
 
 export async function GET(request: NextRequest) {
   const week = request.nextUrl.searchParams.get('week')
@@ -96,7 +90,8 @@ export async function GET(request: NextRequest) {
       </div>
     ),
     {
-      ...size,
+      width: 1280,
+      height: 640,
       status: 200,
       fonts: [
         {
