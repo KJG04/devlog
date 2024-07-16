@@ -25,6 +25,7 @@ export const runtime = 'edge'
 export async function GET(request: NextRequest) {
   const week = request.nextUrl.searchParams.get('week')
   const day = request.nextUrl.searchParams.get('day')
+  const title = request.nextUrl.searchParams.get('title')
   const pretendardExtraBoldSubset = fetch(
     new URL(
       '../../../../public/fonts/Pretendard-ExtraBold-Subset.otf',
@@ -37,8 +38,14 @@ export async function GET(request: NextRequest) {
       import.meta.url,
     ),
   ).then((res) => res.arrayBuffer())
+  const pretendardRegularSubset = fetch(
+    new URL(
+      '../../../../public/fonts/Pretendard-Regular-Subset.otf',
+      import.meta.url,
+    ),
+  ).then((res) => res.arrayBuffer())
 
-  if (!week || !day || !Object.keys(DayEnum).includes(day)) {
+  if (!week || !day || !title || !Object.keys(DayEnum).includes(day)) {
     return NextResponse.json('Bad Request', { status: 400 })
   }
 
@@ -53,7 +60,7 @@ export async function GET(request: NextRequest) {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-          gap: 16,
+          gap: 10,
         }}
       >
         <img
@@ -68,17 +75,28 @@ export async function GET(request: NextRequest) {
             fontWeight: 800,
             fontFamily: 'Pretendard-ExtraBold',
             color: '#FAFAFA',
+            marginTop: 6,
           }}
         >
           Today I Learned
         </div>
         <div
           style={{
-            whiteSpace: 'pre',
-            color: '#D4D4D8',
             fontSize: 48,
             fontWeight: 500,
             fontFamily: 'Pretendard-Medium',
+            color: '#FAFAFA',
+          }}
+        >
+          {title}
+        </div>
+        <div
+          style={{
+            whiteSpace: 'pre',
+            color: '#D4D4D8',
+            fontSize: 32,
+            fontWeight: 400,
+            fontFamily: 'Pretendard-Regular',
             display: 'flex',
           }}
         >
@@ -103,6 +121,11 @@ export async function GET(request: NextRequest) {
           data: await pretendardMediumSubset,
           name: 'Pretendard-Medium',
           weight: 500,
+        },
+        {
+          data: await pretendardRegularSubset,
+          name: 'Pretendard-Regular',
+          weight: 400,
         },
       ],
     },

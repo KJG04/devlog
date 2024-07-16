@@ -6,4 +6,4 @@ Allow: /
 Host: https://devlog-kjg04.vercel.app/
 
 # Sitemaps
-Sitemap: https://devlog-kjg04.vercel.app/sitemap.xml
+Sitemap: https://devlog-kjg04.vercel.app/sitemap.xml/
