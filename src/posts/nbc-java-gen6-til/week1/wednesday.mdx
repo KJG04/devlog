@@ -1,0 +1,56 @@
+---
+title: '[내배캠 Spring TIL] 정적 에셋 트러블슈팅'
+tags:
+  - Vite
+  - Javascript
+keyword: vite, javascript, html, js, 스파르타, TIL, Today I Learned, 스파르타 코딩클럽, Spring
+published: true
+date: 2024-07-17T21:00:00+09:00
+description: Github Pages에 배포시 발생하는 정적 에셋 이슈를 해결해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=1&day=WEDNESDAY&title=정적 에셋 트러블슈팅
+---
+
+오늘은 Github Pages에 배포시 발생하는 정적 에셋 이슈를 해결한 과정을 기록하려 한다.
+
+## 문제
+
+팀원 모두 로컬에서 잘 작동하는 코드를 메인 브랜치로 올려 배포가 되었다.
+
+배포된 것을 확인해보니 js 파일과 이미지 파일들을 불러오지 못하고 오류를 뿜어내고 있었다.
+
+![img](CannotLoadStaticAsset)
+
+분명 경로도 잘 적혀있고 로컬에서 잘 작동하던 코드여서 당황하였다.
+
+## 해결
+
+나와 같은 케이스가 있는지 구글링 해보았는데, 배포된 페이지의 주소가 `https://xxx.github.io/xxx/`일때 에셋 가져오는 경로가 잘못될 수 있다는 글을 발견했다.
+
+내 페이지도 분명 `https://kjg04.github.io/nbc-team5/`에 배포 되어있기 때문에, 맞는 케이스를 찾았다는 생각이 들었다.
+
+`test.png`를 가져오는 경우라면 `https://kjg04.github.io/nbc-team5/test.png`를 요청해야 하는데 `https://kjg04.github.io/test.png`에 요청을 하여 발생하는 오류였다.
+
+```js path="vite.config.js"
+import path, { resolve } from 'path'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  root: path.resolve(__dirname, 'src'),
+  publicDir: path.resolve(__dirname, 'public'),
+  // base 옵션 추가로 해결
+  base: '/nbc-team5/',
+  build: {
+    outDir: path.resolve(__dirname, 'dist'),
+    rollupOptions: {
+      input: {
+        index: resolve(__dirname, 'src/index.html'),
+        sungraeInfo: resolve(__dirname, 'src/sungraeInfo.html'),
+        jingeunInfo: resolve(__dirname, 'src/jingeunInfo.html'),
+        jeongkiInfo: resolve(__dirname, 'src/jeongkiInfo.html'),
+      },
+    },
+  },
+})
+```
+
+config 파일에 `base`를 추가하여 `/test.png`를 `/nbc-team5/test.png`로 요청하도록 바꾸니 해결이 되었다.

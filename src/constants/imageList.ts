@@ -7,6 +7,7 @@ import SendingMessagesToAndFromTheWebAndReactNativeThumbnail from 'public/post-i
 import GradualMigrateToNextjsThumbnail from 'public/post-images/gradual-migrate-to-nextjs-thumbnail.jpg'
 import GraphqlWithReactQueryThumbnail from 'public/post-images/graphql-with-react-query-thumbnail.jpg'
 import PrefetchQueryWithReactQueryThumbnail from 'public/post-images/prefetch-query-with-react-query-thumbnail.jpg'
+import CannotLoadStaticAsset from 'public/post-images/cannot-load-static-asset.png'
 
 const IMAGE_LIST = {
   BeforeCodeSplit,
@@ -18,6 +19,7 @@ const IMAGE_LIST = {
   GradualMigrateToNextjsThumbnail,
   GraphqlWithReactQueryThumbnail,
   PrefetchQueryWithReactQueryThumbnail,
+  CannotLoadStaticAsset,
 }
 
 export const isInImageList = (str: string): str is keyof typeof IMAGE_LIST =>

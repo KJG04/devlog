@@ -1,0 +1,142 @@
+---
+title: '[내배캠 Spring TIL] 미니 프로젝트 세팅'
+tags:
+  - Vite
+  - Javascript
+  - Gh Pages
+keyword: vite, javascript, html, js, 스파르타, TIL, Today I Learned, 스파르타 코딩클럽, Spring, github pages, gh-pages, 깃허브 페이지, 배포, 정적 배포
+published: true
+date: 2024-07-16T21:00:00+09:00
+description: Vite 세팅과 Github Actions로 Github Pages 배포를 자동화 해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=1&day=TUESDAY&title=미니 프로젝트 세팅
+---
+
+팀 소개 페이지를 제작하는 미니 프로젝트에서 Vite 세팅과 페이지 배포 부분을 맡게 되었다.
+
+프로젝트를 세팅하며 배운 것을 정리해보도록 한다.
+
+<br />
+
+## Vite 세팅
+
+우선 Vite를 설치하고 적용하는 것은 상당히 쉬웠다. 문서에는 Vue를 추천하였지만 프로젝트에서 Vue를 사용하지 않기 떄문에 `Manual Installation`를 따랐다.
+
+```sh path="zsh"
+npm install -D vite
+```
+
+그리고 `package.json`과 `vite.config.js`를 추가해준다.
+
+```js path="vite.config.js"
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        nested: resolve(__dirname, 'nested/index.html'),
+      },
+    },
+  },
+})
+```
+
+```json path="package.json"
+{
+  "name": "nbc-team5",
+  "devDependencies": {
+    "vite": "^5.3.4"
+  },
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1"
+  }
+}
+```
+
+`vite.config.js`의 input 부분을 보면 여러개가 있는 것을 볼 수 있는데, 여러 페이지를 배포하고 싶다면 input 아래에 추가해주면 된다.
+
+`npm run dev`로 확인해보면 잘 작동하는 것을 볼 수 있다.
+
+## 배포 세팅
+
+페이지는 깃허브에서 제공하는 기능인 `Pages`를 사용해서 배포하기로 하였다.
+
+`package.json`에 `homepage`를 추가해주고 `gh-pages` 명령어를 실행해주면 된다. 간편하게 하기 위해 스크립트를 추가했다.
+
+```json path="package.json"
+{
+  "name": "nbc-team5",
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "vite": "^5.3.4"
+  },
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1"
+  },
+  "homepage": "https://KJG04.github.io/nbc-team5/"
+}
+```
+
+이제 터미널에서 스크립트를 실행하면 배포가 완료되게 된다.
+
+## 액션 추가
+
+배포 과정을 더 편리하게 하기 위해 깃허브 액션을 사용해서 배포 자동화를 하였다.
+
+`.github/workflows/gh-pages.yml`을 추가하고 내용을 작성 해주었다.
+
+```yml path="gh-pages.yml"
+name: GitHub Pages
+
+# 메인에 push 될때 실행된다.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      # 체크아웃
+      - name: Checkout
+        uses: actions/checkout@v3
+      # 노드 세팅
+      - name: Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          persist-credentials: false
+
+      # 패키지 설치
+      - name: Install Dependencies
+        run: npm install
+      # 코드 빌드
+      - name: Build
+        run: npm run build
+      # 배포
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+```
+
+`peaceiris/actions-gh-pages@v4`가 간단하게 배포할 수 있게 해주었다. `github_token`, `publish_dir`만 설정해주면 간단하게 배포 자동화까지 할 수 있다.
