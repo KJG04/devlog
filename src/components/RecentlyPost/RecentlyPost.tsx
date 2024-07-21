@@ -1,5 +1,5 @@
 import PostCard from '#components/PostCard/PostCard'
-import { Post } from '#types'
+import { Post } from '#types/post'
 import { Spacer } from '@nextui-org/spacer'
 import { FC } from 'react'
 

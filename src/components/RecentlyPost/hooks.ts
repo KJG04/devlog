@@ -1,4 +1,4 @@
-import { Post } from '#types'
+import { Post } from '#types/post'
 
 export const usePost = (post: Post[]) => {
   const posts = []

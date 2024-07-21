@@ -3,7 +3,7 @@
 import { FC, useMemo } from 'react'
 
 import { memo } from 'react'
-import { Post } from '#types'
+import { Post } from '#types/post'
 import Tag from '#components/Tag'
 import { Card, CardBody, CardFooter } from '@nextui-org/card'
 import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'

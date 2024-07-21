@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, memo, useMemo } from 'react'
-import { FrontMatter } from 'src/types'
+import { FrontMatter } from '#types/post'
 import Tag from '#components/Tag'
 import { formatDateByYear } from '#utils/date'
 import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'

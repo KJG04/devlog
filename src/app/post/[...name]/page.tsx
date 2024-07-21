@@ -1,5 +1,5 @@
 import PostContainer from '#containers/post'
-import { Path } from '#types'
+import { Path } from '#types/post'
 import {
   getAllPaths,
   getNextPost,

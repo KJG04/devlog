@@ -1,6 +1,6 @@
 import fs from 'fs'
 import frontMatter from 'front-matter'
-import { FrontMatter, Path, Post, PostWithHTMLBody } from '#types'
+import { FrontMatter, Path, Post, PostWithHTMLBody } from '#types/post'
 import remarkMath from 'remark-math'
 import toc from 'remark-toc'
 import slug from 'rehype-slug'

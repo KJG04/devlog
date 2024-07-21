@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FC, memo } from 'react'
 import IMAGE_LIST, { isInImageList } from 'src/constants/imageList'
-import { FrontMatter } from 'src/types'
+import { FrontMatter } from '#types/post'
 
 interface PropsType {
   frontMatter: FrontMatter

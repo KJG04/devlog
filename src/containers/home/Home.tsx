@@ -1,7 +1,7 @@
 import GithubLogo from '#components/GithubLogo'
 import RecentlyPost from '#components/RecentlyPost'
 import ProfileImage from 'public/images/profile-image.webp'
-import { Post } from '#types'
+import { Post } from '#types/post'
 
 import type { NextPage } from 'next'
 import Image from 'next/image'

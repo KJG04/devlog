@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { FrontMatter } from 'src/types'
+import { FrontMatter } from '#types/post'
 import { useMemo } from 'react'
 import Tag from '#components/Tag'
 import 'dayjs/locale/ko'

@@ -1,7 +1,7 @@
 'use client'
 
 import { NextPage } from 'next'
-import { StaticPostProps } from 'src/types'
+import { StaticPostProps } from '#types/post'
 
 import Thumbnail from '#containers/post/components/Thumbnail'
 import Header from '#containers/post/components/Header'

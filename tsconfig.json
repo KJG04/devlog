@@ -16,7 +16,6 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "#types": ["src/types/index.d.ts"],
       "#types/*": ["src/types/*"],
       "#containers/*": ["src/containers/*"],
       "#utils/*": ["src/utils/*"],
@@ -27,7 +26,7 @@
       "#context/*": ["src/context/*"]
     },
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["src/types", "./node_modules/@types"],
+    "typeRoots": ["./node_modules/@types"],
     "plugins": [
       {
         "name": "next"

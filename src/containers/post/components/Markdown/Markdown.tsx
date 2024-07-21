@@ -2,7 +2,7 @@
 
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { FC, memo, useMemo } from 'react'
-import { MDXComponents } from 'src/types'
+import { MDXComponents } from '#types/mdx'
 import {
   Pre,
   Anchor,
