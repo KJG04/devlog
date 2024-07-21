@@ -16,6 +16,9 @@ import rehypeMetaAsAttributes from '#utils/rehypeMetaAsAttributes'
 import p from 'path'
 import { unstable_cache } from 'next/cache'
 import CACHE_KEY from '#constants/cacheKey'
+import { rehypeImageOptimizer } from '#utils/rehypePlaceholder'
+import { getBlurDataURL } from '#utils/image'
+import { isInImageList } from '#constants/imageList'
 
 const DIR_REPLACE_STRING = p.normalize('/src/posts')
 const POST_PATH = p.normalize(`${process.cwd()}${DIR_REPLACE_STRING}`)
@@ -53,6 +56,9 @@ export const getPostByPath = unstable_cache(
 
     const { attributes, body } = frontMatter<FrontMatter>(file)
     attributes.date = dayjs(attributes.date).toISOString()
+    attributes.thumbnailBlurDataURL = !isInImageList(attributes.thumbnail)
+      ? (await getBlurDataURL(attributes.thumbnail)).base64
+      : undefined
 
     return {
       frontMatter: attributes,
@@ -63,6 +69,7 @@ export const getPostByPath = unstable_cache(
             slug,
             rehypeKatex,
             rehypeMetaAsAttributes,
+            rehypeImageOptimizer,
             [prism, { showLineNumbers: true }],
             [
               rehypeAutolinkHeadings,
@@ -87,20 +94,26 @@ export const getPostByPath = unstable_cache(
 export const getAllPosts = unstable_cache(async (): Promise<Post[]> => {
   const paths = glob.sync(`${POST_PATH}/**/*.md*`)
 
-  return paths
-    .map<Post>((path) => {
-      const fullPath = path
-      const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
-      const { attributes, body } = frontMatter<FrontMatter>(file)
-      const pathParam = { name: getFileNameByPath(path) }
+  return (
+    await Promise.all(
+      paths.map<Promise<Post>>(async (path) => {
+        const fullPath = path
+        const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
+        const { attributes, body } = frontMatter<FrontMatter>(file)
+        const pathParam = { name: getFileNameByPath(path) }
+        attributes.date = dayjs(attributes.date).toISOString()
+        attributes.thumbnailBlurDataURL = !isInImageList(attributes.thumbnail)
+          ? (await getBlurDataURL(attributes.thumbnail)).base64
+          : undefined
 
-      return {
-        frontMatter: attributes,
-        body,
-        pathParam,
-      }
-    })
-    .filter((value) => value.frontMatter.published)
+        return {
+          frontMatter: attributes,
+          body,
+          pathParam,
+        }
+      }),
+    )
+  ).filter((value) => value.frontMatter.published)
 }, CACHE_KEY.GET_ALL_POSTS)
 
 export const getSeriesPosts = unstable_cache(

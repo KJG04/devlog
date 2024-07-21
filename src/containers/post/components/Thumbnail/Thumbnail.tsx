@@ -8,9 +8,9 @@ interface PropsType {
 }
 
 const Thumbnail: FC<PropsType> = (props) => {
-  const { frontMatter } = props
+  const { thumbnail, thumbnailBlurDataURL, title } = props.frontMatter
 
-  if (!frontMatter.thumbnail) {
+  if (!thumbnail) {
     return <></>
   }
 
@@ -18,15 +18,14 @@ const Thumbnail: FC<PropsType> = (props) => {
     <Image
       data-zoomable
       className="block w-full select-none rounded-xl md:rounded-2xl"
-      src={
-        isInImageList(frontMatter.thumbnail)
-          ? IMAGE_LIST[frontMatter.thumbnail]
-          : frontMatter.thumbnail
-      }
-      alt="blog-thumbnail"
+      src={isInImageList(thumbnail) ? IMAGE_LIST[thumbnail] : thumbnail}
+      alt={`${title} 썸네일`}
       width={976}
       height={976}
-      placeholder={isInImageList(frontMatter.thumbnail) ? 'blur' : 'empty'}
+      placeholder={
+        isInImageList(thumbnail) || !!thumbnailBlurDataURL ? 'blur' : 'empty'
+      }
+      blurDataURL={thumbnailBlurDataURL}
       priority
     />
   )

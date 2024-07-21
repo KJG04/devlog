@@ -4,11 +4,7 @@ import { Metadata } from 'next'
 import ProfileImage from 'public/images/profile-image.webp'
 
 const Home = async () => {
-  const recentlyPost = (await getRecentPosts()).map((value) => {
-    const date = value.frontMatter.date.toString()
-    return { ...value, frontMatter: { ...value.frontMatter, date } }
-  })
-
+  const recentlyPost = await getRecentPosts()
   return <HomeContainer recentlyPost={recentlyPost} />
 }
 

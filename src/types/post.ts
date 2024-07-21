@@ -10,6 +10,7 @@ export interface FrontMatter {
   description: string
   keyword: string
   thumbnail: keyof typeof IMAGE_LIST | string
+  thumbnailBlurDataURL?: string
   series?: string
 }
 

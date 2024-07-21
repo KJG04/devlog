@@ -18,7 +18,6 @@ const About = () => {
 
   const onSelectionChange = useCallback((value: string | number) => {
     const index = tabList.findIndex((v) => v === value)
-    console.log({ scrollToRefList })
 
     if (index >= 0)
       window.scrollTo({

@@ -27,17 +27,7 @@ const Post = async ({ params }: { params: Params }) => {
     ? await getNextPost(post.frontMatter)
     : null
 
-  const recentlyPost = (await getRecentPosts()).map((value) => {
-    const date = value.frontMatter.date.toString()
-
-    return {
-      ...value,
-      frontMatter: {
-        ...value.frontMatter,
-        date,
-      },
-    }
-  })
+  const recentlyPost = await getRecentPosts()
 
   return (
     <PostContainer

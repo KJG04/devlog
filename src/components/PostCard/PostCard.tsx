@@ -20,7 +20,8 @@ interface PropsType {
 
 const PostCard: FC<PropsType> = (props) => {
   const { frontMatter, pathParam } = props
-  const { description, date, tags, title, thumbnail } = frontMatter
+  const { description, date, tags, title, thumbnail, thumbnailBlurDataURL } =
+    frontMatter
   const { name } = pathParam
 
   const renderedTags = useMemo(
@@ -45,7 +46,12 @@ const PostCard: FC<PropsType> = (props) => {
                 className="aspect-video select-none rounded-lg object-cover"
                 width={591}
                 height={296}
-                placeholder={isInImageList(thumbnail) ? 'blur' : 'empty'}
+                placeholder={
+                  isInImageList(thumbnail) || !!thumbnailBlurDataURL
+                    ? 'blur'
+                    : 'empty'
+                }
+                blurDataURL={thumbnailBlurDataURL}
               />
             </CardBody>
           )}
