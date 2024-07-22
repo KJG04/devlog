@@ -21,7 +21,7 @@ const Thumbnail: FC<PropsType> = (props) => {
       src={isInImageList(thumbnail) ? IMAGE_LIST[thumbnail] : thumbnail}
       alt={`${title} 썸네일`}
       width={976}
-      height={976}
+      height={488}
       placeholder={
         isInImageList(thumbnail) || !!thumbnailBlurDataURL ? 'blur' : 'empty'
       }
