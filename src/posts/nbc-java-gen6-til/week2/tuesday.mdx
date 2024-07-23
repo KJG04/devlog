@@ -1,0 +1,52 @@
+---
+title: '[내배캠 Spring TIL] MySQL Subquery'
+tags:
+  - MySQL
+  - Subquery
+keyword: MySQL, Subquery, 서브쿼리, MySQL, SQL, DB, 데이터베이스, TIL
+published: true
+date: 2024-07-23T21:11:00+09:00
+description: Subquery를 적재적소에 사용해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=2&day=TUESDAY&title=MySQL Subquery
+---
+
+SQL 문제를 풀며 배웠던 Subquery에 대해 정리해보려 한다.
+
+## Subquery
+
+Subquery는 다른 쿼리 내부에 포함되어 있는 쿼리를 의미한다.
+
+서브쿼리는 `()`로 감싸져서 표현된다.
+
+## Where문에서 사용될 때
+
+```sql path="즐겨찾기가 가장 많은 식당 정보 출력하기"
+SELECT FOOD_TYPE, REST_ID, REST_NAME, FAVORITES
+FROM REST_INFO
+WHERE (FOOD_TYPE, FAVORITES) IN (SELECT FOOD_TYPE, MAX(FAVORITES) FROM REST_INFO GROUP BY FOOD_TYPE)
+ORDER BY FOOD_TYPE DESC
+```
+
+위 쿼리는 내가 작성한 [즐겨찾기가 가장 많은 식당 정보 출력하기](https://school.programmers.co.kr/learn/courses/30/lessons/131123) 문제의 정답이다.
+
+<br />
+
+`FOOD_TYPE`중 `FAVORITES`이 가장 많은 가게의 정보를 출력하는 문제인데, 이 문제를 처음 풀때는 Subquery를 사용하지 않고 `FOOD_TYPE`을 기준으로 GRUOP BY를 하여 풀려고 하였다.
+
+하지만 GRUOP BY는 가장 `FAVORITES`이 많은 가게의 정보를 보여주지 않고, 저장된 순서중 첫번째 순서의 정보를 보여주기 때문에 정답이 아니다.
+
+<br />
+
+Where문에서 서브쿼리를 사용해 `FOOD_TYPE`과 그 `MAX(FAVORITES)`의 값을 구해 Where의 조건으로 사용하여 각 `FOOD_TYPE`의 `MAX(FAVORITES)`에 해당하는 가게만 보여주게 할 수 있다.
+
+## 사용가능한 곳
+
+- SELECT
+- FROM
+- WHERE
+- HAVING
+- ORDER BY
+- INSERT문의 VALUES 부분
+- UPDATE문의 SET 부분
+
+아직 WHERE절에서만 사용해 보았지만 다른 사용처도 있어서 복잡한 쿼리에 사용할 수 있을 것 같다.
