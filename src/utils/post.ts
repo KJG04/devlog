@@ -35,19 +35,26 @@ function getFileNameByPath(path: string) {
   return fileNameWithoutExt
 }
 
-export const getAllPaths = unstable_cache(async (): Promise<Path[]> => {
-  const paths = glob.sync(`${POST_PATH}/**/*.md*`)
+// 1day -> second
+const REVALIDATE = 60 * 60 * 24
 
-  return paths
-    .filter(async (path) => {
-      const post = await getPostByPath(getFileNameByPath(path))
-      return post.frontMatter.published
-    })
-    .map((path) => {
-      const params = { name: getFileNameByPath(path) }
-      return { params }
-    })
-}, CACHE_KEY.GET_ALL_PATHS)
+export const getAllPaths = unstable_cache(
+  async (): Promise<Path[]> => {
+    const paths = glob.sync(`${POST_PATH}/**/*.md*`)
+
+    return paths
+      .filter(async (path) => {
+        const post = await getPostByPath(getFileNameByPath(path))
+        return post.frontMatter.published
+      })
+      .map((path) => {
+        const params = { name: getFileNameByPath(path) }
+        return { params }
+      })
+  },
+  CACHE_KEY.GET_ALL_PATHS,
+  { revalidate: REVALIDATE },
+)
 
 export const getPostByPath = unstable_cache(
   async (path: string): Promise<PostWithHTMLBody> => {
@@ -89,32 +96,37 @@ export const getPostByPath = unstable_cache(
     }
   },
   CACHE_KEY.GET_POST_BY_PATH,
+  { revalidate: REVALIDATE },
 )
 
-export const getAllPosts = unstable_cache(async (): Promise<Post[]> => {
-  const paths = glob.sync(`${POST_PATH}/**/*.md*`)
+export const getAllPosts = unstable_cache(
+  async (): Promise<Post[]> => {
+    const paths = glob.sync(`${POST_PATH}/**/*.md*`)
 
-  return (
-    await Promise.all(
-      paths.map<Promise<Post>>(async (path) => {
-        const fullPath = path
-        const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
-        const { attributes, body } = frontMatter<FrontMatter>(file)
-        const pathParam = { name: getFileNameByPath(path) }
-        attributes.date = dayjs(attributes.date).toISOString()
-        attributes.thumbnailBlurDataURL = !isInImageList(attributes.thumbnail)
-          ? (await getBlurDataURL(attributes.thumbnail)).base64
-          : undefined
+    return (
+      await Promise.all(
+        paths.map<Promise<Post>>(async (path) => {
+          const fullPath = path
+          const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
+          const { attributes, body } = frontMatter<FrontMatter>(file)
+          const pathParam = { name: getFileNameByPath(path) }
+          attributes.date = dayjs(attributes.date).toISOString()
+          attributes.thumbnailBlurDataURL = !isInImageList(attributes.thumbnail)
+            ? (await getBlurDataURL(attributes.thumbnail)).base64
+            : undefined
 
-        return {
-          frontMatter: attributes,
-          body,
-          pathParam,
-        }
-      }),
-    )
-  ).filter((value) => value.frontMatter.published)
-}, CACHE_KEY.GET_ALL_POSTS)
+          return {
+            frontMatter: attributes,
+            body,
+            pathParam,
+          }
+        }),
+      )
+    ).filter((value) => value.frontMatter.published)
+  },
+  CACHE_KEY.GET_ALL_POSTS,
+  { revalidate: REVALIDATE },
+)
 
 export const getSeriesPosts = unstable_cache(
   async (series: string): Promise<Post[]> => {
@@ -136,6 +148,7 @@ export const getSeriesPosts = unstable_cache(
       }))
   },
   CACHE_KEY.GET_SERIES_POSTS,
+  { revalidate: REVALIDATE },
 )
 
 export const getNextPost = unstable_cache(
@@ -162,13 +175,18 @@ export const getNextPost = unstable_cache(
     return null
   },
   CACHE_KEY.GET_NEXT_POST,
+  { revalidate: REVALIDATE },
 )
 
-export const getRecentPosts = unstable_cache(async () => {
-  return (await getAllPosts()).sort((a, b) => {
-    const dateA = dayjs(a.frontMatter.date)
-    const dateB = dayjs(b.frontMatter.date)
+export const getRecentPosts = unstable_cache(
+  async () => {
+    return (await getAllPosts()).sort((a, b) => {
+      const dateA = dayjs(a.frontMatter.date)
+      const dateB = dayjs(b.frontMatter.date)
 
-    return dateA.isBefore(dateB) ? 1 : -1
-  })
-}, CACHE_KEY.GET_RECENT_POSTS)
+      return dateA.isBefore(dateB) ? 1 : -1
+    })
+  },
+  CACHE_KEY.GET_RECENT_POSTS,
+  { revalidate: REVALIDATE },
+)
