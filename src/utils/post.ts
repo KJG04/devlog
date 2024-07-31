@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import frontMatter from 'front-matter'
 import { FrontMatter, Path, Post, PostWithHTMLBody } from '#types/post'
 import remarkMath from 'remark-math'
@@ -59,7 +59,7 @@ export const getAllPaths = unstable_cache(
 export const getPostByPath = unstable_cache(
   async (path: string): Promise<PostWithHTMLBody> => {
     const fullPath = `${POST_PATH}/${path}.mdx`
-    const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
+    const file = await fs.readFile(fullPath, { encoding: 'utf8' })
 
     const { attributes, body } = frontMatter<FrontMatter>(file)
     attributes.date = dayjs(attributes.date).toISOString()
@@ -107,7 +107,7 @@ export const getAllPosts = unstable_cache(
       await Promise.all(
         paths.map<Promise<Post>>(async (path) => {
           const fullPath = path
-          const file = fs.readFileSync(fullPath, { encoding: 'utf8' })
+          const file = await fs.readFile(fullPath, { encoding: 'utf8' })
           const { attributes, body } = frontMatter<FrontMatter>(file)
           const pathParam = { name: getFileNameByPath(path) }
           attributes.date = dayjs(attributes.date).toISOString()

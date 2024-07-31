@@ -42,7 +42,19 @@ const Post = async ({ params }: { params: Params }) => {
 export default Post
 
 export const generateStaticParams = async (): Promise<Path[]> => {
-  return await getAllPaths()
+  const allPaths = await getAllPaths()
+  return allPaths.map((v) => {
+    if (typeof v.params.name === 'string') {
+      return {
+        ...v,
+        params: {
+          ...v.params,
+          name: v.params.name?.split('/'),
+        },
+      }
+    }
+    return v
+  })
 }
 
 export async function generateMetadata({
