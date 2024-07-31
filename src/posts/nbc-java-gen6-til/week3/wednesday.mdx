@@ -1,0 +1,70 @@
+---
+title: '[내배캠 Spring TIL] Java Thread'
+tags:
+  - Java
+  - Thread
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Thread
+published: true
+date: 2024-07-31T21:00:00+09:00
+description: Java Thread를 사용해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=3&day=WEDNESDAY&title=Java Thread
+---
+
+## 쓰레드
+
+쓰레드는 프로그램의 실행 단위로, 하나의 프로세스 내에서 여러 작업을 동시에 실행할 수 있게 해준다. 자바에서는 Thread 클래스를 사용하여 쓰레드를 생성하고 관리할 수 있다.
+
+## 생성 방법
+
+### Thread 클래스를 상속
+
+```java path="ThreadExample.java"
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("MyThread run()");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start();
+    }
+}
+
+```
+
+### Runnable 인터페이스를 구현
+
+```java path="ThreadExample.java"
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("MyRunnable run()");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Thread t = new Thread(new MyRunnable());
+        t.start();
+    }
+}
+```
+
+## 상태
+
+- `NEW`: 쓰레드 객체가 생성되었지만 아직 start()가 호출되지 않은 상태.
+- `RUNNABLE`: start()가 호출되어 실행 중이거나 실행 가능한 상태.
+- `BLOCKED`: 다른 쓰레드가 모니터 락을 가지고 있어서 일시적으로 실행되지 못하는 상태.
+- `WAITING`: 특정 조건이 만족될 때까지 기다리는 상태.
+- `TIMED_WAITING`: 주어진 시간 동안 기다리는 상태.
+- `TERMINATED`: 쓰레드의 실행이 완료된 상태.
+
+## 주요 메서드
+
+- `start()`: 새로운 쓰레드에서 run() 메서드를 호출하여 쓰레드를 시작함.
+- `run()`: 쓰레드가 실행할 코드를 포함.
+- `sleep(l`ong millis): 주어진 시간 동안 현재 쓰레드를 일시 정지.
+- `join()`: 다른 쓰레드가 종료될 때까지 현재 쓰레드를 기다리게 함.
+- `interrupt()`: 쓰레드의 실행을 중단하도록 요청함.
+- `isAlive()`: 쓰레드가 여전히 실행 중인지.
