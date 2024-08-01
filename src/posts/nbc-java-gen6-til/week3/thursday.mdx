@@ -1,0 +1,83 @@
+---
+title: '[내배캠 Spring TIL] Java 스레드 동기화'
+tags:
+  - Java
+  - Synchronized
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Thread, 동기화
+published: true
+date: 2024-08-01T21:00:00+09:00
+description: Java Thread를 동기화 해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=3&day=THURSDAY&title=Java 스레드 동기화
+---
+
+## 스레드 동기화
+
+스레드 동기화는 멀티스레드를 관리하기 위한 중요한 개념이다. 동기화를 통해 두개 이상의 스레드가 하나의 공유자원에 동시에 접근하지 못하도록 할 수 있다.
+
+## 동기화가 필요한 이유
+
+```java path="Main.java"
+public class Main {
+    static int x = 0;
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 100000; i++) { x++; }
+            System.out.println("t1 end");
+        });
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 100000; i++) { x++; }
+            System.out.println("t2 end");
+        });
+        t1.start();
+        t2.start();
+        try {
+            Thread.sleep(1000);
+            System.out.println(x);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+위 코드를 실행하면 `i`를 20만번 더하는 코드이기 때문에 `x`는 `200000`이 될것이라고 생각하지만, 실행할때마다 출력되는 `x`의 값이 바뀐다. 여러 스레드가 하나의 공유자원을 동시에 접근해서 생기는 문제이다. 이를 해결하기 위해 동기화를 해야한다.
+
+## Synchronized 메서드
+
+synchronized 키워드를 사용한 메서드는 여러 스레드가 메서드에 접근하는 것을 제어할 수 있다. 메서드가 synchronized로 선언되면, 한 스레드가 이 메서드에 접근하여 사용할때 lock이 걸림으로써 다른 스레드가 접근할 수 없게 된다. 이후 해당 스레드가 이 메서드의 코드를 다 실행 후 벗어나게되면 unlock 상태가 되어 그때서야 대기하고 있던 다른 스레드가 이 메서드에 접근하여 다시 lock을 걸고 사용할 수 있게 된다.
+
+```java path="Counter.java"
+public class Counter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+    }
+
+    public synchronized int getCount() {
+        return count;
+    }
+}
+```
+
+## Synchronized 블록
+
+대부분에 상황에서는 필요한 부분만 동기화하는 것이 더 효율적이다. Synchronized 블록을 사용하면 메서드 내의 특정 코드 블록만 동기화할 수 있어 동기화를 더 세밀하게 제어할 수 있다.
+
+```java path="Counter.java"
+public class Counter {
+    private int count = 0;
+    public void increment() {
+        synchronized(this) {
+            count++;
+        }
+    }
+
+    public int getCount() {
+        synchronized(this) {
+            return count;
+        }
+    }
+}
+```

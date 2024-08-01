@@ -36,7 +36,7 @@ function getFileNameByPath(path: string) {
 }
 
 // 1day -> second
-const REVALIDATE = 60 * 60 * 24
+const REVALIDATE = 60 * 60 * 4
 
 export const getAllPaths = unstable_cache(
   async (): Promise<Path[]> => {
