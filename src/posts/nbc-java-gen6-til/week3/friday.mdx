@@ -1,0 +1,49 @@
+---
+title: '[내배캠 Spring TIL] Java Optional'
+tags:
+  - Java
+  - Optional
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Optional
+published: true
+date: 2024-08-02T21:00:00+09:00
+description: Java Optional을 알아보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=3&day=FRIDAY&title=Java Optional
+---
+
+자바 Optional에 대해 배운 내용을 정리해보도록 한다.
+
+그전에 `NullPointerException`에 대해 먼저 정리하겠다.
+
+## NPE(NullPointerException)
+
+말 그대로 널 값을 가지고 있는 참조형 변수에 접근하려 하면 발생한다. 여러가지 이유로 null 값이 들어가기 때문에 많이 발생하는 오류중 하나이다.
+
+```java path="NullTest.java"
+String nullValue = null;
+nullValue.length(); // NullPointerException
+```
+
+### 기존 처리 방법
+
+`if`문 또는 `try catch`문으로 처리하게 되는데 이 방법은 처리해야할 값이 많아지면 많아질수록 코드가 읽기 어려워지고 길어지게 된다.
+
+```java path="NPETryCatch.java"
+String value = getValue(); // null일수도 있음
+int valueLength;
+
+try {
+    valueLength = value.length();
+} catch (NullPointerException e) {
+    valueLength = -1;
+}
+```
+
+## Optional
+
+null이 올 수 있는 값을 감싸는 Wrapper 클래스로, 참조하더라도 NPE가 발생하지 않도록 도와준다. 위 코드를 Optional을 사용해서 표현하면 아래와 같다.
+
+```java path="OptionalTest.java"
+int valueLength = Optional.ofNullable(getValue()).map(String::length).orElse(-1);
+```
+
+이처럼 코드의 예외 처리가 간단해진 것을 알 수 있다. 잘 사용하면 읽기 좋은 코드를 쉽게 작성할 수 있을것 같다.
