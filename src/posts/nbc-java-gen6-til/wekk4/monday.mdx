@@ -1,0 +1,75 @@
+---
+title: '[내배캠 Spring TIL] Java 객체 비교'
+tags:
+  - Java
+  - 비교
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, 비교
+published: true
+date: 2024-08-05T21:00:00+09:00
+description: Java에서 객체 사이에 비교는 어떻게 이루어지는지 알아보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=4&day=MONDAY&title=Java 객체 비교
+---
+
+오늘은 Java에서 객체를 비교하는 방법에 대해 공부했다. Java에서는 객체를 비교하기 위해 기본적으로 두 가지 방법을 제공한다: == 연산자와 equals() 메서드.
+
+## 1. == 연산자
+
+객체의 메모리 주소를 비교한다.
+
+두 객체가 동일한 객체인지(즉, 동일한 메모리 주소를 참조하는지) 확인할 때 사용된다.
+
+```java path="Same.java"
+String a = new String("hello");
+String b = new String("hello");
+boolean result = (a == b);  // false, 다른 메모리 주소를 참조
+```
+
+## 2. equals() 메서드
+
+객체의 내용을 비교한다.
+
+두 객체의 실제 값이 같은지 확인할 때 사용된다.
+
+```java path="Equals.java"
+String a = new String("hello");
+String b = new String("hello");
+boolean result = a.equals(b);  // true, 내용이 동일
+```
+
+### hashCode()
+
+두 객체가 equals()에 의해 같다고 판정되면, 두 객체의 hashCode() 값도 같아야 한다. 이는 주로 Hash 기반 컬렉션(예: HashMap, HashSet)에서 사용된다.
+
+> equals() 메서드를 재정의하면, hashCode() 메서드도 재정의해야 한다.
+
+## 3. compareTo() 메서드와 Comparable 인터페이스
+
+두 객체의 순서를 비교한다.
+
+객체의 자연 순서를 정의할 때 사용되며, 주로 정렬에 사용된다.
+
+```java path="CompareTo.java"
+public class Person implements Comparable<Person> {
+    private String name;
+
+    @Override
+    public int compareTo(Person other) {
+        return this.name.compareTo(other.name);
+    }
+}
+```
+
+## 4. Comparator 인터페이스
+
+특정 기준에 따라 두 객체의 순서를 비교한다.
+
+객체의 자연 순서와 다른 순서로 정렬하고자 할 때 사용된다.
+
+```java path="Comparator.java"
+public class PersonNameComparator implements Comparator<Person> {
+    @Override
+    public int compare(Person p1, Person p2) {
+        return p1.getName().compareTo(p2.getName());
+    }
+}
+```
