@@ -1,0 +1,27 @@
+---
+title: '[내배캠 Spring TIL] MySQL Group By'
+tags:
+  - MySQL
+  - GROUP
+keyword: MySQL, GROUP, MySQL, SQL, DB, 데이터베이스, TIL
+published: true
+date: 2024-08-07T21:11:00+09:00
+description: Group By에 대해 공부해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=4&day=TUESDAY&title=MySQL Group By
+---
+
+GROUP BY는 MySQL에서 동일한 값들을 가진 행들을 그룹으로 묶어 요약 정보를 제공하는 SQL 절이다. 주로 집계 함수(COUNT, MAX, MIN, SUM, AVG)와 함께 사용된다.
+
+```sql
+SELECT column1, AVG(column2)
+FROM table_name
+GROUP BY column1
+```
+
+## 집계 함수
+
+- COUNT(column): 특정 열의 값 개수.
+- SUM(column): 특정 열의 값들을 모두 더함.
+- AVG(column): 특정 열의 값들의 평균.
+- MAX(column): 특정 열의 값들 중 최대값.
+- MIN(column): 특정 열의 값들 중 최소값.
