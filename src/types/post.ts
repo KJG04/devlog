@@ -7,7 +7,7 @@ export interface FrontMatter {
   tags: string[]
   published: boolean
   date: string
-  description: string
+  description?: string
   keyword: string
   thumbnail: keyof typeof IMAGE_LIST | string
   thumbnailBlurDataURL?: string

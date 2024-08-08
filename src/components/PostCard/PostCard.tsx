@@ -69,7 +69,9 @@ const PostCard: FC<PropsType> = (props) => {
                 {title}
               </h4>
               <Spacer y={1} />
-              <div className="lead text-zinc-400">{description}</div>
+              {description && (
+                <div className="lead text-zinc-400">{description}</div>
+              )}
               <Spacer y={2} />
               <div className="flex flex-wrap gap-[0.5rem]">{renderedTags}</div>
             </div>

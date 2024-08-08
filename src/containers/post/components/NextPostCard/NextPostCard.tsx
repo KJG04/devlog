@@ -50,7 +50,9 @@ const NextPostCard: FC<PropsType> = (props) => {
         <CardFooter className="flex-col items-start text-left">
           <div className="text-lg text-zinc-400">이어서 읽기 </div>
           <div className="text-lg font-bold">{title}</div>
-          <div className="text-base text-zinc-400">{description}</div>
+          {description && (
+            <div className="text-base text-zinc-400">{description}</div>
+          )}
           <div className="mt-4 flex gap-2">{renderedTags}</div>
         </CardFooter>
       </Card>
