@@ -1,0 +1,43 @@
+---
+title: '[내배캠 Spring TIL] Java 메모리 영역'
+tags:
+  - Java
+  - 메모리
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, 메모리 영역
+published: true
+date: 2024-08-07T21:00:00+09:00
+description: Java Thread를 사용해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=3&day=WEDNESDAY&title=Java 메모리 영역
+---
+
+Java 메모리 영역에 대해 공부한 내용을 정리해보려 한다. Java 프로그램이 실행될 때 JVM(Java Virtual Machine)은 메모리를 여러 영역으로 나누어 관리하는데, 각 영역의 역할과 특징을 이해하는 것이 중요하다.
+
+## 메소드 영역 (Method Area)
+
+클래스, 인터페이스, 메소드, 필드, 상수와 같은 구조적 정보를 저장한다.
+
+모든 스레드가 공유하는 영역으로 JVM이 시작될 때 생성되고 종료될 때 소멸된다.
+
+## 힙 영역 (Heap)
+
+객체와 배열이 할당되는 영역으로, 모든 객체가 이곳에 저장된다.
+
+역시 모든 스레드가 공유하며, 가비지 컬렉션의 대상이 되는 영역이다. 크게 Young Generation과 Old Generation으로 나뉜다.
+
+## 스택 영역 (Stack)
+
+각 스레드마다 별도로 존재하며, 메소드 호출 시 생성되는 프레임을 저장한다. 프레임은 지역 변수, 매개 변수, 복귀 주소 등을 포함한다.
+
+LIFO(Last In First Out) 구조로, 메소드가 호출될 때마다 새로운 프레임이 추가되고 메소드가 종료되면 해당 프레임이 제거된다.
+
+## PC 레지스터 (Program Counter Register)
+
+현재 스레드가 실행 중인 JVM 명령의 주소를 저장한다.
+
+각 스레드마다 별도로 존재하며, 스레드가 실행 중인 명령을 추적한다.
+
+## 네이티브 메소드 스택 (Native Method Stack)
+
+네이티브 메소드 호출 시 사용되는 스택이다.
+
+C/C++ 등 자바 이외의 언어로 작성된 네이티브 코드를 실행하는 데 사용된다.
