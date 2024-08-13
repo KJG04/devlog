@@ -1,0 +1,36 @@
+---
+title: '[내배캠 Spring TIL] Spring 3-Layer Architecture'
+tags:
+  - Spring
+  - Java
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, 3-Layer Architecture
+published: true
+date: 2024-08-12T21:00:00+09:00
+description: 3-Layer Architecture 패턴을 알아보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=4&day=MONDAY&title=Spring 3-Layer Architecture
+---
+
+Spring의 3-Layer Architecture는 디자인 패턴 중 하나로, 애플리케이션을 세 가지 독립된 계층으로 분리한다.
+
+이러한 분리는 유지보수성, 확장성, 테스트 용이성을 높여준다.
+
+## Presentation Layer
+
+HTTP 요청을 처리하고, 사용자 입력을 받아 적절한 서비스로 전달한다. 또한, 응답을 렌더링하는 역할도 담당한다.
+Controller가 담당하게 된다.
+
+## Service Layer
+
+애플리케이션의 비즈니스 로직을 포함한다. 컨트롤러로부터 데이터를 받아 처리하고, 레파지토리 계층과 통신하여 데이터 작업을 수행한다.
+Service가 담당하게 된다.
+
+## Data Access Layer
+
+역할: 데이터베이스 또는 기타 데이터 소스와의 상호작용을 관리한다. 이 계층은 CRUD 작업과 데이터 검색을 담당한다.
+Repository가 담당하게 된다.
+
+## 장점
+
+- 관심사의 분리: 각 계층이 특정 부분에만 집중하므로 관리가 용이.
+- 유지보수성: 모듈화된 구조로 인해 업데이트와 유지보수가 쉬움.
+- 테스트 용이성: 각 계층을 독립적으로 테스트할 수 있어 단위 테스트 용이.
