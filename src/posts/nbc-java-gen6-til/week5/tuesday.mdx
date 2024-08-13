@@ -1,0 +1,57 @@
+---
+title: '[내배캠 Spring TIL] MapStruct 라이브러리'
+tags:
+  - MapStruct
+  - Java
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, MapStruct
+published: true
+date: 2024-08-13T21:11:00+09:00
+description: MapStruct를 사용해보자.
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=4&day=TUESDAY&title=MapStruct 라이브러리
+---
+
+MapStruct는 자바 객체 사이의 매핑을 자동으로 생성해주는 오픈소스 라이브러리이다.
+
+주요 특징으로는
+
+- 컴파일 시점 매핑 코드 생성
+- 간단한 설정 및 사용 방법
+- 커스텀 매핑 지원
+
+## 설치
+
+```gradle path="build.gradle"
+dependencies {
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+}
+```
+
+`build.gradle`에 위 코드를 추가하여 설치 가능하다.
+
+## 사용
+
+```java path="UserMapper.java"
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+@Mapper
+public interface UserMapper {
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
+    UserResponseDto toUserResponseDto(User user);
+}
+```
+
+매핑 대상 클래스들 간의 매핑을 정의하기 위해 @Mapper 애노테이션을 사용하여 인터페이스를 생성하고, 매핑하는 메서드를 인터페이스에 정의하면 끝이다.
+
+`static`한 `INSTANCE` 멤버에 `Mappers.getMapper(UserMapper.class)`를 사용해 `MapStruct`에서 생성한 인스턴스를 사용한다.
+
+### 필드 이름이 다른 경우
+
+@Mapping 애노테이션을 사용하여 속성 간의 매핑을 명시적으로 설정할 수 있다.
+
+```java path="UserMapper.java"
+@Mapping(source = "userName", target = "name")
+UserDto userToUserDto(User user);
+```
