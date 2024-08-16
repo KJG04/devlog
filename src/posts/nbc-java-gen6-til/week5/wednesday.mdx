@@ -1,0 +1,59 @@
+---
+title: '[내배캠 Spring TIL] IoC와 DI'
+tags:
+  - IoC
+  - DI
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, IoC, DI
+published: true
+date: 2024-08-14T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=5&day=WEDNESDAY&title=IoC와 DI
+series: 내일배움캠프 TIL
+---
+
+## DI(Dependency Injection)
+
+의존성 주입(Dependency Injection, DI)은 클래스나 컴포넌트가 직접적인 의존성을 생성하거나 관리하지 않고, 외부에서 필요한 의존성을 주입받는 설계 패턴이다.
+
+### 의존성
+
+클래스가 기능을 수행하기 위해 필요로 하는 외부 자원이나 객체.
+
+### 주입
+
+필요한 의존성을 외부에서 제공(주입)하는 행위.
+
+주입하는 법에는 크게 두가지가 있다.
+
+#### 생성자 주입
+
+객체의 생성자에서 의존성을 주입받는 방법.
+
+```java path="Di.java"
+public class Service {
+    private final Repository repository;
+
+    public Service(Repository repository) {
+        this.repository = repository;
+    }
+}
+```
+
+#### 세터 주입
+
+세터 메서드를 통해 의존성을 주입받는 방법.
+
+```java path="Di.java"
+public class Service {
+    private Repository repository;
+
+    public void setRepository(Repository repository) {
+        this.repository = repository;
+    }
+}
+```
+
+## Inversion of Control(IoC)
+
+만약 의존성을 주입받지 않고 내부에서 객체를 생성한다고 해보자. 그러면 객체가 변경될 때 내부 코드도 함께 변경되게 된다. Service -> Repository 순서로 제어된다.
+
+DI릃 활용해 외부에서 의존성을 주입받게 되면 Service \<- Repository 순서로 제어가 역전되게 된다. 이를 IoC라고 부른다.

@@ -22,24 +22,26 @@ const dayTextMap: Record<DayEnum, string> = {
   [DayEnum.FRIDAY]: '금요일',
 }
 
-// export const runtime = 'edge'
+function readFile(p: string) {
+  return fs.readFile(path.join(process.cwd(), p))
+}
 
 export async function GET(request: NextRequest) {
   const week = request.nextUrl.searchParams.get('week')
   const day = request.nextUrl.searchParams.get('day')
+  const showBigTitle =
+    request.nextUrl.searchParams.get('showBigTitle') !== 'false' ? true : false
   const title = request.nextUrl.searchParams.get('title')
-  const pretendardExtraBoldSubset = fs.readFile(
-    path.join(process.cwd(), 'public/fonts/Pretendard-ExtraBold-Subset.otf'),
+  const pretendardExtraBoldSubset = readFile(
+    'public/fonts/Pretendard-ExtraBold-Subset.otf',
   )
-  const pretendardMediumSubset = fs.readFile(
-    path.join(process.cwd(), 'public/fonts/Pretendard-Medium-Subset.otf'),
+  const pretendardMediumSubset = readFile(
+    'public/fonts/Pretendard-Medium-Subset.otf',
   )
-  const pretendardRegularSubset = fs.readFile(
-    path.join(process.cwd(), 'public/fonts/Pretendard-Regular-Subset.otf'),
+  const pretendardRegularSubset = readFile(
+    'public/fonts/Pretendard-Regular-Subset.otf',
   )
-  const spartaLogo = await fs.readFile(
-    path.join(process.cwd(), 'public/images/sparta-logo.png'),
-  )
+  const spartaLogo = await readFile('public/images/sparta-logo.png')
   const spartaLogoBase64 = Buffer.from(spartaLogo).toString('base64')
 
   if (!week || !day || !title || !Object.keys(DayEnum).includes(day)) {
@@ -66,17 +68,19 @@ export async function GET(request: NextRequest) {
           width={250}
           height={134}
         />
-        <div
-          style={{
-            fontSize: 96,
-            fontWeight: 800,
-            fontFamily: 'Pretendard-ExtraBold',
-            color: '#FAFAFA',
-            marginTop: 6,
-          }}
-        >
-          Today I Learned
-        </div>
+        {showBigTitle && (
+          <div
+            style={{
+              fontSize: 96,
+              fontWeight: 800,
+              fontFamily: 'Pretendard-ExtraBold',
+              color: '#FAFAFA',
+              marginTop: 6,
+            }}
+          >
+            Today I Learned
+          </div>
+        )}
         <div
           style={{
             fontSize: 48,
