@@ -1,0 +1,53 @@
+---
+title: '[내배캠 Spring TIL] Spring Data JPA'
+tags:
+  - Spring
+  - JPA
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Spring Data JPA
+published: true
+date: 2024-08-16T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=5&day=FRIDAY&title=Spring Data JPA
+series: 내일배움캠프 TIL
+---
+
+Spring Data JPA에 대해 배운 내용을 정리해보려 한다.
+
+<br />
+
+Spring Data JPA는 Java Persistence API(JPA)를 더 쉽게 사용할 수 있도록 도와주는
+스프링 모듈이다.
+
+## JPA(Java Persistence API)
+
+관계형 데이터베이스와 객체 간의 매핑을 관리하고 처리하는 데 사용되는 표준화된 API이다. JPA를 사용하면 SQL을 직접 작성하지 않고도 데이터베이스에 데이터를 저장하고 조회할 수 있다.
+
+## Repository 인터페이스
+
+- Repository: 가장 기본이 되는 인터페이스로, CRUD(생성, 읽기, 갱신, 삭제) 기능을 지원한다.
+- CrudRepository: Repository를 확장하여 CRUD 기능을 제공하며, 주로 간단한 CRUD 작업에 사용된다.
+- JpaRepository: CrudRepository를 확장하여 JPA와 관련된 기능을 추가로 제공한다. 예를 들어, 페이징 및 정렬 기능이 포함되어 있다.
+
+```java path="UserRepository.java"
+public interface UserRepository extends JpaRepository<User, Long> {
+}
+```
+
+## 쿼리 메소드
+
+Spring Data JPA는 메소드 이름만으로도 다양한 쿼리를 작성할 수 있다.
+
+findBy, findAllBy, countBy, deleteBy 등의 메소드를 사용하여 원하는 조건으로 데이터를 조회, 수정, 삭제할 수 있다.
+
+```java path="UserRepository.java"
+List<User> findByLastName(String lastName);
+Optional<User> findByEmail(String email);
+```
+
+## @Query 어노테이션
+
+복잡한 쿼리를 직접 작성할 때 사용된다. JPQL(Java Persistence Query Language) 또는 네이티브 SQL을 사용할 수 있다.
+
+```java path="UserRepository.java"
+@Query("SELECT u FROM User u WHERE u.status = ?1")
+List<User> findByStatus(String status);
+```
