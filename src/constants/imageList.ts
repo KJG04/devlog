@@ -8,6 +8,7 @@ import GradualMigrateToNextjsThumbnail from 'public/post-images/gradual-migrate-
 import GraphqlWithReactQueryThumbnail from 'public/post-images/graphql-with-react-query-thumbnail.jpg'
 import PrefetchQueryWithReactQueryThumbnail from 'public/post-images/prefetch-query-with-react-query-thumbnail.jpg'
 import CannotLoadStaticAsset from 'public/post-images/cannot-load-static-asset.png'
+import EntityLifecycle from 'public/post-images/entity-lifecycle.png'
 
 const IMAGE_LIST = {
   BeforeCodeSplit,
@@ -20,6 +21,7 @@ const IMAGE_LIST = {
   GraphqlWithReactQueryThumbnail,
   PrefetchQueryWithReactQueryThumbnail,
   CannotLoadStaticAsset,
+  EntityLifecycle,
 }
 
 export const isInImageList = (str: string): str is keyof typeof IMAGE_LIST =>
