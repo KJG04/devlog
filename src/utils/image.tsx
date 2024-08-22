@@ -64,6 +64,9 @@ async function readFile(p: string) {
     p,
     'path.join(process.cwd(), p)': path.join(process.cwd(), p),
     'await fs.readdir(process.cwd())': await fs.readdir(process.cwd()),
+    'await fs.readdir(process.cwd() + /src)': await fs.readdir(
+      process.cwd() + '/src',
+    ),
   })
 
   return fs.readFile(path.join(process.cwd(), p))
