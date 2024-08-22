@@ -28,6 +28,7 @@ const PostCard: FC<PropsType> = (props) => {
     () => tags.map((item) => <Tag key={item}>{item}</Tag>),
     [tags],
   )
+  console.log(isInImageList(thumbnail) ? IMAGE_LIST[thumbnail] : thumbnail)
 
   return (
     <article>

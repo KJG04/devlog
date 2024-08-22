@@ -1,19 +1,6 @@
 'use server'
 
-import CACHE_KEY from '#constants/cacheKey'
-import { unstable_cache } from 'next/cache'
 import { getPlaiceholder, GetPlaiceholderOptions } from 'plaiceholder'
-
-const _getPlaiceholder = unstable_cache(
-  async (_base64: string, options?: GetPlaiceholderOptions) => {
-    const bf = Buffer.from(_base64, 'base64')
-    return getPlaiceholder(bf, {
-      size: 20,
-      ...options,
-    })
-  },
-  CACHE_KEY.GET_PLAICEHOLDER,
-)
 
 export async function getBlurDataURL(
   src: string,
@@ -26,5 +13,9 @@ export async function getBlurDataURL(
   }).then(async (res) =>
     Buffer.from(await res.arrayBuffer()).toString('base64'),
   )
-  return _getPlaiceholder(b64, options)
+  const bf = Buffer.from(b64, 'base64')
+  return getPlaiceholder(bf, {
+    size: 20,
+    ...options,
+  })
 }

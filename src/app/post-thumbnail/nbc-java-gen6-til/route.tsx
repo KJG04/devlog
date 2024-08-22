@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { NextRequest, NextResponse } from 'next/server'
-import { ImageResponse } from 'next/og'
 import { DayEnum } from '#utils/day'
 import path from 'path'
 import fs from 'fs/promises'
+import satori from 'satori'
+import sharp from 'sharp'
 
 const dayColorMap: Record<DayEnum, string> = {
   [DayEnum.MONDAY]: '#006FEE',
@@ -48,70 +49,68 @@ export async function GET(request: NextRequest) {
     return NextResponse.json('Bad Request', { status: 400 })
   }
 
-  return new ImageResponse(
-    (
+  const svg = await satori(
+    <div
+      style={{
+        width: 1280,
+        height: 640,
+        background: '#202020',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+        gap: 10,
+      }}
+    >
+      <img
+        alt="스파르타 로고"
+        src={`data:image/png;base64,${spartaLogoBase64}`}
+        width={250}
+        height={134}
+      />
+      {showBigTitle && (
+        <div
+          style={{
+            fontSize: 96,
+            fontWeight: 800,
+            fontFamily: 'Pretendard-ExtraBold',
+            color: '#FAFAFA',
+            marginTop: 6,
+          }}
+        >
+          Today I Learned
+        </div>
+      )}
       <div
         style={{
-          width: 1280,
-          height: 640,
-          background: '#202020',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          gap: 10,
+          fontSize: 48,
+          fontWeight: 500,
+          fontFamily: 'Pretendard-Medium',
+          color: '#FAFAFA',
         }}
       >
-        <img
-          alt="스파르타 로고"
-          src={`data:image/png;base64,${spartaLogoBase64}`}
-          width={250}
-          height={134}
-        />
-        {showBigTitle && (
-          <div
-            style={{
-              fontSize: 96,
-              fontWeight: 800,
-              fontFamily: 'Pretendard-ExtraBold',
-              color: '#FAFAFA',
-              marginTop: 6,
-            }}
-          >
-            Today I Learned
-          </div>
-        )}
-        <div
-          style={{
-            fontSize: 48,
-            fontWeight: 500,
-            fontFamily: 'Pretendard-Medium',
-            color: '#FAFAFA',
-          }}
-        >
-          {title}
-        </div>
-        <div
-          style={{
-            whiteSpace: 'pre',
-            color: '#D4D4D8',
-            fontSize: 32,
-            fontWeight: 400,
-            fontFamily: 'Pretendard-Regular',
-            display: 'flex',
-          }}
-        >
-          내일배움캠프 Spring {week}주차{' '}
-          <span style={{ color: dayColorMap[day as keyof typeof DayEnum] }}>
-            {dayTextMap[day as keyof typeof DayEnum]}
-          </span>
-        </div>
+        {title}
       </div>
-    ),
+      <div
+        style={{
+          whiteSpace: 'pre',
+          color: '#D4D4D8',
+          fontSize: 32,
+          fontWeight: 400,
+          fontFamily: 'Pretendard-Regular',
+          display: 'flex',
+        }}
+      >
+        내일배움캠프 Spring {week}주차{' '}
+        <span style={{ color: dayColorMap[day as keyof typeof DayEnum] }}>
+          {dayTextMap[day as keyof typeof DayEnum]}
+        </span>
+      </div>
+    </div>,
     {
       width: 1280,
       height: 640,
-      status: 200,
+      debug: false,
       fonts: [
         {
           data: await pretendardExtraBoldSubset,
@@ -131,4 +130,11 @@ export async function GET(request: NextRequest) {
       ],
     },
   )
+
+  const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer()
+
+  const headers = new Headers()
+  headers.set('content-type', 'image/png')
+
+  return new NextResponse(pngBuffer, { status: 200, statusText: 'OK', headers })
 }

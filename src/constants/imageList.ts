@@ -22,7 +22,7 @@ const IMAGE_LIST = {
   PrefetchQueryWithReactQueryThumbnail,
   CannotLoadStaticAsset,
   EntityLifecycle,
-}
+} as const
 
 export const isInImageList = (str: string): str is keyof typeof IMAGE_LIST =>
   Object.keys(IMAGE_LIST).includes(str)

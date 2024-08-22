@@ -37,6 +37,7 @@ export const rehypeImageOptimizer: Plugin<[GetPlaiceholderOptions?], Root> =
       if (!isImageElement(node)) return
       // Now, we can safely assume that node is an image node.
       const { src } = node.properties
+      console.log(src)
       // isInImageList이면 plaiceholder를 그만둔다
       if (isInImageList(src)) {
         return
