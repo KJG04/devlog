@@ -58,11 +58,12 @@ const dayTextMap: Record<DayEnum, string> = {
   [DayEnum.FRIDAY]: '금요일',
 }
 
-function readFile(p: string) {
+async function readFile(p: string) {
   console.log({
     'process.cwd()': process.cwd(),
     p,
     'path.join(process.cwd(), p)': path.join(process.cwd(), p),
+    'await fs.readdir(process.cwd())': await fs.readdir(process.cwd()),
   })
 
   return fs.readFile(path.join(process.cwd(), p))
