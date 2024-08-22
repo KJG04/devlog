@@ -84,10 +84,16 @@ export async function createNbcJavaGen6TilThumbnail(
     pretendardRegularSubset,
     spartaLogo,
   ] = await Promise.all([
-    readFile('public/fonts/Pretendard-ExtraBold-Subset.otf'),
-    readFile('public/fonts/Pretendard-Medium-Subset.otf'),
-    readFile('public/fonts/Pretendard-Regular-Subset.otf'),
-    readFile('public/images/sparta-logo.png'),
+    readFile(
+      'src/app/post-thumbnail/nbc-java-gen6-til/Pretendard-ExtraBold-Subset.otf',
+    ),
+    readFile(
+      'src/app/post-thumbnail/nbc-java-gen6-til/Pretendard-Medium-Subset.otf',
+    ),
+    readFile(
+      'src/app/post-thumbnail/nbc-java-gen6-til/Pretendard-Regular-Subset.otf',
+    ),
+    readFile('src/app/post-thumbnail/nbc-java-gen6-til/sparta-logo.png'),
   ])
 
   const spartaLogoBase64 = Buffer.from(spartaLogo).toString('base64')
