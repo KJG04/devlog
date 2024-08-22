@@ -171,7 +171,7 @@ const createNbcTilThumbnailSvg = unstable_cache(
   },
 )
 
-export async function createNbcTilThumbnail(
+async function _createNbcTilThumbnail(
   week?: string,
   day?: string,
   title?: string,
@@ -181,3 +181,7 @@ export async function createNbcTilThumbnail(
 
   return await sharp(Buffer.from(svg)).png().toBuffer()
 }
+
+export const createNbcTilThumbnail = unstable_cache(_createNbcTilThumbnail, [
+  'createNbcTilThumbnail',
+])
