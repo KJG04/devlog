@@ -1,0 +1,41 @@
+---
+title: '[내배캠 Spring TIL] 유효성 검증'
+tags:
+  - IoC
+  - DI
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Valid
+published: true
+date: 2024-08-21T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=6&day=WEDNESDAY&title=유효성 검증
+series: 내일배움캠프 TIL
+---
+
+요청 데이터 유효성 검증을 하는 방법에 대해 공부한 내용을 정리해두려 한다.
+
+스프링 부트에서 제공하는 validation 라이브러리를 사용하면 간단하게 유효성 검증을 할 수 있다.
+
+```txt path="build.gradle"
+implementation 'org.springframework.boot:spring-boot-starter-validation'
+```
+
+## 유효성 어노테이션
+
+많이 사용되는 어노테이션은 아래와 같다.
+
+- `@NotNull`: 해당 필드에 null 값이 들어오는 것을 허용하지 않음.
+- `@NotEmpty`: 해당 필드가 null이거나 빈 문자열("")이 되지 않도록 검증함.
+- `@NotBlank`: 해당 필드가 null, 빈 문자열(""), 혹은 공백만으로 구성된 문자열(" ")이 아닌지 확인함. 최소한 한 글자 이상 입력이 필요함.
+- `@Min`: 해당 필드의 값이 지정된 최소값보다 작은지 여부를 확인함.
+- `@Max`: 해당 필드의 값이 지정된 최대값을 초과하지 않는지 검증함.
+- `@Pattern`: 해당 필드가 특정한 패턴(정규 표현식)에 맞는지 검사함.
+- `@Email`: 해당 필드가 유효한 이메일 주소 형식인지 확인함.
+- `@Size`: 문자열의 길이가 설정된 최소 및 최대 크기 범위 내에 있는지 확인함.
+
+그리고 아래의 코드처럼 `@Valid` 어노테이션을 붙혀 검증을 한다고 명시한다.
+
+```java path="Controller.java"
+@PostMapping("/user")
+public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
+    // Handle valid user
+}
+```

@@ -15,13 +15,9 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     })
-
     return config
   },
   transpilePackages: ['next-mdx-remote'],
-  images: {
-    remotePatterns: [{ hostname: 'cdn.pixabay.com' }],
-  },
 }
 
 module.exports = withBundleAnalyzer(nextConfig)
