@@ -3,7 +3,7 @@
 
 import { getPlaiceholder, GetPlaiceholderOptions } from 'plaiceholder'
 import satori, { SatoriOptions } from 'satori'
-import fs from 'fs/promises'
+import fs from 'fs'
 import path from 'path'
 import { DayEnum } from '#utils/day'
 import sharp from 'sharp'
@@ -58,55 +58,49 @@ const dayTextMap: Record<DayEnum, string> = {
   [DayEnum.FRIDAY]: '금요일',
 }
 
+const pretendardExtraBoldSubset = fs.readFileSync(
+  path.join(process.cwd(), 'public/fonts/Pretendard-ExtraBold-Subset.otf'),
+)
+const pretendardMediumSubset = fs.readFileSync(
+  path.join(process.cwd(), 'public/fonts/Pretendard-Medium-Subset.otf'),
+)
+const pretendardRegularSubset = fs.readFileSync(
+  path.join(process.cwd(), 'public/fonts/Pretendard-Regular-Subset.otf'),
+)
+const spartaLogo = fs.readFileSync(
+  path.join(process.cwd(), 'public/images/sparta-logo.png'),
+)
+const spartaLogoBase64 = Buffer.from(spartaLogo).toString('base64')
+
+const options: SatoriOptions = {
+  width: 1280,
+  height: 640,
+  debug: false,
+  fonts: [
+    {
+      data: pretendardExtraBoldSubset,
+      name: 'Pretendard-ExtraBold',
+      weight: 800,
+    },
+    {
+      data: pretendardMediumSubset,
+      name: 'Pretendard-Medium',
+      weight: 500,
+    },
+    {
+      data: pretendardRegularSubset,
+      name: 'Pretendard-Regular',
+      weight: 400,
+    },
+  ],
+}
+
 export async function createNbcJavaGen6TilThumbnail(
   week?: string,
   day?: string,
   title?: string,
   showBigTitle: boolean = true,
 ) {
-  const [
-    pretendardExtraBoldSubset,
-    pretendardMediumSubset,
-    pretendardRegularSubset,
-    spartaLogo,
-  ] = await Promise.all([
-    fs.readFile(
-      path.join(process.cwd(), 'src/assets/Pretendard-ExtraBold-Subset.otf'),
-    ),
-    fs.readFile(
-      path.join(process.cwd(), 'src/assets/Pretendard-Medium-Subset.otf'),
-    ),
-    fs.readFile(
-      path.join(process.cwd(), 'src/assets/Pretendard-Regular-Subset.otf'),
-    ),
-    fs.readFile(path.join(process.cwd(), 'src/assets/sparta-logo.png')),
-  ])
-
-  const spartaLogoBase64 = Buffer.from(spartaLogo).toString('base64')
-
-  const options: SatoriOptions = {
-    width: 1280,
-    height: 640,
-    debug: false,
-    fonts: [
-      {
-        data: pretendardExtraBoldSubset,
-        name: 'Pretendard-ExtraBold',
-        weight: 800,
-      },
-      {
-        data: pretendardMediumSubset,
-        name: 'Pretendard-Medium',
-        weight: 500,
-      },
-      {
-        data: pretendardRegularSubset,
-        name: 'Pretendard-Regular',
-        weight: 400,
-      },
-    ],
-  }
-
   const svg = await satori(
     <div
       style={{
