@@ -58,20 +58,6 @@ const dayTextMap: Record<DayEnum, string> = {
   [DayEnum.FRIDAY]: '금요일',
 }
 
-async function readFile(p: string) {
-  console.log({
-    'process.cwd()': process.cwd(),
-    p,
-    'path.join(process.cwd(), p)': path.join(process.cwd(), p),
-    'await fs.readdir(process.cwd())': await fs.readdir(process.cwd()),
-    'await fs.readdir(process.cwd() + /src)': await fs.readdir(
-      process.cwd() + '/src',
-    ),
-  })
-
-  return fs.readFile(path.join(process.cwd(), p))
-}
-
 export async function createNbcJavaGen6TilThumbnail(
   week?: string,
   day?: string,
@@ -84,10 +70,16 @@ export async function createNbcJavaGen6TilThumbnail(
     pretendardRegularSubset,
     spartaLogo,
   ] = await Promise.all([
-    readFile('src/assets/Pretendard-ExtraBold-Subset.otf'),
-    readFile('src/assets/Pretendard-Medium-Subset.otf'),
-    readFile('src/assets/Pretendard-Regular-Subset.otf'),
-    readFile('src/assets/sparta-logo.png'),
+    fs.readFile(
+      path.join(process.cwd(), 'src/assets/Pretendard-ExtraBold-Subset.otf'),
+    ),
+    fs.readFile(
+      path.join(process.cwd(), 'src/assets/Pretendard-Medium-Subset.otf'),
+    ),
+    fs.readFile(
+      path.join(process.cwd(), 'src/assets/Pretendard-Regular-Subset.otf'),
+    ),
+    fs.readFile(path.join(process.cwd(), 'src/assets/sparta-logo.png')),
   ])
 
   const spartaLogoBase64 = Buffer.from(spartaLogo).toString('base64')
