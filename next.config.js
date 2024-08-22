@@ -7,7 +7,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: false,
+  swcMinify: true,
   trailingSlash: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false }
@@ -15,8 +15,6 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     })
-    config.optimization.minimize = false
-    config.optimization.minimizer = []
 
     return config
   },
