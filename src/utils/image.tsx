@@ -10,8 +10,6 @@ import sharp from 'sharp'
 import { unstable_cache } from 'next/cache'
 
 async function _getBlurDataURL(src: string, options?: GetPlaiceholderOptions) {
-  console.log('_getBlurDataURL')
-
   const fullUrlRegex = /^https?:\/\//i
   let bf: Buffer
 
@@ -31,7 +29,7 @@ async function _getBlurDataURL(src: string, options?: GetPlaiceholderOptions) {
     const _showBigTitle = url.searchParams.get('showBigTitle')
     const showBigTitle = _showBigTitle === 'false' ? false : true
 
-    bf = await createNbcJavaGen6TilThumbnail(week, day, title, showBigTitle)
+    bf = await createNbcTilThumbnail(week, day, title, showBigTitle)
   } else {
     return
   }
@@ -99,76 +97,87 @@ const options: SatoriOptions = {
   ],
 }
 
-export async function createNbcJavaGen6TilThumbnail(
+const createNbcTilThumbnailSvg = unstable_cache(
+  async (
+    week?: string,
+    day?: string,
+    title?: string,
+    showBigTitle: boolean = true,
+  ) => {
+    return satori(
+      <div
+        style={{
+          width: 1280,
+          height: 640,
+          background: '#202020',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          gap: 10,
+        }}
+      >
+        <img
+          alt="스파르타 로고"
+          src={`data:image/png;base64,${spartaLogoBase64}`}
+          width={250}
+          height={134}
+        />
+        {showBigTitle && (
+          <div
+            style={{
+              fontSize: 96,
+              fontWeight: 800,
+              fontFamily: 'Pretendard-ExtraBold',
+              color: '#FAFAFA',
+              marginTop: 6,
+            }}
+          >
+            Today I Learned
+          </div>
+        )}
+        {title && (
+          <div
+            style={{
+              fontSize: 48,
+              fontWeight: 500,
+              fontFamily: 'Pretendard-Medium',
+              color: '#FAFAFA',
+            }}
+          >
+            {title}
+          </div>
+        )}
+        <div
+          style={{
+            whiteSpace: 'pre',
+            color: '#D4D4D8',
+            fontSize: 32,
+            fontWeight: 400,
+            fontFamily: 'Pretendard-Regular',
+            display: 'flex',
+          }}
+        >
+          {week && <>내일배움캠프 Spring {week}주차 </>}
+          {day && (
+            <span style={{ color: dayColorMap[day as keyof typeof DayEnum] }}>
+              {dayTextMap[day as keyof typeof DayEnum]}
+            </span>
+          )}
+        </div>
+      </div>,
+      options,
+    )
+  },
+)
+
+export async function createNbcTilThumbnail(
   week?: string,
   day?: string,
   title?: string,
   showBigTitle: boolean = true,
 ) {
-  const svg = await satori(
-    <div
-      style={{
-        width: 1280,
-        height: 640,
-        background: '#202020',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: 10,
-      }}
-    >
-      <img
-        alt="스파르타 로고"
-        src={`data:image/png;base64,${spartaLogoBase64}`}
-        width={250}
-        height={134}
-      />
-      {showBigTitle && (
-        <div
-          style={{
-            fontSize: 96,
-            fontWeight: 800,
-            fontFamily: 'Pretendard-ExtraBold',
-            color: '#FAFAFA',
-            marginTop: 6,
-          }}
-        >
-          Today I Learned
-        </div>
-      )}
-      {title && (
-        <div
-          style={{
-            fontSize: 48,
-            fontWeight: 500,
-            fontFamily: 'Pretendard-Medium',
-            color: '#FAFAFA',
-          }}
-        >
-          {title}
-        </div>
-      )}
-      <div
-        style={{
-          whiteSpace: 'pre',
-          color: '#D4D4D8',
-          fontSize: 32,
-          fontWeight: 400,
-          fontFamily: 'Pretendard-Regular',
-          display: 'flex',
-        }}
-      >
-        {week && <>내일배움캠프 Spring {week}주차 </>}
-        {day && (
-          <span style={{ color: dayColorMap[day as keyof typeof DayEnum] }}>
-            {dayTextMap[day as keyof typeof DayEnum]}
-          </span>
-        )}
-      </div>
-    </div>,
-    options,
-  )
+  const svg = await createNbcTilThumbnailSvg(week, day, title, showBigTitle)
 
   return await sharp(Buffer.from(svg)).png().toBuffer()
 }

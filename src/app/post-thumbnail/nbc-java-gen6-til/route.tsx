@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { DayEnum } from '#utils/day'
-import { createNbcJavaGen6TilThumbnail } from '#utils/image'
+import { createNbcTilThumbnail } from '#utils/image'
 
 export async function GET(request: NextRequest) {
   const week = request.nextUrl.searchParams.get('week')
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json('Bad Request', { status: 400 })
   }
 
-  const pngBuffer = await createNbcJavaGen6TilThumbnail(
+  const pngBuffer = await createNbcTilThumbnail(
     week,
     day,
     title ?? undefined,
