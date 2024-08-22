@@ -59,6 +59,12 @@ const dayTextMap: Record<DayEnum, string> = {
 }
 
 function readFile(p: string) {
+  console.log({
+    'process.cwd()': process.cwd(),
+    p,
+    'path.join(process.cwd(), p)': path.join(process.cwd(), p),
+  })
+
   return fs.readFile(path.join(process.cwd(), p))
 }
 
