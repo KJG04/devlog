@@ -7,9 +7,11 @@ import fs from 'fs'
 import path from 'path'
 import { DayEnum } from '#utils/day'
 import sharp from 'sharp'
-import { unstable_cache } from 'next/cache'
 
-async function _getBlurDataURL(src: string, options?: GetPlaiceholderOptions) {
+export async function getBlurDataURL(
+  src: string,
+  options?: GetPlaiceholderOptions,
+) {
   const fullUrlRegex = /^https?:\/\//i
   let bf: Buffer
 
@@ -39,10 +41,6 @@ async function _getBlurDataURL(src: string, options?: GetPlaiceholderOptions) {
     ...options,
   })
 }
-
-export const getBlurDataURL = unstable_cache(_getBlurDataURL, [
-  'getBlurDataURL',
-])
 
 const dayColorMap: Record<DayEnum, string> = {
   [DayEnum.MONDAY]: '#006FEE',
@@ -97,7 +95,7 @@ const options: SatoriOptions = {
   ],
 }
 
-async function _createNbcJavaGen6TilThumbnail(
+export async function createNbcJavaGen6TilThumbnail(
   week?: string,
   day?: string,
   title?: string,
@@ -170,8 +168,3 @@ async function _createNbcJavaGen6TilThumbnail(
 
   return await sharp(Buffer.from(svg)).png().toBuffer()
 }
-
-export const createNbcJavaGen6TilThumbnail = unstable_cache(
-  _createNbcJavaGen6TilThumbnail,
-  ['createNbcJavaGen6TilThumbnail'],
-)
