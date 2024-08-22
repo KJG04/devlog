@@ -44,7 +44,10 @@ export const rehypeImageOptimizer: Plugin<[GetPlaiceholderOptions?], Root> =
       promises.push(async () => {
         try {
           // Retrieve the image buffer and generate the blur data URL and size data.
-          const { base64, metadata } = await getBlurDataURL(src, options)
+          const blurData = await getBlurDataURL(src, options)
+          if (!blurData) return
+
+          const { base64, metadata } = blurData
           const { width, height } = metadata
 
           // Add the optimized image properties to the image node.

@@ -56,7 +56,7 @@ export const getPostByPath = async (
   const { attributes, body } = frontMatter<FrontMatter>(file)
   attributes.date = dayjs(attributes.date).toISOString()
   attributes.thumbnailBlurDataURL = !isInImageList(attributes.thumbnail)
-    ? (await getBlurDataURL(attributes.thumbnail)).base64
+    ? (await getBlurDataURL(attributes.thumbnail))?.base64
     : undefined
 
   return {
@@ -100,7 +100,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
         const pathParam = { name: getFileNameByPath(path) }
         attributes.date = dayjs(attributes.date).toISOString()
         attributes.thumbnailBlurDataURL = !isInImageList(attributes.thumbnail)
-          ? (await getBlurDataURL(attributes.thumbnail)).base64
+          ? (await getBlurDataURL(attributes.thumbnail))?.base64
           : undefined
 
         return {
