@@ -7,11 +7,11 @@ import fs from 'fs'
 import path from 'path'
 import { DayEnum } from '#utils/day'
 import sharp from 'sharp'
+import { unstable_cache } from 'next/cache'
 
-export async function getBlurDataURL(
-  src: string,
-  options?: GetPlaiceholderOptions,
-) {
+async function _getBlurDataURL(src: string, options?: GetPlaiceholderOptions) {
+  console.log('_getBlurDataURL')
+
   const fullUrlRegex = /^https?:\/\//i
   let bf: Buffer
 
@@ -41,6 +41,10 @@ export async function getBlurDataURL(
     ...options,
   })
 }
+
+export const getBlurDataURL = unstable_cache(_getBlurDataURL, [
+  'getBlurDataURL',
+])
 
 const dayColorMap: Record<DayEnum, string> = {
   [DayEnum.MONDAY]: '#006FEE',
