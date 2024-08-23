@@ -26,8 +26,8 @@ async function _getBlurDataURL(src: string, options?: GetPlaiceholderOptions) {
     const week = url.searchParams.get('week') ?? undefined
     const day = url.searchParams.get('day') ?? undefined
     const title = url.searchParams.get('title') ?? undefined
-    const _showBigTitle = url.searchParams.get('showBigTitle')
-    const showBigTitle = _showBigTitle === 'false' ? false : true
+    const showBigTitle =
+      url.searchParams.get('showBigTitle') === 'false' ? false : true
 
     bf = await createNbcTilThumbnail(week, day, title, showBigTitle)
   } else {
