@@ -9,40 +9,42 @@ import { DayEnum } from '#utils/day'
 import sharp from 'sharp'
 import { unstable_cache } from 'next/cache'
 
-async function _getBlurDataURL(src: string, options?: GetPlaiceholderOptions) {
-  const fullUrlRegex = /^https?:\/\//i
-  let bf: Buffer
+export const getBlurDataURL = unstable_cache(
+  async (src: string, options?: GetPlaiceholderOptions) => {
+    const fullUrlRegex = /^https?:\/\//i
+    let bf: Buffer
 
-  if (fullUrlRegex.test(src)) {
-    const b64 = await fetch(src, {
-      cache: 'force-cache',
-    }).then(async (res) =>
-      Buffer.from(await res.arrayBuffer()).toString('base64'),
-    )
+    if (fullUrlRegex.test(src)) {
+      const b64 = await fetch(src, {
+        cache: 'force-cache',
+      }).then(async (res) =>
+        Buffer.from(await res.arrayBuffer()).toString('base64'),
+      )
 
-    bf = Buffer.from(b64, 'base64')
-  } else if (src.startsWith('/post-thumbnail/nbc-java-gen6-til/')) {
-    const url = new URL(src, process.env.URL)
-    const week = url.searchParams.get('week') ?? undefined
-    const day = url.searchParams.get('day') ?? undefined
-    const title = url.searchParams.get('title') ?? undefined
-    const showBigTitle =
-      url.searchParams.get('showBigTitle') === 'false' ? false : true
+      bf = Buffer.from(b64, 'base64')
+    } else if (src.startsWith('/post-thumbnail/nbc-java-gen6-til/')) {
+      const url = new URL(src, process.env.URL)
+      const week = url.searchParams.get('week') ?? undefined
+      const day = url.searchParams.get('day') ?? undefined
+      const title = url.searchParams.get('title') ?? undefined
+      const showBigTitle =
+        url.searchParams.get('showBigTitle') === 'false' ? false : true
 
-    bf = await createNbcTilThumbnail(week, day, title, showBigTitle)
-  } else {
-    return
-  }
+      bf = Buffer.from(
+        await createNbcTilThumbnail(week, day, title, showBigTitle),
+        'base64',
+      )
+    } else {
+      return
+    }
 
-  return getPlaiceholder(bf, {
-    size: 20,
-    ...options,
-  })
-}
-
-export const getBlurDataURL = unstable_cache(_getBlurDataURL, [
-  'getBlurDataURL',
-])
+    return getPlaiceholder(bf, {
+      size: 20,
+      ...options,
+    })
+  },
+  ['get-blur-data-url'],
+)
 
 const dayColorMap: Record<DayEnum, string> = {
   [DayEnum.MONDAY]: '#006FEE',
@@ -169,15 +171,19 @@ const createNbcTilThumbnailSvg = unstable_cache(
       options,
     )
   },
+  ['create-nbc-til-thumbnail-svg'],
 )
 
-export async function createNbcTilThumbnail(
-  week?: string,
-  day?: string,
-  title?: string,
-  showBigTitle: boolean = true,
-) {
-  const svg = await createNbcTilThumbnailSvg(week, day, title, showBigTitle)
+export const createNbcTilThumbnail = unstable_cache(
+  async (
+    week?: string,
+    day?: string,
+    title?: string,
+    showBigTitle: boolean = true,
+  ) => {
+    const svg = await createNbcTilThumbnailSvg(week, day, title, showBigTitle)
 
-  return await sharp(Buffer.from(svg)).png().toBuffer()
-}
+    return (await sharp(Buffer.from(svg)).png().toBuffer()).toString('base64')
+  },
+  ['create-nbc-til-thumbnail'],
+)

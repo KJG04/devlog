@@ -13,11 +13,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json('Bad Request', { status: 400 })
   }
 
-  const pngBuffer = await createNbcTilThumbnail(
-    week,
-    day,
-    title ?? undefined,
-    showBigTitle,
+  const pngBuffer = Buffer.from(
+    await createNbcTilThumbnail(week, day, title ?? undefined, showBigTitle),
+    'base64',
   )
   const headers = new Headers()
   headers.set('content-type', 'image/png')
