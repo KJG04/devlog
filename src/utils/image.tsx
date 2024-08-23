@@ -8,6 +8,7 @@ import path from 'path'
 import { DayEnum } from '#utils/day'
 import sharp from 'sharp'
 import { unstable_cache } from 'next/cache'
+import CACHE_KEY from '#constants/cacheKey'
 
 export const getBlurDataURL = unstable_cache(
   async (src: string, options?: GetPlaiceholderOptions) => {
@@ -43,7 +44,7 @@ export const getBlurDataURL = unstable_cache(
       ...options,
     })
   },
-  ['get-blur-data-url'],
+  CACHE_KEY.GET_BLUR_DATA_URL,
 )
 
 const dayColorMap: Record<DayEnum, string> = {
@@ -171,7 +172,7 @@ const createNbcTilThumbnailSvg = unstable_cache(
       options,
     )
   },
-  ['create-nbc-til-thumbnail-svg'],
+  CACHE_KEY.CREATE_NBC_TIL_THUMBNAIL_SVG,
 )
 
 export const createNbcTilThumbnail = unstable_cache(
@@ -185,5 +186,5 @@ export const createNbcTilThumbnail = unstable_cache(
 
     return (await sharp(Buffer.from(svg)).png().toBuffer()).toString('base64')
   },
-  ['create-nbc-til-thumbnail'],
+  CACHE_KEY.CREATE_NBC_TIL_THUMBNAIL,
 )
