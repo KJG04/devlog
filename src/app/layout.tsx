@@ -94,4 +94,5 @@ export const metadata: Metadata = {
       },
     ],
   },
+  metadataBase: process.env.URL ? new URL(process.env.URL) : undefined,
 }

@@ -16,10 +16,12 @@ interface Params {
 
 const Post = async ({ params }: { params: Params }) => {
   const { name } = params
+  console.time(name.toString())
   const path = name.join('/')
   const post = await getPostByPath(path)
 
   if (!post.frontMatter.published) {
+    console.timeEnd(name.toString())
     notFound()
   }
 
@@ -29,6 +31,7 @@ const Post = async ({ params }: { params: Params }) => {
 
   const recentlyPost = await getRecentPosts()
 
+  console.timeEnd(name.toString())
   return (
     <PostContainer
       post={post}

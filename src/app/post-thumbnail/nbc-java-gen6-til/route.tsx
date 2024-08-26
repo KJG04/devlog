@@ -19,6 +19,9 @@ export async function GET(request: NextRequest) {
   )
   const headers = new Headers()
   headers.set('content-type', 'image/png')
+  headers.set('Cache-Control', 'public, s-maxage=31536000')
+  headers.set('CDN-Cache-Control', 'public, s-maxage=31536000')
+  headers.set('Vercel-CDN-Cache-Control', 'public, s-maxage=31536000')
 
   return new NextResponse(pngBuffer, { status: 200, statusText: 'OK', headers })
 }
