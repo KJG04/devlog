@@ -1,0 +1,47 @@
+---
+title: '[내배캠 Spring TIL] Spring 페이지네이션'
+tags:
+  - Spring
+  - Pagination
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Spring 페이지네이션
+published: true
+date: 2024-08-23T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=6&day=FRIDAY&title=Spring 페이지네이션
+series: 내일배움캠프 TIL
+---
+
+Spring에서 페이지네이션을 구현하는 법에 대해 공부한 내용을 정리해보겠다.
+
+## 페이지네이션
+
+페이지네이션(Pagination)은 대량의 데이터를 여러 페이지로 나누어 표시하는 기술이다. 한 번에 모든 데이터를 보여주지 않고, 사용자가 필요에 따라 다음 페이지로 이동하면서 데이터를 탐색할 수 있도록 하는 방식이다.
+
+### 사용 이유
+
+- 성능 개선: 한 번에 모든 데이터를 로드하면 웹페이지의 성능이 저하될 수 있다. 페이지네이션은 한 페이지에 제한된 양의 데이터만 로드하여 성능에서 이점을 가질 수 있다.
+
+- 트래픽 절약: 한 번에 많은 데이터를 전송하는 대신 필요한 데이터만 전송하므로 서버와 클라이언트 간의 트래픽을 절약할 수 있다.
+
+## Pageable
+
+`Pageable` 인터페이스를 활용해서 페이지 번호, 크기, 정렬 순서등을 지정할 수 있다.
+
+```java path="Controller.java"
+Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("fieldName").ascending());
+```
+
+## Page
+
+`Repository` 메서드에서 `Page` 인터페이스를 사용하여 페이지네이션된 결과를 반환할 수 있다.
+
+```java path="Repository.java"
+Page<Entity> findByStatus(String status, Pageable pageable);
+```
+
+## 정렬
+
+정렬은 페이지네이션과 함께 Sort 객체를 PageRequest에 지정하여 사용할 수 있다.
+
+```java path="Controller.java"
+Pageable pageable = PageRequest.of(0, 10, Sort.by("name").descending());
+```
