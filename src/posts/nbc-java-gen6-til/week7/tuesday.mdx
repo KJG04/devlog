@@ -1,0 +1,50 @@
+---
+title: '[내배캠 Spring TIL] Spring Bean'
+tags:
+  - Spring
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Bean
+published: true
+date: 2024-08-27T21:11:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=7&day=TUESDAY&title=Spring Bean
+series: 내일배움캠프 TIL
+---
+
+Spring `Bean`에 대해 배운 것을 정리해보겠다.
+
+## Bean
+
+스프링 컨테이너에 의해 관리되는 객체이다. 개발자는 객체를 직접 생성하지 않고, 컨테이너가 필요한 시점에 `Bean`을 생성하게된다.
+
+## 정의
+
+Spring `Bean`은 `@Component`, `@Service`, `@Repository`, `@Controller`와 같은 어노테이션을 통해 정의된다.
+
+## 생명주기
+
+`Bean`은 스프링 컨테이너에 의해 생성, 초기화, 사용 및 소멸된다. 생명주기는 다음과 같다.
+
+- 객체 생성: 스프링 컨테이너가 `Bean`을 생성.
+- 의존성 주입: 필요한 의존성을 주입.
+- 초기화 메서드 호출: `@PostConstruct` 어노테이션이나 `InitializingBean` 인터페이스의 `afterPropertiesSet()` 메서드를 통해 초기화 로직 수행.
+- 사용: 애플리케이션이 `Bean`을 사용.
+- 소멸 전 작업: `@PreDestroy` 어노테이션이나 `DisposableBean` 인터페이스의 `destroy()` 메서드를 통해 소멸 전 작업 수행.
+- 소멸: 컨테이너에 의해 `Bean` 소멸.
+
+## 스코프
+
+스코프는 `Bean`이 존재할 수 있는 범위를 뜻한다. 다음과 같은 종류가 있다.
+
+- 싱글톤(Singleton): 기본 스코프. 애플리케이션 전체에서 하나의 `Bean` 인스턴스만 존재.
+- 프로토타입(Prototype): 요청 시마다 새로운 `Bean` 인스턴스를 생성.
+- Request, Session, Application, WebSocket: 웹 스코프. 웹 환경에서만 동작한다.
+
+## 의존성 주입 (Dependency Injection)
+
+- 필드 주입: `@Autowired`를 사용해 필드에 의존성을 주입.
+- 생성자 주입: 생성자를 통해 의존성을 주입. 필드 주입보다 테스트가 용이하고 순환 의존성을 방지할 수 있다.
+- 세터 주입: 세터 메서드를 통해 의존성을 주입.
+
+## Bean의 등록 방법
+
+- 자동 등록: `@ComponentScan` 어노테이션을 사용해 특정 패키지의 클래스를 자동으로 `Bean`으로 등록.
+- 수동 등록: `@Bean` 어노테이션을 사용해 `@Configuration` 클래스에서 직접 `Bean`을 등록.
