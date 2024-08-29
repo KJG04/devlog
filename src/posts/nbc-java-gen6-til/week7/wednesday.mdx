@@ -1,0 +1,47 @@
+---
+title: '[내배캠 Spring TIL] Filter'
+tags:
+  - Spring
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Filter
+published: true
+date: 2024-08-28T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=7&day=WEDNESDAY&title=Filter
+series: 내일배움캠프 TIL
+---
+
+## Filter
+
+`Filter`는 HTTP 요청 및 응답을 가로채서 처리하는 데 사용된다. 클라이언트의 요청이 서블릿에 도달하기 전에, 또는 서블릿에서 응답이 클라이언트로 전달되기 전에 특정 로직을 수행할 수 있게 해준다.
+주로 인증, 인가, 로깅 등의 목적으로 사용된다.
+
+## 동작 과정
+
+### doFilter 메서드
+
+`Filter` 인터페이스에서 가장 중요한 메서드로, 필터가 실제로 작업을 수행하는 부분이다.
+
+```java path="Filter.java"
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+  throws IOException, ServletException {
+  // 전처리 작업
+  chain.doFilter(request, response); // 다음 필터로 요청 전달
+  // 후처리 작업
+}
+```
+
+### FilterChain
+
+여러 필터가 있을 때 필터들을 체인처럼 연결해서 순차적으로 호출하는 역할을 한다. `chain.doFilter()`를 호출하여 다음 필터 또는 최종 서블릿으로 요청을 전달한다.
+
+## 등록방법
+
+- `@Component`: Spring Boot에서는 필터 클래스를 `@Component`로 등록하여 필터를 적용할 수 있다.
+- `@Order`: 여러 개의 필터가 있을 경우 필터의 실행 순서를 제어할 수 있다. `@Order` 어노테이션을 사용하여 우선순위를 설정할 수 있으며, 값이 낮을수록 높은 우선순위를 가진다.
+
+```java path="Filter.java"
+@Component
+@Order(1)
+public class CustomFilter implements Filter {
+    // 필터 구현
+}
+```
