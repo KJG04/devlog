@@ -1,0 +1,47 @@
+---
+title: '[내배캠 Spring TIL] Spring RestTemplate'
+tags:
+  - Spring
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Spring RestTemplate
+published: true
+date: 2024-08-30T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=7&day=FRIDAY&title=Spring RestTemplate
+series: 내일배움캠프 TIL
+---
+
+`RestTemplate`에 대해 공부한 내용을 정리해보겠다.
+
+## RestTemplate
+
+`RestTemplate`은 스프링에서 제공하는 HTTP 통신을 위한 유틸리티 클래스로, RESTful API를 간단하게 호출할 수 있도록 도와준다.
+
+## 기능
+
+RestTemplate는 다양한 HTTP 메서드(GET, POST, PUT, DELETE 등)를 지원하며, 이를 통해 API 호출을 처리할 수 있다.
+
+## 사용법
+
+```java path="Service.java"
+RestTemplate restTemplate = new RestTemplate();
+String url = "https://api.example.com/resource";
+
+// GET 요청
+ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+String responseBody = response.getBody();
+```
+
+`getForEntity` 메서드는 주어진 URL로 GET 요청을 보내고, 응답을 `ResponseEntity` 객체로 반환한다. 응답에는 상태 코드, 헤더, 그리고 바디가 포함된다.
+
+응답 바디는 `getBody()` 메서드를 통해 접근할 수 있다.
+
+```java path="Service.java"
+String url = "https://api.example.com/resource";
+MyRequestObject requestObject = new MyRequestObject("value1", "value2");
+
+// POST 요청
+ResponseEntity<String> response = restTemplate.postForEntity(url, requestObject, String.class);
+```
+
+`postForEntity` 메서드는 주어진 URL로 POST 요청을 보내고, 응답을 `ResponseEntity로` 반환한다.
+
+요청 바디는 객체로 전달되며, 내부적으로 JSON이나 XML로 변환된다.
