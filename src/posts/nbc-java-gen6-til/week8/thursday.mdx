@@ -1,34 +1,73 @@
 ---
-title: '[내배캠 Spring TIL] Spring @RestControllerAdvice'
+title: '[내배캠 Spring TIL] Spring HandlerMethodArgumentResolver'
 tags:
   - Spring
-keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, @RestControllerAdvice
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Spring HandlerMethodArgumentResolver
 published: true
-date: 2024-09-04T21:00:00+09:00
-thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=8&day=WEDNESDAY&title=Spring @RestControllerAdvice
+date: 2024-09-05T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=8&day=THURSDAY&title=HandlerMethodArgumentResolver
 series: 내일배움캠프 TIL
 ---
 
-`@RestControllerAdvice`에 대해 공부한 내용을 정리하겠다.
+`HandlerMethodArgumentResolver` 대해 공부한 내용을 정리해보려 한다.
 
-## @RestControllerAdvice
+## HandlerMethodArgumentResolver
 
-`@RestControllerAdvice`는 Spring에서 전역 예외 처리를 담당하는 어노테이션이다.
-컨트롤러 레벨에서 발생하는 예외를 처리하기 위해 사용되며, 모든 @RestController에서 발생하는 예외를 한 곳에서 처리할 수 있도록 도와준다.
-@ControllerAdvice와 비슷하지만, @RestControllerAdvice는 @ResponseBody를 포함하여 JSON이나 XML 형태로 예외 정보를 반환한다.
+HandlerMethodArgumentResolver는 컨트롤러 메서드의 파라미터가 특정 조건을 충족할 때, 해당 파라미터에 원하는 값을 자동으로 매핑해주는 인터페이스이다.
 
-<br />
+### supportsParameter()
 
-공통된 예외 처리 로직을 관리할 수 있어 코드의 중복을 줄일 수 있고, 예외 발생 시
-일관된 응답 형식을 유지할 수 있어 개발자에게 더 나은 경험을 제공한다.
+이 메서드는 주어진 파라미터를 이 `resolver`가 처리할 수 있는지 여부를 결정한다. 반환값이 true일 경우, 해당 파라미터는 이 resolver에 의해 처리된다.
 
-### @ExceptionHandler
+### resolveArgument()
 
-특정 예외를 처리하는 메서드에 붙인다. 예외 클래스나 그 하위 클래스의 예외가 발생하면 해당 메서드가 호출된다
+실제로 파라미터를 처리하는 메서드. 요청으로부터 데이터를 추출하여 컨트롤러 메서드의 파라미터에 전달될 값을 반환한다.
 
-```java path="ExceptionHandler.java"
-@ExceptionHandler(RuntimeException.class)
-public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-    return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+## 에제 코드
+
+```java path="CustomArgumentResolver.java"
+public class CustomArgumentResolver implements HandlerMethodArgumentResolver {
+
+    @Override
+    public boolean supportsParameter(MethodParameter parameter) {
+        return parameter.getParameterType().equals(CustomObject.class);
+    }
+
+    @Override
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
+        String param = webRequest.getParameter("customParam");
+        return new CustomObject(param);
+    }
 }
 ```
+
+파라미터에 `CustomObject`가 있으면 `supportsParameter`의 반환 값이 `true`가 되어서 `resolveArgument`가 동작하게 된다.
+
+```java path="WebConfig.java"
+@Configuration
+@RequiredArgsConstructor
+public class WebConfig implements WebMvcConfigurer {
+  private final CustomArgumentResolver customArgumentResolver;
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(customArgumentResolver);
+    }
+}
+```
+
+`WebMvcConfigurer`에 `ArgumentResolver`를 추가한다.
+
+```java path="CustomController.java"
+@RestController
+public class CustomController {
+
+    @GetMapping("/custom")
+    public String handleCustom(CustomObject customObject) {
+        return "Received: " + customObject.getValue();
+    }
+}
+```
+
+컨트롤러에서 `CustomObject`를 사용할 수 있게 된다.
