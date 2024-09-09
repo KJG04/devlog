@@ -1,0 +1,57 @@
+---
+title: '[내배캠 Spring TIL] 영속성 전이'
+tags:
+  - Spring
+  - JPA
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, 영속성 전이
+published: true
+date: 2024-09-06T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=8&day=FRIDAY&title=영속성 전이
+series: 내일배움캠프 TIL
+---
+
+영속성 전이에 대해 공부한 내용을 정리해보겠다.
+
+## 영속성 전이
+
+영속성 전이(Persistence Cascade)란 엔티티 간의 관계에서, 특정 엔티티의 상태 변화가 연관된 엔티티에 자동으로 전이되는 것을 말한다. 부모 엔티티가 자식 엔티티의 생명주기까지 관리할 때 유용하다.
+
+부모 엔티티에서 발생한 영속성 컨텍스트의 변화가 자식 엔티티에도 자동으로 적용되도록 하여, 부모 엔티티를 영속화하거나 삭제할 때 자식 엔티티의 상태를 별도로 관리할 필요 없이 일관된 상태로 유지할 수 있다.
+
+## 종류
+
+- `CascadeType.PERSIST`: 부모 엔티티를 영속화할 때, 연관된 자식 엔티티도 자동으로 영속화된다.
+- `CascadeType.REMOVE`: 부모 엔티티를 삭제할 때, 연관된 자식 엔티티도 자동으로 삭제된다.
+- `CascadeType.MERGE`: 부모 엔티티를 병합할 때, 연관된 자식 엔티티도 자동으로 병합된다.
+- `CascadeType.DETACH`: 부모 엔티티를 준영속 상태로 만들 때, 연관된 자식 엔티티도 자동으로 준영속 상태가 된다.
+- `CascadeType.REFRESH`: 부모 엔티티를 새로 고침할 때, 연관된 자식 엔티티도 새로 고침된다.
+- `CascadeType.ALL`: 위에 나열된 모든 영속성 전이 유형을 적용한다.
+
+## 예시
+
+```java path="Entity.java"
+@Entity
+public class Parent {
+    @Id @GeneratedValue
+    private Long id;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private List<Child> children = new ArrayList<>();
+}
+
+@Entity
+public class Child {
+    @Id @GeneratedValue
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Parent parent;
+}
+```
+
+Parent 엔티티와 Child 엔티티는 1:N 관계를 맺고 있다. `cascade = CascadeType.ALL` 설정을 통해 Parent가 영속화될 때 Child 엔티티들도 함께 영속화되고, 삭제될 때도 자식 엔티티들이 함께 삭제된다.
+
+## 주의점
+
+영속성 전이는 편리하지만, 잘못 사용하면 의도하지 않은 부작용이 발생할 수 있다. 예를 들어, `CascadeType.REMOVE`를 잘못 적용하면 부모 엔티티 삭제 시 자식 엔티티도 함께 삭제되어 데이터 손실이 일어날 수 있다. 따라서 사용하려면 필요한 기능인지 고민을 하고 적용하는것이 좋다.

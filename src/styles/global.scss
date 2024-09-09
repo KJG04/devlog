@@ -63,7 +63,7 @@
     }
 
     :not(pre) > code {
-      @apply mx-1 my-1 inline-block h-fit whitespace-nowrap rounded-lg bg-zinc-700 px-2 py-1 font-mono text-sm font-normal text-zinc-300;
+      @apply mx-1 my-1 inline-block h-fit whitespace-nowrap rounded-lg bg-zinc-700 px-2 py-1 font-mono text-small font-normal text-zinc-300;
     }
 
     blockquote {
