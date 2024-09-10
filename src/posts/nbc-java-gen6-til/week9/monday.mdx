@@ -1,0 +1,107 @@
+---
+title: '[내배캠 Spring TIL] JUnit'
+tags:
+  - Java
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, JUnit
+published: true
+date: 2024-09-09T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=9&day=MONDAY&title=JUnit
+series: 내일배움캠프 TIL
+---
+
+Junit에 대해 공부한 내용을 정리해보겠다.
+
+## Junit
+
+JUnit은 Java 단위 테스트 프레임워크다. Test-Driven Development (TDD)를 할때 사용된다.
+
+## 동작
+
+```java path="Test.java"
+class Test {
+  @BeforeAll
+  void beforeAll() {
+    // 모든 테스트가 실행되기 전에 한 번만 실행되는 코드를 정의한다.
+  }
+
+  @BeforeEach
+  void beforeEach() {
+    // 각 테스트 메서드가 실행되기 전에 실행될 코드를 정의한다.
+  }
+
+  @Test //테스트 메서드를 정의할 때 사용한다. 메서드 앞에 붙여서 이 메서드가 테스트라는 것을 명시한다.
+  void test() {
+    // 테스트 코드
+  }
+
+  @AfterEach
+  void afterEach() {
+    // 각 테스트 메서드가 실행된후 에 실행될 코드를 정의한다.
+  }
+
+  @AfterAll
+  void afterAll() {
+    // 모든 테스트가 실행된 후에 한 번만 실행되는 코드를 정의한다.
+  }
+}
+```
+
+위 코드처럼 어노테이션을 활용하여 동작하게 된다. `@BeforeAll` → `@BeforeEach` → `@Test` → `@AfterEach` → `@AfterAll` 순서로 실행된다.
+
+## Assertions
+
+테스트의 성공 여부를 가리기 위해 assert 메소드를 사용한다. 종류는 다음과 같다.
+
+- `assertEquals(expected, actual)`: 기대한 값과 실제 값이 같은지 확인한다.
+
+```java path="Test.java"
+assertEquals(5, 2 + 3, "2 + 3은 5여야 합니다.");
+```
+
+- `assertTrue(condition)`: 조건이 참인지 확인한다.
+
+```java path="Test.java"
+assertTrue(3 > 1, "3은 1보다 커야 합니다.");
+```
+
+- `assertFalse(condition)`: 조건이 거짓인지 확인한다.
+
+```java path="Test.java"
+assertFalse(1 > 3, "1은 3보다 크지 않아야 합니다.");
+```
+
+- `assertNotNull(object)`: 객체가 null이 아닌지 확인한다.
+
+```java path="Test.java"
+String str = "JUnit";
+assertNotNull(str, "문자열은 null이 아니어야 합니다.");
+```
+
+- `assertThrows(expectedType, executable)`: 특정 예외가 발생했는지 확인한다.
+
+```java path="Test.java"
+assertThrows(ArithmeticException.class, () -> {
+    int result = 10 / 0;
+}, "0으로 나눌 때 ArithmeticException이 발생해야 합니다.");
+```
+
+## 예시 코드
+
+```java path="CalculatorTest.java"
+class CalculatorTest {
+
+    @Test
+    void testAddition() {
+        Calculator calc = new Calculator();
+        assertEquals(5, calc.add(2, 3), "2 + 3은 5여야 합니다.");
+    }
+
+    @Test
+    void testDivision() {
+        Calculator calc = new Calculator();
+        assertThrows(ArithmeticException.class, () -> calc.divide(10, 0), "0으로 나눌 때 예외가 발생해야 합니다.");
+    }
+}
+```
+
+`assertEquals`로 덧셈 테스트를 하고, `assertThrows`로 예외 발생 여부를 확인하는 코드이다.
