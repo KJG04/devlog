@@ -1,0 +1,54 @@
+---
+title: '[내배캠 Spring TIL] Mockito'
+tags:
+  - Java
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Mockito
+published: true
+date: 2024-09-11T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=9&day=WEDNESDAY&title=Mockito
+series: 내일배움캠프 TIL
+---
+
+Mockito에 대해 공부한 내용을 정리해보겠다.
+
+## Mockito
+
+단위 테스트를 위한 모킹(Mocking) 프레임워크로, 테스트 대상 객체의 의존성을 *모의 객체(Mock Object)*로 대체하여 외부 의존성을 제거하고 독립적으로 테스트할 수 있도록 도와준다.
+
+### 단위 테스트
+
+단위 테스트(Unit Test)는 개별 모듈이나 함수가 올바르게 동작하는지 확인하기 위해 작성하는 테스트이다.
+
+## @Mock과 @InjectMocks
+
+`@Mock` 어노테이션으로 모킹할 객체를 생성할 수 있고, `@InjectMocks` 어노테이션을 사용해 모킹한 객체를 해당 객체이 주입 할 수 있다.
+
+```java path="MyServiceTest.java"
+class MyServiceTest {
+  @Mock
+  MyRepository myRepository;
+
+  @InjectMocks
+  MyService myService;
+}
+```
+
+위처럼하면 모킹된 `myRepository`가 `myService`에 주입된다.
+
+### @Spy
+
+`@Spy` 어노테이션은 실제 객체를 Spy 객체로 감싸서 일부 메서드는 실제 동작을 수행하고, 나머지는 모킹(Mock)할 수 있도록 도와준다.
+
+즉, 부분적으로 모의하면서 실제 객체의 동작을 유지할 수 있는 테스트 방식을 제공한다.
+
+### given()
+
+특정 메서드가 호출되었을 때의 행동을 설정하기 위해 `given()` 메서드를 사용한다.
+
+매개변수로 호출할 메서드를 넘겨주고 `willReturn()`과 같은 메서드로 동작을 지정할 수 있다.
+
+```java path="Test.java"
+given(mockService.doSomething()).willReturn("mocked result");
+```
+
+위처럼 하게 되면 `mockService.doSomething()`의 반환값이 `"mocked result"`이 된다.

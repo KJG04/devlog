@@ -17,8 +17,27 @@ import p from 'path'
 import { rehypeImageOptimizer } from '#utils/rehypePlaceholder'
 import { getBlurDataURL } from '#utils/image'
 import { isInImageList } from '#constants/imageList'
-import { unstable_cache } from 'next/cache'
+import { unstable_cache as _unstable_cache } from 'next/cache'
 import CACHE_KEY from '#constants/cacheKey'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Callback = (...args: any[]) => Promise<any>
+
+
+// 개발 롼경에서는 캐싱 하지 않는다
+const devUnstableCache = <T extends Callback>(
+  cb: T,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _keyParts?: string[],
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _options?: {
+    revalidate?: number | false
+    tags?: string[]
+  },
+) => cb
+
+const unstable_cache =
+  process.env.NODE_ENV === 'development' ? devUnstableCache : _unstable_cache
 
 const DIR_REPLACE_STRING = p.normalize('/src/posts')
 const POST_PATH = p.normalize(`${process.cwd()}${DIR_REPLACE_STRING}`)
