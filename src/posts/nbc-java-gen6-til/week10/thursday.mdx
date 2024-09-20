@@ -1,0 +1,52 @@
+---
+title: '[내배캠 Spring TIL] JPQL'
+tags:
+  - Java
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, JPQL
+published: true
+date: 2024-09-19T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=10&day=THURSDAY&title=JPQL
+series: 내일배움캠프 TIL
+---
+
+## JPQL(Java Persistence Query Language)
+
+JPQL은 JPA에서 사용되는 객체 지향 쿼리 언어로, SQL과 유사하지만 데이터베이스 테이블 대신 엔티티 객체를 대상으로 쿼리를 수행할 수 있다는 점이 특징이다.
+
+## 기본 개념
+
+JPQL은 SQL과 문법적으로 비슷하지만, SQL처럼 테이블과 컬럼을 직접 다루지 않고 엔티티와 속성을 사용하여 쿼리를 작성한다.
+데이터베이스에 종속되지 않으므로 다양한 데이터베이스에 대해 동일한 쿼리를 사용할 수 있다.
+
+## 특징
+
+특징으로는 세가지가 있다.
+
+- 객체 중심: JPQL은 객체 모델을 기반으로 쿼리를 작성하기 때문에 테이블 구조에 의존하지 않는다.
+- 타입 안전성: 엔티티 객체와 속성에 대해 직접 접근하므로 컴파일 시점에서 타입 검사를 수행할 수 있다.
+- 플랫폼 독립성: 데이터베이스 벤더에 관계없이 동일한 JPQL을 사용할 수 있다.
+
+## @Query
+
+Spring Data JPA에서는 @Query 어노테이션을 사용하여 JPQL을 작성할 수 있다. 예를 들어, 특정 조건에 맞는 데이터를 조회하는 JPQL 쿼리를 Repository에서 직접 정의할 수 있다.
+
+```java path="EmployeeRepository.java"
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+    // JPQL을 사용한 단순 조회 예시
+    @Query("SELECT e FROM Employee e WHERE e.salary > :minSalary")
+    List<Employee> findEmployeesWithSalaryGreaterThan(@Param("minSalary") int minSalary);
+
+    // JPQL을 사용한 JOIN 예시
+    @Query("SELECT e FROM Employee e JOIN e.department d WHERE d.name = :departmentName")
+    List<Employee> findEmployeesByDepartmentName(@Param("departmentName") String departmentName);
+
+    // JPQL을 사용한 COUNT 예시
+    @Query("SELECT COUNT(e) FROM Employee e WHERE e.status = 'ACTIVE'")
+    long countActiveEmployees();
+
+    // Named Parameter 사용 예시
+    @Query("SELECT e FROM Employee e WHERE e.name = :name AND e.status = :status")
+    List<Employee> findByNameAndStatus(@Param("name") String name, @Param("status") String status);
+}
+```

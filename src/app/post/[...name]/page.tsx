@@ -17,29 +17,30 @@ interface Params {
 const Post = async ({ params }: { params: Params }) => {
   const { name } = params
   const path = name.join('/')
-  console.time(path)
-  const post = await getPostByPath(path)
+  try {
+    const post = await getPostByPath(path)
 
-  if (!post.frontMatter.published) {
-    console.timeEnd(path)
+    if (!post.frontMatter.published) {
+      notFound()
+    }
+
+    const nextPost = post.frontMatter.series
+      ? await getNextPost(post.frontMatter)
+      : null
+
+    const recentlyPost = await getRecentPosts()
+
+    return (
+      <PostContainer
+        post={post}
+        nextPost={nextPost}
+        recentlyPost={recentlyPost}
+        pathName={path}
+      />
+    )
+  } catch {
     notFound()
   }
-
-  const nextPost = post.frontMatter.series
-    ? await getNextPost(post.frontMatter)
-    : null
-
-  const recentlyPost = await getRecentPosts()
-
-  console.timeEnd(path)
-  return (
-    <PostContainer
-      post={post}
-      nextPost={nextPost}
-      recentlyPost={recentlyPost}
-      pathName={path}
-    />
-  )
 }
 
 export default Post
