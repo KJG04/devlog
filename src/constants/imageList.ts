@@ -9,6 +9,7 @@ import GraphqlWithReactQueryThumbnail from 'public/post-images/graphql-with-reac
 import PrefetchQueryWithReactQueryThumbnail from 'public/post-images/prefetch-query-with-react-query-thumbnail.jpg'
 import CannotLoadStaticAsset from 'public/post-images/cannot-load-static-asset.jpg'
 import EntityLifecycle from 'public/post-images/entity-lifecycle.jpg'
+import SpringSecurity403 from 'public/post-images/spring-security-403.png'
 
 const IMAGE_LIST = {
   BeforeCodeSplit,
@@ -22,6 +23,7 @@ const IMAGE_LIST = {
   PrefetchQueryWithReactQueryThumbnail,
   CannotLoadStaticAsset,
   EntityLifecycle,
+  SpringSecurity403,
 } as const
 
 export const isInImageList = (str: string): str is keyof typeof IMAGE_LIST =>

@@ -1,0 +1,54 @@
+---
+title: '[내배캠 Spring TIL] Spring Security 트러블슈팅'
+tags:
+  - Java
+  - Spring
+keyword: TIL, Today I Learned, 스파르타 코딩클럽, Spring, Java, Security, Spring Security
+published: true
+date: 2024-10-10T21:00:00+09:00
+thumbnail: /post-thumbnail/nbc-java-gen6-til/?week=13&day=THURSDAY&title=Spring Security 트러블슈팅
+series: 내일배움캠프 TIL
+---
+
+Spring Security를 적용했을때, 모든 오류가 403으로 응답되는 이슈를 해결한 경험을 공유하려 한다.
+
+## 이슈 발생
+
+Spring Security를 적용하고 오류가 발생했을때 정상적인 오류가 발생하지 않고 status가 403으로만 응답되는 이슈가 발생했다.
+
+![img](SpringSecurity403)
+
+## 원인 파악
+
+구글링을 해보니 스프링 부트에서는 오류가 발생하면 `/error`라는 URI로 매핑을 시도한다고 한다.
+
+```java path="SecurityConfig.java"
+.authorizeHttpRequests((authorize) -> authorize
+        .requestMatchers("/auth/signin", "/auth/signup").permitAll()
+        .anyRequest().authenticated()
+)
+```
+
+하지만 위의 코드처럼 `/error` 인증 제외 목록에 들어가 있지 않기 때문에 인증이 필요하게 된다. 따라서 403 응답이 발생하게 된다.
+
+## 해결
+
+```java path="SecurityConfig.java"
+.authorizeHttpRequests((authorize) -> authorize
+        .requestMatchers("/auth/signin", "/auth/signup", "/error").permitAll()
+        .anyRequest().authenticated()
+)
+```
+
+위 코드처럼 `/error`를 인증 제외 목록에 추가하면 해결할 수 있다.
+
+```java path="SecurityConfig.java"
+.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer
+        .authenticationEntryPoint(((request, response, authException) -> {
+                    handlerExceptionResolver.resolveException(request, response, null, authException);
+                })
+        )
+)
+```
+
+그리고 `AuthenticationEntryPoint`를 등록하여 해결할 수도 있다.
